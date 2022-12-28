@@ -4,7 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PageHome from './pages/Home';
+import { PageFeed, PageHome } from './pages';
 
 const root = createRoot(document.getElementById('root')!);
 
@@ -12,6 +12,10 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <PageHome />,
+  },
+  {
+    path: '/feed',
+    element: <PageFeed />,
   },
 ]);
 
