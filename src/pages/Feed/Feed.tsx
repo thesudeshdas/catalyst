@@ -3,12 +3,16 @@ import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
 import { FeedFilters, FeedNav, Layout, PowstCard } from '../../components';
+import { IPost } from '../../types/feed.type';
+import { getAllPosts } from '../../lib/api/posts.api';
 
 export default function PageFeed() {
+  const [posts, setPosts] = useState<IPost[]>();
+
   const [activeFeed, setActiveFeed] = useState<string>('Discover');
   const [showFilter, setShowFilter] = useState(false);
   const [following, setFollowing] = useState([]);
-  const [finalPosts, setFinalPosts] = useState([]);
+  const [finalPosts, setFinalPosts] = useState<IPost[]>([]);
 
   let status = 'authenticated';
 
@@ -32,6 +36,20 @@ export default function PageFeed() {
   //   }
   // }, [status]);
 
+  useEffect(() => {
+    (async () => {
+      const response = await getAllPosts();
+
+      if (response.status === 200) {
+        setFinalPosts(response.data.posts);
+      } else {
+        console.log('handle error in feed page');
+      }
+    })();
+  }, []);
+
+  console.log({ finalPosts });
+
   return (
     <Layout>
       <FeedNav
@@ -48,7 +66,7 @@ export default function PageFeed() {
         showFilter={showFilter}
       />
 
-      {activeFeed == 'Discover' && (
+      {activeFeed === 'Discover' && (
         <Grid
           templateColumns='repeat(3, 1fr)'
           my={8}
@@ -56,11 +74,15 @@ export default function PageFeed() {
           justifyItems='center'
           alignItems='center'
         >
-          {/* {finalPosts.map((post) => (
-            <GridItem key={post._id}>
-              <PowstCard details={post} />
-            </GridItem>
-          ))} */}
+          {finalPosts.map((post) => {
+            console.log({ post });
+
+            return (
+              <GridItem key={post._id}>
+                <PowstCard details={post} />
+              </GridItem>
+            );
+          })}
         </Grid>
       )}
 
@@ -101,11 +123,11 @@ export default function PageFeed() {
           justifyItems='center'
           alignItems='center'
         >
-          {/* {finalPosts.map((post) => (
+          {finalPosts.map((post) => (
             <GridItem key={post._id}>
               <PowstCard details={post} />
             </GridItem>
-          ))} */}
+          ))}
         </Grid>
       )}
     </Layout>
