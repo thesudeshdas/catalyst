@@ -7,8 +7,6 @@ import { IPost } from '../../types/feed.type';
 import { getAllPosts } from '../../lib/api/posts.api';
 
 export default function PageFeed() {
-  const [posts, setPosts] = useState<IPost[]>();
-
   const [activeFeed, setActiveFeed] = useState<string>('Discover');
   const [showFilter, setShowFilter] = useState(false);
   const [following, setFollowing] = useState([]);
@@ -48,8 +46,6 @@ export default function PageFeed() {
     })();
   }, []);
 
-  console.log({ finalPosts });
-
   return (
     <Layout>
       <FeedNav
@@ -86,7 +82,7 @@ export default function PageFeed() {
         </Grid>
       )}
 
-      {activeFeed == 'Following' && status == 'unauthenticated' && (
+      {activeFeed === 'Following' && status === 'unauthenticated' && (
         <Heading textAlign='center' mt={8} size='lg'>
           You are not signed in, sign in now to see what people you follow have
           been creating
@@ -95,9 +91,9 @@ export default function PageFeed() {
         </Heading>
       )}
 
-      {activeFeed == 'Following' &&
-        status == 'authenticated' &&
-        following.length == 0 && (
+      {activeFeed === 'Following' &&
+        status === 'authenticated' &&
+        following.length === 0 && (
           <Stack mt={8}>
             <Heading textAlign='center' mb={4} size='lg'>
               You are not following anyone yet
@@ -115,7 +111,7 @@ export default function PageFeed() {
           </Stack>
         )}
 
-      {activeFeed == 'Following' && (
+      {activeFeed === 'Following' && (
         <Grid
           templateColumns='repeat(3, 1fr)'
           my={8}
