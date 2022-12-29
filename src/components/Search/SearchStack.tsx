@@ -120,9 +120,11 @@ export default function SearchStack({ tags, setTags }) {
     }
   };
 
-  const techStack = techStackIcons.filter(({ alt }) =>
-    selected.some(({ label }) => label == alt)
-  );
+  // const techStack = techStackIcons.filter(({ alt }) =>
+  //   selected.some(({ label }) => label == alt)
+  // );
+
+  const techStack = techStackIcons;
 
   useEffect(() => {
     setTags(selected);

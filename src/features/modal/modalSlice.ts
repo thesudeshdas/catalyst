@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export type ModalState = {
   shown: boolean;
   modalComponent: string | null;
-  modalData: object | null;
+  modalData: { postId: string } | null;
   modalFunction: Function | null;
 };
 

@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { PageFeed, PageHome } from './pages';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
+import theme from './themes/index';
 
 const root = createRoot(document.getElementById('root')!);
 
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <RouterProvider router={router} />
       </ChakraProvider>
     </Provider>
