@@ -23,7 +23,7 @@ export type IPost = {
   live: string;
   repo: string;
   stack: IPostStack[];
-  _id: string;
+  _id?: string;
   comments: IComment[];
 };
 
