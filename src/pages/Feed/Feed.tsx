@@ -41,6 +41,8 @@ export default function PageFeed() {
       if (response.status === 200) {
         setFinalPosts(response.data.posts);
       } else {
+        console.log({ response });
+
         console.log('handle error in feed page');
       }
     })();
