@@ -16,6 +16,7 @@ export default function PowstCard({ details }) {
         position='relative'
         role='group'
         cursor='pointer'
+        bg='red.200'
       >
         <PowstTagPill
           position='absolute'
@@ -45,7 +46,13 @@ export default function PowstCard({ details }) {
           <Text noOfLines={5}>{description}</Text>
         </Stack>
 
-        <Image src={images[0].src} alt={images[0].alt} objectFit='cover' />
+        <Image
+          src={images[0].src}
+          alt={images[0].alt}
+          w='100%'
+          h='100%'
+          objectFit='cover'
+        />
 
         {/* hover items */}
         <Box
