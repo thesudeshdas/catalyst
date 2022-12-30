@@ -36,7 +36,7 @@ export default function CommentPanel({ postId, comments: staticComments }) {
       w='25%'
       h='fit-content'
       position='sticky'
-      top='7rem'
+      top={3}
       borderLeft='2px solid black'
       px={3}
       gap={2}

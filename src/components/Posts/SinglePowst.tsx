@@ -73,10 +73,9 @@ export default function SinglePowst({ postId }) {
   console.log({ postId, post });
 
   return (
-    <Box>
+    <Box bg='#00000080'>
       <Flex
         direction='row-reverse'
-        bg='#00000080'
         onClick={() => dispatch(toggle(''))}
         h='3rem'
         p={2}
@@ -93,118 +92,120 @@ export default function SinglePowst({ postId }) {
 
       {/* content */}
       {post ? (
-        <Box
+        <Flex
+          direction='row-reverse'
           bg='white'
           height='calc(100vh - 3rem)'
-          p={4}
+          p={8}
           overflowY='scroll'
           position='relative'
+          borderTopRadius='3xl'
+          justifyContent='center'
+          gap={4}
         >
-          <Flex direction='row-reverse' justifyContent='center' gap={4}>
-            {showComments && (
-              <CommentPanel comments={post.comments} postId={post._id} />
-            )}
+          {showComments && (
+            <CommentPanel comments={post.comments} postId={post._id} />
+          )}
 
-            <PostNav
-              likes={post.likes}
-              comments={post.comments}
-              creator={post.user}
-              setShowComments={setShowComments}
-            />
+          <PostNav
+            likes={post.likes}
+            comments={post.comments}
+            creator={post.user}
+            setShowComments={setShowComments}
+          />
 
-            <Stack gap={6}>
-              {/* user details */}
-              <Flex gap={4} alignItems='center'>
-                <CreatorDetails creator={post.user} postName={post.name} />
+          <Stack gap={6}>
+            {/* user details */}
+            <Flex gap={4} alignItems='center'>
+              <CreatorDetails creator={post.user} postName={post.name} />
 
-                <Spacer />
+              <Spacer />
 
-                {/* save & like */}
-                <Button variant='ghost'>Save</Button>
-                {hasUserLiked ? (
+              {/* save & like */}
+              <Button variant='ghost'>Save</Button>
+              {hasUserLiked ? (
+                <Button
+                  // TODO - add outline icon for like
+                  leftIcon={<LikeIcon />}
+                  variant='secondary'
+                  // onClick={() => unlikeHandler(_id)}
+                >
+                  Unlike
+                </Button>
+              ) : (
+                <Button
+                  leftIcon={<LikeIcon />}
+                  variant='primary'
+                  // onClick={() => likeHandler(_id)}
+                >
+                  Like
+                </Button>
+              )}
+            </Flex>
+
+            <CarouselImage images={post.images} />
+
+            {/* texts & stack & links */}
+            <Flex>
+              <Text w='60%'>{post.description}</Text>
+
+              <Spacer />
+
+              <Stack w='25%' alignItems='flex-end' gap={2}>
+                {post.live != undefined && (
                   <Button
-                    // TODO - add outline icon for like
-                    leftIcon={<LikeIcon />}
-                    variant='secondary'
-                    // onClick={() => unlikeHandler(_id)}
-                  >
-                    Unlike
-                  </Button>
-                ) : (
-                  <Button
-                    leftIcon={<LikeIcon />}
                     variant='primary'
-                    // onClick={() => likeHandler(_id)}
+                    as='a'
+                    w='70%'
+                    href={post.live}
+                    target='blank'
                   >
-                    Like
+                    Live Preview
                   </Button>
                 )}
-              </Flex>
 
-              <CarouselImage images={post.images} />
+                {post.repo != undefined && (
+                  <Button
+                    variant='secondary'
+                    as='a'
+                    w='70%'
+                    href={post.repo}
+                    target='blank'
+                  >
+                    Repo Link
+                  </Button>
+                )}
 
-              {/* texts & stack & links */}
-              <Flex>
-                <Text w='60%'>{post.description}</Text>
-
-                <Spacer />
-
-                <Stack w='25%' alignItems='flex-end' gap={2}>
-                  {post.live != undefined && (
-                    <Button
-                      variant='primary'
-                      as='a'
-                      w='70%'
-                      href={post.live}
-                      target='blank'
-                    >
-                      Live Preview
-                    </Button>
-                  )}
-
-                  {post.repo != undefined && (
-                    <Button
-                      variant='secondary'
-                      as='a'
-                      w='70%'
-                      href={post.repo}
-                      target='blank'
-                    >
-                      Repo Link
-                    </Button>
-                  )}
-
-                  <ListTechStack
-                    stack={post.stack}
-                    direction='row-reverse'
-                    wrap='wrap'
-                    gap={4}
-                  />
-                </Stack>
-              </Flex>
-
-              {/* separator */}
-              {/* // TODO - Take separtor outside as separate component  */}
-              <Flex gap={4} alignItems='center'>
-                <Divider bg='black' h={1} borderRadius='lg' />
-                <Image
-                  borderRadius='50%'
-                  src={post.user.image}
-                  alt={post.user.name}
-                  width='200'
-                  height='200'
+                <ListTechStack
+                  stack={post.stack}
+                  direction='row-reverse'
+                  wrap='wrap'
+                  gap={4}
                 />
-                <Divider bg='black' h={1} borderRadius='lg' />
-              </Flex>
-              <Center>
-                <Heading size='lg'>{post.user.name}</Heading>
-              </Center>
+              </Stack>
+            </Flex>
 
-              {/* similar */}
-              {/* // TODO - Create & Add similar post component */}
-            </Stack>
-          </Flex>
-        </Box>
+            {/* separator */}
+            {/* // TODO - Take separtor outside as separate component  */}
+            <Flex gap={4} alignItems='center'>
+              <Divider bg='black' h={1} borderRadius='lg' />
+              <Image
+                borderRadius='50%'
+                src={post.user.image}
+                alt={post.user.name}
+                width='200'
+                height='200'
+              />
+              <Divider bg='black' h={1} borderRadius='lg' />
+            </Flex>
+            <Center>
+              <Heading size='lg'>{post.user.name}</Heading>
+            </Center>
+
+            {/* similar */}
+            {/* // TODO - Create & Add similar post component */}
+          </Stack>
+        </Flex>
       ) : (
         <Box
           bg='white'
@@ -212,6 +213,7 @@ export default function SinglePowst({ postId }) {
           p={4}
           overflowY='scroll'
           position='relative'
+          borderTopRadius='2xl'
         >
           <Heading>Nothing to show</Heading>
         </Box>

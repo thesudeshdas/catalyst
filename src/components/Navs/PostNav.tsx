@@ -15,7 +15,7 @@ export default function PostNav({ likes, comments, creator, setShowComments }) {
     <Stack
       gap={2}
       position='sticky'
-      top='7rem'
+      top={3}
       w='4rem'
       h='fit-content'
       alignItems='center'
