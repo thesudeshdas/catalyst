@@ -12,13 +12,17 @@ export const getAllPosts = async () => {
   }
 };
 
-// export const getPostDetails = async (postId) => {
-//   const data = await fetch(
-//     `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts/${postId}`
-//   ).then((r) => r.json());
+export const getPostDetails = async (postId) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_POSTS_API_URL}/${postId}`
+    );
 
-//   return data.post;
-// };
+    return response;
+  } catch (error) {
+    return error.response;
+  }
+};
 
 // export const likePost = async (postId: string, userId: string) => {
 //   const config = {

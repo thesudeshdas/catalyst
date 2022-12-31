@@ -4,26 +4,62 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { PageFeed, PageHome } from './pages';
+import {
+  PageCallback,
+  PageFeed,
+  PageHome,
+  PageProfile,
+  PageSignIn,
+} from './pages';
+import { store } from './app/store';
+import { Provider } from 'react-redux';
+import theme from './themes/index';
+import ProtectedRoute from './lib/utils/route-utils/ProtectedRoute';
+import { Layout } from './components';
+import { Auth0ProviderWithConfig } from './auth0-provider-with-config';
 
 const root = createRoot(document.getElementById('root')!);
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <PageHome />,
-  },
-  {
-    path: '/feed',
-    element: <PageFeed />,
+    element: <Auth0ProviderWithConfig />,
+    children: [
+      {
+        element: <Layout />,
+        children: [
+          {
+            element: <ProtectedRoute />,
+            children: [{ path: '/profile', element: <PageProfile /> }],
+          },
+          {
+            path: '/callback',
+            element: <PageCallback />,
+          },
+          {
+            path: '/',
+            element: <PageHome />,
+          },
+          {
+            path: '/feed',
+            element: <PageFeed />,
+          },
+        ],
+      },
+      {
+        path: '/sign-in',
+        element: <PageSignIn />,
+      },
+    ],
   },
 ]);
 
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <RouterProvider router={router} />
-    </ChakraProvider>
+    <Provider store={store}>
+      <ChakraProvider theme={theme}>
+        <RouterProvider router={router} />
+      </ChakraProvider>
+    </Provider>
   </React.StrictMode>
 );
 
