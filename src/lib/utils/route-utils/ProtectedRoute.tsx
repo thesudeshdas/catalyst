@@ -1,8 +1,9 @@
+import { withAuthenticationRequired } from '@auth0/auth0-react';
 import * as React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
 export default function ProtectedRoute() {
-  const authStatus = true;
+  const Component = withAuthenticationRequired(Outlet);
 
-  return authStatus ? <Outlet /> : <Navigate to='/sign-in' replace={true} />;
+  return <Component />;
 }
