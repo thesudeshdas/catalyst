@@ -4,13 +4,14 @@ import AppNav from '../Navs/AppNav';
 import { useAppSelector } from '../../app/hooks';
 import ModalContainer from '../Modals/ModalContainer';
 import SinglePowst from '../Posts/SinglePowst';
+import { Outlet } from 'react-router-dom';
 // import CommentPanel from '../Chats/CommentPanel';
 
 export default function Layout({
-  children,
+  // children,
   comment,
 }: {
-  children: any;
+  // children: any;
   comment?: boolean;
 }) {
   const showModal = useAppSelector((state) => state.modal.shown);
@@ -22,7 +23,7 @@ export default function Layout({
     <>
       <AppNav />
       <Box maxW={comment ? '90vw' : '70vw'} m='2rem auto'>
-        {children}
+        <Outlet />
       </Box>
 
       {showModal && modalComponent == 'SinglePowst' && (

@@ -49,7 +49,7 @@ export default function PageFeed() {
   }, []);
 
   return (
-    <Layout>
+    <>
       <FeedNav
         activeFeed={activeFeed}
         setActiveFeed={setActiveFeed}
@@ -128,6 +128,6 @@ export default function PageFeed() {
           ))}
         </Grid>
       )}
-    </Layout>
+    </>
   );
 }
