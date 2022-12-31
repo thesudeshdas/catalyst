@@ -35,7 +35,7 @@ export default function AppNav() {
         </Flex>
       </Link>
 
-      <Link to='/auth/sign-in'>
+      <Link to='/profile'>
         <Flex
           alignItems='center'
           className='box-0'
