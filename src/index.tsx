@@ -4,14 +4,19 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { PageFeed, PageHome } from './pages';
+import { PageFeed, PageHome, PageProfile, PageSignIn } from './pages';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import theme from './themes/index';
+import ProtectedRoute from './lib/utils/route-utils/ProtectedRoute';
 
 const root = createRoot(document.getElementById('root')!);
 
 const router = createBrowserRouter([
+  {
+    element: <ProtectedRoute />,
+    children: [{ path: '/profile', element: <PageProfile /> }],
+  },
   {
     path: '/',
     element: <PageHome />,
@@ -19,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: '/feed',
     element: <PageFeed />,
+  },
+  {
+    path: '/sign-in',
+    element: <PageSignIn />,
   },
 ]);
 
