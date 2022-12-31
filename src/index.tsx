@@ -9,21 +9,27 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import theme from './themes/index';
 import ProtectedRoute from './lib/utils/route-utils/ProtectedRoute';
+import { Layout } from './components';
 
 const root = createRoot(document.getElementById('root')!);
 
 const router = createBrowserRouter([
   {
-    element: <ProtectedRoute />,
-    children: [{ path: '/profile', element: <PageProfile /> }],
-  },
-  {
-    path: '/',
-    element: <PageHome />,
-  },
-  {
-    path: '/feed',
-    element: <PageFeed />,
+    element: <Layout />,
+    children: [
+      {
+        element: <ProtectedRoute />,
+        children: [{ path: '/profile', element: <PageProfile /> }],
+      },
+      {
+        path: '/',
+        element: <PageHome />,
+      },
+      {
+        path: '/feed',
+        element: <PageFeed />,
+      },
+    ],
   },
   {
     path: '/sign-in',
