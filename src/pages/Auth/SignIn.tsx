@@ -18,7 +18,7 @@ export default function PageSignIn() {
   };
 
   const handleSignOut = async () => {
-    window.open(`${process.env.REACT_APP_AUTH_URL}logout`, '_self');
+    window.open(`${process.env.REACT_APP_AUTH_URL}/logout`, '_self');
   };
 
   return (
