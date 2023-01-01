@@ -1,33 +1,58 @@
 import * as React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
-
-import { useAuth0 } from '@auth0/auth0-react';
-
-export const LoginButton: React.FC = () => {
-  const { loginWithRedirect } = useAuth0();
-
-  const handleLogin = async () => {
-    await loginWithRedirect({
-      prompt: 'login',
-      appState: {
-        returnTo: '/feed',
-      },
-    });
-  };
-
-  return (
-    <button className='button__login' onClick={handleLogin}>
-      Log In
-    </button>
-  );
-};
+import {
+  Box,
+  Button,
+  Center,
+  Divider,
+  Flex,
+  Heading,
+  Image,
+  Text,
+} from '@chakra-ui/react';
+import { Link } from 'react-router-dom';
 
 export default function PageSignIn() {
   return (
-    <Box>
-      <Heading>Sign in page</Heading>
+    <Flex>
+      <Image
+        src='https://images.unsplash.com/photo-1632245889029-e406faaa34cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80'
+        alt='porsche'
+        objectFit='cover'
+        w='40%'
+        h='100vh'
+      />
 
-      <LoginButton />
-    </Box>
+      <Center w='60%'>
+        <Box w='30rem'>
+          <Text position='absolute' top='2rem' right='2rem'>
+            Not a member? <Link to='/auth/signup'>Sign up now</Link>
+          </Text>
+          <Heading>Sign in to Catalyst</Heading>
+          <Button
+            my={6}
+            colorScheme='blue'
+            // onClick={() => signIn()}
+          >
+            Sign in with Google
+          </Button>
+
+          <Flex w='100%' alignItems='center' gap='1rem'>
+            <Divider
+              borderColor='gray.800'
+              borderWidth='1px'
+              borderRadius='1rem'
+            />
+            <Text>Or</Text>
+            <Divider
+              borderColor='gray.800'
+              borderWidth='1px'
+              borderRadius='1rem'
+            />
+          </Flex>
+
+          {/* <FormSignIn /> */}
+        </Box>
+      </Center>
+    </Flex>
   );
 }
