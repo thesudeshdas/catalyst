@@ -27,6 +27,8 @@ export default function PageHome() {
         .then((resObject) => {
           setUser(resObject.user);
 
+          console.log({ resObject });
+
           dispatch(logInReducer({}));
         })
         .catch((err) => {
