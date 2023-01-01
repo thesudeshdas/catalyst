@@ -14,19 +14,11 @@ import axios from 'axios';
 
 export default function PageSignIn() {
   const handleSignIn = async () => {
-    // const response = await axios.get('http://localhost:8000/auth/google');
-
-    window.open(`http://localhost:8000/auth/google`, '_self');
-
-    // console.log({ response });
+    window.open(`${process.env.REACT_APP_AUTH_URL}/google`, '_self');
   };
 
   const handleSignOut = async () => {
-    // const response = await axios.get('http://localhost:8000/auth/logout');
-
-    // console.log({ response });
-
-    window.open(`http://localhost:8000/auth/logout`, '_self');
+    window.open(`${process.env.REACT_APP_AUTH_URL}logout`, '_self');
   };
 
   return (
@@ -45,13 +37,7 @@ export default function PageSignIn() {
             Not a member? <Link to='/auth/signup'>Sign up now</Link>
           </Text>
           <Heading>Sign in to Catalyst</Heading>
-          <Button
-            // as='a'
-            // href='http://localhost:8000/auth/google'
-            my={6}
-            colorScheme='blue'
-            onClick={handleSignIn}
-          >
+          <Button my={6} colorScheme='blue' onClick={handleSignIn}>
             Sign in with Google
           </Button>
 
