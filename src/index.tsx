@@ -16,40 +16,35 @@ import { Provider } from 'react-redux';
 import theme from './themes/index';
 import ProtectedRoute from './lib/utils/route-utils/ProtectedRoute';
 import { Layout } from './components';
-import { Auth0ProviderWithConfig } from './auth0-provider-with-config';
 
 const root = createRoot(document.getElementById('root')!);
 
 const router = createBrowserRouter([
   {
-    element: <Auth0ProviderWithConfig />,
+    element: <Layout />,
     children: [
       {
-        element: <Layout />,
-        children: [
-          {
-            element: <ProtectedRoute />,
-            children: [{ path: '/profile', element: <PageProfile /> }],
-          },
-          {
-            path: '/callback',
-            element: <PageCallback />,
-          },
-          {
-            path: '/',
-            element: <PageHome />,
-          },
-          {
-            path: '/feed',
-            element: <PageFeed />,
-          },
-        ],
+        element: <ProtectedRoute />,
+        children: [{ path: '/profile', element: <PageProfile /> }],
+      },
+      // { path: '/profile', element: <PageProfile /> },
+      {
+        path: '/callback',
+        element: <PageCallback />,
       },
       {
-        path: '/sign-in',
-        element: <PageSignIn />,
+        path: '/',
+        element: <PageHome />,
+      },
+      {
+        path: '/feed',
+        element: <PageFeed />,
       },
     ],
+  },
+  {
+    path: '/sign-in',
+    element: <PageSignIn />,
   },
 ]);
 
