@@ -12,7 +12,7 @@ export default function PageHome() {
 
   useEffect(() => {
     const getUser = async () => {
-      fetch(`${process.env.RREACT_APP_AUTH_URL}/login/success`, {
+      fetch(`${process.env.REACT_APP_AUTH_URL}/login/success`, {
         method: 'GET',
         credentials: 'include',
         headers: {
