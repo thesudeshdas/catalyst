@@ -2,10 +2,13 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Heading } from '@chakra-ui/react';
 import { Layout } from '../../components';
+import { useAppDispatch } from '../../app/hooks';
+import { logInReducer } from '../../features/auth/authSlice';
 
 export default function PageHome() {
+  const dispatch = useAppDispatch();
+
   const [user, setUser] = useState(null);
-  const [authStatus, setAuthStatus] = useState(false);
 
   useEffect(() => {
     const getUser = async () => {
@@ -24,6 +27,8 @@ export default function PageHome() {
         })
         .then((resObject) => {
           setUser(resObject.user);
+
+          dispatch(logInReducer({}));
         })
         .catch((err) => {
           console.log(err);
