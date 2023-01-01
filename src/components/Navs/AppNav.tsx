@@ -65,7 +65,7 @@ export default function AppNav() {
         </Flex>
       </Link>
 
-      <Link to='/create-powst'>
+      <Link to='/sign-in'>
         <Flex
           alignItems='center'
           position='relative'

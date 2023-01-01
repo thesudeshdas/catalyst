@@ -10,8 +10,25 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function PageSignIn() {
+  const handleSignIn = async () => {
+    // const response = await axios.get('http://localhost:8000/auth/google');
+
+    window.open(`http://localhost:8000/auth/google`, '_self');
+
+    // console.log({ response });
+  };
+
+  const handleSignOut = async () => {
+    // const response = await axios.get('http://localhost:8000/auth/logout');
+
+    // console.log({ response });
+
+    window.open(`http://localhost:8000/auth/logout`, '_self');
+  };
+
   return (
     <Flex>
       <Image
@@ -29,11 +46,17 @@ export default function PageSignIn() {
           </Text>
           <Heading>Sign in to Catalyst</Heading>
           <Button
+            // as='a'
+            // href='http://localhost:8000/auth/google'
             my={6}
             colorScheme='blue'
-            // onClick={() => signIn()}
+            onClick={handleSignIn}
           >
             Sign in with Google
+          </Button>
+
+          <Button my={6} colorScheme='blue' onClick={handleSignOut}>
+            Logout
           </Button>
 
           <Flex w='100%' alignItems='center' gap='1rem'>

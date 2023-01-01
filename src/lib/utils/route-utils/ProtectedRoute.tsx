@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import axios, { AxiosError } from 'axios';
 
 export default function ProtectedRoute() {
-  const authStatus = false;
+  const [user, setUser] = useState(null);
+  const [authStatus, setAuthStatus] = useState(false);
 
-  return !authStatus ? <Navigate to='/sign-in' replace={true} /> : <Outlet />;
+  return !user ? <Navigate to='/' replace={true} /> : <Outlet />;
 }

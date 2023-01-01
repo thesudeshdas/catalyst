@@ -1,38 +1,33 @@
 import * as React from 'react';
 import { Box, Button, Heading } from '@chakra-ui/react';
-import { useAuth0, withAuthenticationRequired } from '@auth0/auth0-react';
-
-export const LogoutButton: React.FC = () => {
-  const { logout } = useAuth0();
-
-  const handleLogout = () => {
-    logout({
-      returnTo: window.location.origin,
-    });
-  };
-
-  return (
-    <button className='button__logout' onClick={handleLogout}>
-      Log Out
-    </button>
-  );
-};
+import { useEffect } from 'react';
+import axios, { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function PageProfile() {
-  const { user } = useAuth0();
+  // const navigate = useNavigate();
 
-  console.log({ user });
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:8000/users');
+  //       console.log({ response });
+  //     } catch (error) {
+  //       if (AxiosError) {
+  //         navigate('/sign-in');
+  //       }
+  //     }
+  //   })();
+  // }, []);
 
-  console.log('profile page loading');
+  // console.log('profile page loading');
 
   return (
     <Box>
       <Heading>This is the profile page</Heading>
-      <Button>
-        <LogoutButton />
-      </Button>
+      <Button></Button>
     </Box>
   );
 }
 
-export default withAuthenticationRequired(PageProfile);
+export default PageProfile;

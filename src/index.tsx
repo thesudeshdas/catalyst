@@ -27,6 +27,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute />,
         children: [{ path: '/profile', element: <PageProfile /> }],
       },
+      // { path: '/profile', element: <PageProfile /> },
       {
         path: '/callback',
         element: <PageCallback />,
