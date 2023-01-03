@@ -2,42 +2,16 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Heading } from '@chakra-ui/react';
 import { Layout } from '../../components';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { logInReducer } from '../../features/auth/authSlice';
 import axios from 'axios';
 
 export default function PageHome() {
   const dispatch = useAppDispatch();
 
-  const [user, setUser] = useState(null);
+  const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
-    // const getUser = async () => {
-    //   // fetch(`${process.env.REACT_APP_AUTH_URL}/login/success`, {
-    //   //   method: 'GET',
-    //   //   credentials: 'include',
-    //   //   headers: {
-    //   //     Accept: 'application/json',
-    //   //     'Content-Type': 'application/json',
-    //   //   },
-    //   // })
-    //   //   .then((response) => {
-    //   //     if (response.status === 200) return response.json();
-    //   //     throw new Error('authentication has been failed!');
-    //   //   })
-    //   //   .then((resObject) => {
-    //   //     setUser(resObject.user);
-
-    //   //     console.log({ resObject });
-
-    //   //     dispatch(logInReducer({}));
-    //   //   })
-    //   //   .catch((err) => {
-    //   //     console.log(err);
-    //   //   });
-    // };
-    // getUser();
-
     (async () => {
       const response = await axios.get(
         `${process.env.REACT_APP_AUTH_URL}/login/success`,
@@ -54,14 +28,12 @@ export default function PageHome() {
       console.log({ response });
 
       if (response.status == 200) {
-        setUser(response.data.user);
+        dispatch(logInReducer({ user: response.data.user }));
       } else {
         console.log('kuch gdabadi');
       }
     })();
   }, []);
-
-  console.log({ user });
 
   return (
     <>
