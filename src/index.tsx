@@ -10,6 +10,7 @@ import {
   PageHome,
   PageProfile,
   PageSignIn,
+  PageSignUp,
 } from './pages';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: '/sign-in',
     element: <PageSignIn />,
+  },
+  {
+    path: '/sign-up',
+    element: <PageSignUp />,
   },
 ]);
 
