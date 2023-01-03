@@ -40,3 +40,41 @@ export const registerUser = createAsyncThunk<
     });
   }
 });
+
+export const signinWithCredentials = createAsyncThunk<
+  IUser,
+  { email: string; password: string },
+  { rejectValue: IRejectErrors }
+>('auth/signinWithCredentials', async (req, { rejectWithValue }) => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_AUTH_URL}/users/sign-in`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({ ...req }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (response.status == 404 || response.status == 401) {
+      return rejectWithValue({
+        errorStatus: response.status,
+        errorMessage: data.message,
+      });
+    } else if (response.status == 200) {
+      return data.signedUser as IUser;
+    } else {
+      console.log('unknown error');
+      return null;
+    }
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.response.message,
+    });
+  }
+});

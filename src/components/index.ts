@@ -14,6 +14,7 @@ import FeedFilters from './Filters/FeedFilters';
 
 // Forms
 // import FormEditProfile from './Forms/FormEditProfile';
+import FormSignIn from './Forms/FormSignIn';
 import FormSignUp from './Forms/FormSignup';
 
 // Layouts
@@ -68,6 +69,7 @@ export {
 
   // Forms
   // FormEditProfile,
+  FormSignIn,
   FormSignUp,
 
   // Layouts

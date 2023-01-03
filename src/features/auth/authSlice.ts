@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IAuthState } from '../../types/auth.type';
-import { registerUser } from './authActions';
+import { registerUser, signinWithCredentials } from './authActions';
 
 let localStatus, localUser;
 
-if (typeof window !== 'undefined') {
-  localStatus = JSON.parse(localStorage?.getItem('localStatus')) || false;
-  localUser = JSON.parse(localStorage?.getItem('localUser')) || null;
-}
+localStatus = JSON.parse(localStorage?.getItem('localStatus')) || false;
+localUser = JSON.parse(localStorage?.getItem('localUser')) || null;
 
 const initialState: IAuthState = {
   loading: false,
@@ -25,6 +23,7 @@ export const modalSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    // register user reducers
     builder.addCase(registerUser.pending, (state) => {
       state.loading = true;
     });
@@ -43,6 +42,32 @@ export const modalSlice = createSlice({
 
         case 403:
           state.errors.username = payload.errorMessage;
+      }
+    });
+
+    // sign in reducers
+    builder.addCase(signinWithCredentials.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(signinWithCredentials.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+
+      state.loading = true;
+      state.signInStatus = true;
+      state.user = payload;
+    });
+
+    builder.addCase(signinWithCredentials.rejected, (state, { payload }) => {
+      state.loading = true;
+      switch (payload.errorStatus) {
+        case 404:
+          state.errors.email = payload.errorMessage;
+          break;
+
+        case 401:
+          state.errors.password = payload.errorMessage;
+          break;
       }
     });
   },

@@ -2,14 +2,16 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Heading } from '@chakra-ui/react';
 import { Layout } from '../../components';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 import axios from 'axios';
 
 export default function PageHome() {
   const dispatch = useAppDispatch();
 
-  const [user, setUser] = useState(null);
+  const user = useAppSelector((state) => state.auth.user);
+
+  console.log({ user });
 
   return (
     <>

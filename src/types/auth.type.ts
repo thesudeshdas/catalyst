@@ -33,6 +33,9 @@ export type IUser = {
 export type IRejectErrors = {
   errorStatus: number;
   errorMessage: string;
+  email?: string;
+  name?: string;
+  _id?: string; // TODO - Check these for error handling
 };
 
 export type IAuthErrors = {
