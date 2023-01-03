@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { FormSignIn } from '../../components';
 
 export default function PageSignIn() {
   const handleSignIn = async () => {
@@ -34,7 +35,7 @@ export default function PageSignIn() {
       <Center w='60%'>
         <Box w='30rem'>
           <Text position='absolute' top='2rem' right='2rem'>
-            Not a member? <Link to='/auth/signup'>Sign up now</Link>
+            Not a member? <Link to='/sign-up'>Sign up now</Link>
           </Text>
           <Heading>Sign in to Catalyst</Heading>
           <Button my={6} colorScheme='blue' onClick={handleSignIn}>
@@ -59,7 +60,7 @@ export default function PageSignIn() {
             />
           </Flex>
 
-          {/* <FormSignIn /> */}
+          <FormSignIn />
         </Box>
       </Center>
     </Flex>

@@ -29,3 +29,24 @@ export type IUser = {
   following: string[];
   starredPost: string[];
 };
+
+export type IRejectErrors = {
+  errorStatus: number;
+  errorMessage: string;
+  email?: string;
+  name?: string;
+  _id?: string; // TODO - Check these for error handling
+};
+
+export type IAuthErrors = {
+  email: string;
+  password: string;
+  username: string;
+};
+
+export type IAuthState = {
+  loading: boolean;
+  signInStatus: boolean;
+  errors: IAuthErrors;
+  user: IUser;
+};
