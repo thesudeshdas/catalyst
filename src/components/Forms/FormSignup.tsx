@@ -6,12 +6,12 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  Text,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-// import { registerUser } from '../../features/auth/authActions';
+import { registerUser } from '../../features/auth/authActions';
+import { useNavigate } from 'react-router-dom';
 
 const pwdRegex =
   /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -37,22 +37,24 @@ const SignupSchema = Yup.object().shape({
 });
 
 export default function FormSignUp() {
-  // const router = useRouter();
-
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  // const userErrors = useAppSelector((state) => state.auth.errors);
+  const userErrors = useAppSelector((state) => state.auth['errors']);
 
-  // const handleSignup = async (values) => {
-  //   dispatch(registerUser(values));
-  // };
+  const handleSignup = async (values) => {
+    const response = await dispatch(registerUser(values));
+
+    if (response.meta.requestStatus === 'fulfilled') {
+      navigate('/sign-in');
+    }
+  };
 
   return (
     <Formik
       initialValues={{ name: '', username: '', email: '', password: '' }}
       validationSchema={SignupSchema}
       onSubmit={(values, actions) => {
-        // handleSignup(values);
-        console.log(values);
+        handleSignup(values);
       }}
     >
       {({ errors, touched }) => (
@@ -73,18 +75,18 @@ export default function FormSignUp() {
             <Field name='username'>
               {({ field, form }) => (
                 <FormControl
-                // isInvalid={
-                //   Boolean(errors.username) || Boolean(userErrors?.username)
-                // }
+                  isInvalid={
+                    Boolean(errors.username) || Boolean(userErrors?.username)
+                  }
                 >
                   <FormLabel>Username</FormLabel>
                   <Input {...field} />
-                  {/* {(errors.username && touched.username) ||
+                  {(errors.username && touched.username) ||
                   userErrors?.username ? (
                     <FormErrorMessage>
                       {errors.username || userErrors.username}
                     </FormErrorMessage>
-                  ) : null} */}
+                  ) : null}
                 </FormControl>
               )}
             </Field>
@@ -94,15 +96,15 @@ export default function FormSignUp() {
             {({ field, form }) => (
               <FormControl
                 my={6}
-                // isInvalid={Boolean(errors.email) || Boolean(userErrors?.email)}
+                isInvalid={Boolean(errors.email) || Boolean(userErrors?.email)}
               >
                 <FormLabel>Email address</FormLabel>
                 <Input {...field} />
-                {/* {(errors.email && touched.email) || userErrors?.email ? (
+                {(errors.email && touched.email) || userErrors?.email ? (
                   <FormErrorMessage>
                     {errors.email || userErrors.email}
                   </FormErrorMessage>
-                ) : null} */}
+                ) : null}
               </FormControl>
             )}
           </Field>

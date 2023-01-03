@@ -29,3 +29,21 @@ export type IUser = {
   following: string[];
   starredPost: string[];
 };
+
+export type IRejectErrors = {
+  errorStatus: number;
+  errorMessage: string;
+};
+
+export type IAuthErrors = {
+  email: string;
+  password: string;
+  username: string;
+};
+
+export type IAuthState = {
+  loading: boolean;
+  signInStatus: boolean;
+  errors: IAuthErrors;
+  user: IUser;
+};
