@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IAuthState } from '../../types/auth.type';
-import { registerUser, signinWithCredentials } from './authActions';
+import {
+  getUserDetails,
+  registerUser,
+  signinWithCredentials,
+} from './authActions';
 
 let localStatus, localUser;
 
@@ -70,9 +74,22 @@ export const modalSlice = createSlice({
           break;
       }
     });
+
+    // get user details reducers
+    builder.addCase(getUserDetails.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(getUserDetails.fulfilled, (state, { payload }) => {
+      state.loading = true;
+      state.user = payload;
+    });
+
+    builder.addCase(getUserDetails.rejected, (state) => {
+      state.loading = true;
+      console.log('ab kya karein ji?');
+    });
   },
 });
-
-// export const { logInReducer } = modalSlice.actions;
 
 export default modalSlice.reducer;
