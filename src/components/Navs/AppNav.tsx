@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Box, Flex, Image, Spacer, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
 
 export default function AppNav() {
+  const authUserId = useAppSelector((state) => state.auth.user._id);
+
   return (
     <Flex alignItems='center' p={4} gap={4} top='0' left='0' position='sticky'>
       <Link to='/feed'>
@@ -35,7 +38,7 @@ export default function AppNav() {
         </Flex>
       </Link>
 
-      <Link to='/profile'>
+      <Link to='/profile' state={{ userIdFromURL: '63b544e3b542a5457f3af282' }}>
         <Flex
           alignItems='center'
           className='box-0'

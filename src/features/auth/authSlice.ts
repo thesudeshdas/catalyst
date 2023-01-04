@@ -81,12 +81,18 @@ export const modalSlice = createSlice({
     });
 
     builder.addCase(getUserDetails.fulfilled, (state, { payload }) => {
-      state.loading = true;
-      state.user = payload;
+      console.log({ payload });
+
+      state.loading = false;
+
+      // set only the authenticated user details to RTK
+      if (payload._id == state.user._id) {
+        state.user = payload;
+      }
     });
 
     builder.addCase(getUserDetails.rejected, (state) => {
-      state.loading = true;
+      state.loading = false;
       console.log('ab kya karein ji?');
     });
   },

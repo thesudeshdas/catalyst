@@ -47,7 +47,7 @@ import SinglePowst from './Posts/SinglePowst';
 
 // Profile
 import CreatorDetails from './Profile/CreatorDetails';
-// import ProfileDetails from './Profile/ProfileDetails';
+import ProfileDetails from './Profile/ProfileDetails';
 
 // Search
 import SearchStack from './Search/SearchStack';
@@ -99,7 +99,7 @@ export {
 
   // Profile
   CreatorDetails,
-  // ProfileDetails,
+  ProfileDetails,
 
   // Search
   SearchStack,

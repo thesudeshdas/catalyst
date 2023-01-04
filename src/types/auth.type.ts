@@ -33,9 +33,23 @@ export type IUser = {
 export type IRejectErrors = {
   errorStatus: number;
   errorMessage: string;
+  username?: string;
   email?: string;
   name?: string;
   _id?: string; // TODO - Check these for error handling
+  password?: null;
+  title?: string;
+  company?: string;
+  profilePic?: IProfilePic;
+  image?: string;
+  tags?: string[];
+  bio?: string;
+  stack?: IStack[];
+  social?: ISocial[];
+  status?: string;
+  followers?: string[];
+  following?: string[];
+  starredPost?: string[];
 };
 
 export type IAuthErrors = {

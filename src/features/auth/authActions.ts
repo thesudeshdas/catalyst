@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { IRejectErrors, IUser } from '../../types/auth.type';
 
 export const registerUser = createAsyncThunk<
@@ -79,21 +80,30 @@ export const getUserDetails = createAsyncThunk<
   { rejectValue: IRejectErrors }
 >('auth/getUserDetails', async (req, { rejectWithValue }) => {
   try {
-    const data = await fetch(
+    // const data = await fetch(
+    //   `${process.env.REACT_APP_AUTH_URL}/${req.userId}1`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   }
+    // ).then((r) => r.json());
+
+    const response = await axios.get(
       `${process.env.REACT_APP_AUTH_URL}/${req.userId}`,
       {
-        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       }
-    ).then((r) => r.json());
+    );
 
-    return data.user as IUser;
+    return response.data.user as IUser;
   } catch (error) {
     return rejectWithValue({
       errorStatus: error.response.status,
-      errorMessage: error.response.message,
+      errorMessage: error.message,
     });
   }
 });
