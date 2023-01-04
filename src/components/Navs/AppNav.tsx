@@ -38,7 +38,7 @@ export default function AppNav() {
         </Flex>
       </Link>
 
-      <Link to='/profile' state={{ userIdFromURL: '63b544e3b542a5457f3af282' }}>
+      <Link to='/profile' state={{ userIdFromURL: authUserId }}>
         <Flex
           alignItems='center'
           className='box-0'

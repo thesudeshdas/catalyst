@@ -40,7 +40,7 @@ import PostNav from './Navs/PostNav';
 
 // Pills
 import PowstTagPill from './Pills/PowstTagPill';
-// import ProfileTagPill from './Pills/ProfileTagPill';
+import ProfileTagPill from './Pills/ProfileTagPill';
 
 // Posts
 import SinglePowst from './Posts/SinglePowst';
@@ -95,7 +95,7 @@ export {
 
   // Pills
   PowstTagPill,
-  // ProfileTagPill,
+  ProfileTagPill,
 
   // Profile
   CreatorDetails,

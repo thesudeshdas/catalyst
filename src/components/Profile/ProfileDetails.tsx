@@ -12,7 +12,10 @@ import {
   Image,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { socialIcons } from '../../data/portfolio/portfolio.data';
+import ProfileTagPill from '../Pills/ProfileTagPill';
 
 // import ProfileTagPill from '../Pills/ProfileTagPill';
 
@@ -21,6 +24,12 @@ const amIFollowing = (arr, id) => {
 };
 
 export default function ProfileDetails({ user }) {
+  const dispatch = useAppDispatch();
+
+  const authUser = useAppSelector((state) => state.auth.user);
+
+  const isMyProfile = authUser._id == user?._id;
+
   const [doIFollow, setDoIFollow] = useState<boolean>(false);
 
   // const isMyProfile = user._id == session?.user.id;
@@ -49,11 +58,13 @@ export default function ProfileDetails({ user }) {
     )
   );
 
+  console.log({ isMyProfile });
+
   return (
     <Flex mb={8} alignItems='center' justifyContent='space-between'>
       <Image
-        alt={user?.profilePic.alt || 'blank profile'}
-        src={user?.profilePic.src || '/images/blank_profile.png'}
+        alt={user?.profilePic?.alt || 'blank profile'}
+        src={user?.profilePic?.src || '/images/blank_profile.png'}
         width={150}
         height={150}
         objectFit='cover'
@@ -63,8 +74,8 @@ export default function ProfileDetails({ user }) {
       <Stack ml='2rem' gap={2}>
         <Flex gap={4} alignItems='center'>
           <Heading size='lg'>{user?.name} </Heading>
-          {/* {isMyProfile ? (
-            <Link href='/edit-profile'>
+          {isMyProfile ? (
+            <Link to='/edit-profile'>
               <Button size='sm' rightIcon={<EditIcon />}>
                 Edit Profile
               </Button>
@@ -87,18 +98,18 @@ export default function ProfileDetails({ user }) {
             >
               Follow
             </Button>
-          )} */}
+          )}
         </Flex>
 
         {/* // ? - check if the profile is user's or other's */}
-        {/* {isMyProfile ? (
+        {isMyProfile ? (
           <Flex gap={1} alignItems='center'>
             {user?.title ? (
               <Text fontWeight='500' fontSize='xl'>
                 {user?.title}
               </Text>
             ) : (
-              <Link href='/edit-profile'>
+              <Link to='/edit-profile'>
                 <Input
                   variant='flushed'
                   isReadOnly
@@ -118,7 +129,7 @@ export default function ProfileDetails({ user }) {
                 {user.company}
               </Text>
             ) : (
-              <Link href='/edit-profile'>
+              <Link to='/edit-profile'>
                 <Input
                   variant='flushed'
                   isReadOnly
@@ -147,10 +158,10 @@ export default function ProfileDetails({ user }) {
 
         {isMyProfile ? (
           <Flex gap='4'>
-            {user?.tags.length > 0 ? (
+            {user?.tags?.length > 0 ? (
               user.tags.map((tag) => <ProfileTagPill tag={tag} />)
             ) : (
-              <Link href='/edit-profile'>
+              <Link to='/edit-profile'>
                 <Input
                   isReadOnly
                   variant='flushed'
@@ -165,7 +176,7 @@ export default function ProfileDetails({ user }) {
               <ProfileTagPill tag={tag} />
             ))}
           </Flex>
-        )} */}
+        )}
       </Stack>
 
       <Spacer />
