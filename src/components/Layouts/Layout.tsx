@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box } from '@chakra-ui/react';
 import AppNav from '../Navs/AppNav';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -6,6 +5,8 @@ import ModalContainer from '../Modals/ModalContainer';
 import SinglePowst from '../Posts/SinglePowst';
 import { Outlet } from 'react-router-dom';
 import { getUserDetails } from '../../features/auth/authActions';
+import { useEffect } from 'react';
+import { getAllPosts } from '../../features/feed/feedActions';
 // import CommentPanel from '../Chats/CommentPanel';
 
 export default function Layout({
@@ -23,14 +24,23 @@ export default function Layout({
   const modalFunction = useAppSelector((state) => state.modal.modalFunction);
 
   const user = useAppSelector((state) => state.auth.user);
+  const posts = useAppSelector((state) => state.feed.posts);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (user?._id) {
       (async () => {
         await dispatch(getUserDetails({ userId: user._id }));
       })();
     }
   }, [user._id, dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(getAllPosts({}));
+    })();
+  }, [dispatch]);
+
+  console.log({ posts });
 
   return (
     <>

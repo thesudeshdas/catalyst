@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import modalReducer from '../features/modal/modalSlice';
-import autthReducer from '../features/auth/authSlice';
+import authReducer from '../features/auth/authSlice';
+import feedReducer from '../features/feed/feedSlice';
 
 export const store = configureStore({
   reducer: {
     modal: modalReducer,
-    auth: autthReducer,
+    auth: authReducer,
+    feed: feedReducer,
   },
 });
 

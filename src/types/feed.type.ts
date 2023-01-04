@@ -32,3 +32,14 @@ export type IFeedNavItem = { text: string };
 export type IFeedNav = {
   items: IFeedNavItem[];
 };
+
+export type IFeedRejectErrors = {
+  errorStatus: number;
+  errorMessage: string;
+};
+
+export type IFeedState = {
+  loading: boolean;
+  posts: IPost[];
+  error: IFeedRejectErrors;
+};
