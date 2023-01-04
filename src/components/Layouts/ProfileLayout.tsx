@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { getUserDetails } from '../../features/auth/authActions';
 import { IRejectErrors, IUser } from '../../types/auth.type';
 import ProfileDetails from '../Profile/ProfileDetails';
 import PortfolioNav from '../Navs/PortfolioNav';
 
-export default function ProfileLayout() {
-  let { profileId } = useParams();
+export type ContextType = {
+  user: IUser;
+  starredPost: string[];
+  handleStarPost: Function;
+  handleUnstarPost: Function;
+};
 
-  const location = useLocation();
+export default function ProfileLayout() {
   const dispatch = useAppDispatch();
+  const { profileId } = useParams();
 
   const authUser = useAppSelector((state) => state.auth.user);
 
@@ -20,8 +25,9 @@ export default function ProfileLayout() {
   const [user, setUser] = useState<IUser | IRejectErrors>(
     isMyProfile ? authUser : null
   );
+  // const [posts, setPosts] = use;
 
-  const [starredPost, setStarredPost] = useState(user?.starredPost);
+  const [starredPost, setStarredPost] = useState<string[]>(user?.starredPost);
 
   const handleStarPost = async (postId) => {
     // if (starredPost.length < 3) {
@@ -66,7 +72,20 @@ export default function ProfileLayout() {
       <ProfileDetails user={user} />
 
       <PortfolioNav userId={profileId} />
-      <Outlet />
+
+      <Outlet
+        context={{
+          user,
+          isMyProfile,
+          starredPost,
+          handleStarPost,
+          handleUnstarPost,
+        }}
+      />
     </>
   );
+}
+
+export function useUserDetails() {
+  return useOutletContext<ContextType>();
 }

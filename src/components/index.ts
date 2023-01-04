@@ -1,6 +1,6 @@
 // Cards
 // import PortfolioBlogCard from './Cards/PortfolioBlogCard';
-// import PortfolioPowstCard from './Cards/PortfolioPowstCard';
+import PortfolioPowstCard from './Cards/PortfolioPowstCard';
 import PowstCard from './Cards/PowstCard';
 
 // Carousels
@@ -56,7 +56,7 @@ import SearchStack from './Search/SearchStack';
 export {
   // Cards
   // PortfolioBlogCard,
-  // PortfolioPowstCard,
+  PortfolioPowstCard,
   PowstCard,
 
   // Carousels
