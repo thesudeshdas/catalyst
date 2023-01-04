@@ -81,8 +81,6 @@ export const modalSlice = createSlice({
     });
 
     builder.addCase(getUserDetails.fulfilled, (state, { payload }) => {
-      console.log({ payload });
-
       state.loading = false;
 
       // set only the authenticated user details to RTK

@@ -40,8 +40,6 @@ export default function Layout({
     })();
   }, [dispatch]);
 
-  console.log({ posts });
-
   return (
     <>
       <AppNav />

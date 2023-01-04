@@ -2,11 +2,13 @@ import * as React from 'react';
 import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
-import { FeedFilters, FeedNav, Layout, PowstCard } from '../../components';
+import { FeedFilters, FeedNav, PowstCard } from '../../components';
 import { IPost } from '../../types/feed.type';
-import { getAllPosts } from '../../lib/api/posts.api';
+import { useAppSelector } from '../../app/hooks';
 
 export default function PageFeed() {
+  const posts = useAppSelector((state) => state.feed.posts);
+
   const [activeFeed, setActiveFeed] = useState<string>('Discover');
   const [showFilter, setShowFilter] = useState(false);
   const [following, setFollowing] = useState([]);
@@ -14,39 +16,9 @@ export default function PageFeed() {
 
   let status = 'authenticated';
 
-  // useEffect(() => {
-  //   if (status == 'authenticated') {
-  //     (async () => {
-  //       const response = await getUserDetails(session.user.id);
-
-  //       if (response.following.length > 0) {
-  //         setFollowing(response.following);
-  //       }
-  //     })();
-  //   }
-  // }, [session]);
-
-  // useEffect(() => {
-  //   if (status == 'authenticated') {
-  //     setActiveFeed('Following');
-  //   } else {
-  //     setActiveFeed('Discover');
-  //   }
-  // }, [status]);
-
   useEffect(() => {
-    (async () => {
-      const response = await getAllPosts();
-
-      if (response.status === 200) {
-        setFinalPosts(response.data.posts);
-      } else {
-        console.log({ response });
-
-        console.log('handle error in feed page');
-      }
-    })();
-  }, []);
+    setFinalPosts(posts);
+  }, [posts]);
 
   return (
     <>
@@ -73,8 +45,6 @@ export default function PageFeed() {
           alignItems='center'
         >
           {finalPosts.map((post) => {
-            console.log({ post });
-
             return (
               <GridItem key={post._id}>
                 <PowstCard details={post} />
