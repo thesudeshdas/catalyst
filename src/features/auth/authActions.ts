@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { IRejectErrors, IUser } from '../../types/auth.type';
 
 export const registerUser = createAsyncThunk<
@@ -9,16 +10,13 @@ export const registerUser = createAsyncThunk<
   try {
     console.log('yahan na?', req);
 
-    const response = await fetch(
-      `${process.env.REACT_APP_AUTH_URL}/users/sign-up`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ ...req }),
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_AUTH_URL}/sign-up`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ ...req }),
+    });
 
     const data = await response.json();
 
@@ -47,16 +45,13 @@ export const signinWithCredentials = createAsyncThunk<
   { rejectValue: IRejectErrors }
 >('auth/signinWithCredentials', async (req, { rejectWithValue }) => {
   try {
-    const response = await fetch(
-      `${process.env.REACT_APP_AUTH_URL}/users/sign-in`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({ ...req }),
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_AUTH_URL}/sign-in`, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ ...req }),
+    });
 
     const data = await response.json();
 
@@ -75,6 +70,40 @@ export const signinWithCredentials = createAsyncThunk<
     return rejectWithValue({
       errorStatus: error.response.status,
       errorMessage: error.response.message,
+    });
+  }
+});
+
+export const getUserDetails = createAsyncThunk<
+  IUser,
+  Partial<{ userId: string; username: string }>,
+  { rejectValue: IRejectErrors }
+>('auth/getUserDetails', async (req, { rejectWithValue }) => {
+  try {
+    // const data = await fetch(
+    //   `${process.env.REACT_APP_AUTH_URL}/${req.userId}1`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //   }
+    // ).then((r) => r.json());
+
+    const response = await axios.get(
+      `${process.env.REACT_APP_AUTH_URL}/${req.userId}`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    return response.data.user as IUser;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
     });
   }
 });

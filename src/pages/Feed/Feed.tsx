@@ -2,51 +2,22 @@ import * as React from 'react';
 import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
-import { FeedFilters, FeedNav, Layout, PowstCard } from '../../components';
+import { FeedFilters, FeedNav, PowstCard } from '../../components';
 import { IPost } from '../../types/feed.type';
-import { getAllPosts } from '../../lib/api/posts.api';
+import { useAppSelector } from '../../app/hooks';
 
 export default function PageFeed() {
+  const posts = useAppSelector((state) => state.feed.posts);
+  const authStatus = useAppSelector((state) => state.auth.signInStatus);
+
   const [activeFeed, setActiveFeed] = useState<string>('Discover');
   const [showFilter, setShowFilter] = useState(false);
   const [following, setFollowing] = useState([]);
   const [finalPosts, setFinalPosts] = useState<IPost[]>([]);
 
-  let status = 'authenticated';
-
-  // useEffect(() => {
-  //   if (status == 'authenticated') {
-  //     (async () => {
-  //       const response = await getUserDetails(session.user.id);
-
-  //       if (response.following.length > 0) {
-  //         setFollowing(response.following);
-  //       }
-  //     })();
-  //   }
-  // }, [session]);
-
-  // useEffect(() => {
-  //   if (status == 'authenticated') {
-  //     setActiveFeed('Following');
-  //   } else {
-  //     setActiveFeed('Discover');
-  //   }
-  // }, [status]);
-
   useEffect(() => {
-    (async () => {
-      const response = await getAllPosts();
-
-      if (response.status === 200) {
-        setFinalPosts(response.data.posts);
-      } else {
-        console.log({ response });
-
-        console.log('handle error in feed page');
-      }
-    })();
-  }, []);
+    setFinalPosts(posts);
+  }, [posts]);
 
   return (
     <>
@@ -73,8 +44,6 @@ export default function PageFeed() {
           alignItems='center'
         >
           {finalPosts.map((post) => {
-            console.log({ post });
-
             return (
               <GridItem key={post._id}>
                 <PowstCard details={post} />
@@ -84,7 +53,7 @@ export default function PageFeed() {
         </Grid>
       )}
 
-      {activeFeed === 'Following' && status === 'unauthenticated' && (
+      {activeFeed === 'Following' && !authStatus && (
         <Heading textAlign='center' mt={8} size='lg'>
           You are not signed in, sign in now to see what people you follow have
           been creating
@@ -93,25 +62,23 @@ export default function PageFeed() {
         </Heading>
       )}
 
-      {activeFeed === 'Following' &&
-        status === 'authenticated' &&
-        following.length === 0 && (
-          <Stack mt={8}>
-            <Heading textAlign='center' mb={4} size='lg'>
-              You are not following anyone yet
-              <br />
-              😔😕😥
-            </Heading>
+      {activeFeed === 'Following' && authStatus && following.length === 0 && (
+        <Stack mt={8}>
+          <Heading textAlign='center' mb={4} size='lg'>
+            You are not following anyone yet
+            <br />
+            😔😕😥
+          </Heading>
 
-            <Text fontSize='lg' textAlign='center'>
-              Check out what other <br />{' '}
-              <Text as='span' color='brand.600' fontWeight='600'>
-                Developers
-              </Text>{' '}
-              are creating
-            </Text>
-          </Stack>
-        )}
+          <Text fontSize='lg' textAlign='center'>
+            Check out what other <br />{' '}
+            <Text as='span' color='brand.600' fontWeight='600'>
+              Developers
+            </Text>{' '}
+            are creating
+          </Text>
+        </Stack>
+      )}
 
       {activeFeed === 'Following' && (
         <Grid

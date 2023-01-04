@@ -5,7 +5,7 @@ import { IStack } from '../../types/auth.type';
 
 export default function ListTechStack({ stack, ...props }) {
   const techStack = techStackIcons.filter(({ alt }) =>
-    stack.some(({ label }) => label == alt)
+    stack?.some(({ label }) => label == alt)
   );
 
   return (

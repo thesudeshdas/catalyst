@@ -1,6 +1,6 @@
 // Cards
 // import PortfolioBlogCard from './Cards/PortfolioBlogCard';
-// import PortfolioPowstCard from './Cards/PortfolioPowstCard';
+import PortfolioPowstCard from './Cards/PortfolioPowstCard';
 import PowstCard from './Cards/PowstCard';
 
 // Carousels
@@ -19,6 +19,7 @@ import FormSignUp from './Forms/FormSignup';
 
 // Layouts
 import Layout from './Layouts/Layout';
+import ProfileLayout from './Layouts/ProfileLayout';
 
 // Lists
 import ListTechStack from './Lists/ListTechStack';
@@ -35,19 +36,19 @@ import ModalContainer from './Modals/ModalContainer';
 // Navs
 import AppNav from './Navs/AppNav';
 import FeedNav from './Navs/FeedNav';
-// import PortfolioNav from './Navs/PortfolioNav';
+import PortfolioNav from './Navs/PortfolioNav';
 import PostNav from './Navs/PostNav';
 
 // Pills
 import PowstTagPill from './Pills/PowstTagPill';
-// import ProfileTagPill from './Pills/ProfileTagPill';
+import ProfileTagPill from './Pills/ProfileTagPill';
 
 // Posts
 import SinglePowst from './Posts/SinglePowst';
 
 // Profile
 import CreatorDetails from './Profile/CreatorDetails';
-// import ProfileDetails from './Profile/ProfileDetails';
+import ProfileDetails from './Profile/ProfileDetails';
 
 // Search
 import SearchStack from './Search/SearchStack';
@@ -55,7 +56,7 @@ import SearchStack from './Search/SearchStack';
 export {
   // Cards
   // PortfolioBlogCard,
-  // PortfolioPowstCard,
+  PortfolioPowstCard,
   PowstCard,
 
   // Carousels
@@ -74,6 +75,7 @@ export {
 
   // Layouts
   Layout,
+  ProfileLayout,
 
   // Lists
   ListTechStack,
@@ -90,16 +92,16 @@ export {
   // Navs
   AppNav,
   FeedNav,
-  // PortfolioNav,
+  PortfolioNav,
   PostNav,
 
   // Pills
   PowstTagPill,
-  // ProfileTagPill,
+  ProfileTagPill,
 
   // Profile
   CreatorDetails,
-  // ProfileDetails,
+  ProfileDetails,
 
   // Search
   SearchStack,

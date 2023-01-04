@@ -2,12 +2,13 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { ChakraProvider } from '@chakra-ui/react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Box, ChakraProvider } from '@chakra-ui/react';
+import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import {
   PageCallback,
   PageFeed,
   PageHome,
+  PagePortfolioWork,
   PageProfile,
   PageSignIn,
   PageSignUp,
@@ -16,7 +17,7 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import theme from './themes/index';
 import ProtectedRoute from './lib/utils/route-utils/ProtectedRoute';
-import { Layout } from './components';
+import { Layout, ProfileLayout } from './components';
 
 const root = createRoot(document.getElementById('root')!);
 
@@ -26,9 +27,18 @@ const router = createBrowserRouter([
     children: [
       {
         element: <ProtectedRoute />,
-        children: [{ path: '/profile', element: <PageProfile /> }],
+        children: [
+          {
+            path: ':profileId',
+            element: <ProfileLayout />,
+            children: [
+              { path: 'portfolio', element: <PageProfile /> },
+              { path: 'work', element: <PagePortfolioWork /> },
+            ],
+          },
+        ],
       },
-      // { path: '/profile', element: <PageProfile /> },
+
       {
         path: '/callback',
         element: <PageCallback />,
