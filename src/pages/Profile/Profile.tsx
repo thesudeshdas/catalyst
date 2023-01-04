@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 import {
   Layout,
   ListTechStack,
+  PortfolioNav,
   ProfileDetails,
   // PortfolioNav,
   // PortfolioPowstCard,
@@ -28,7 +29,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useLocation } from 'react-router-dom';
 import { getUserDetails } from '../../features/auth/authActions';
 
-export default function PagePortfolio({ posts }: { posts: IPost[] }) {
+export default function PagePortfolio() {
   const location = useLocation();
   const dispatch = useAppDispatch();
 
@@ -65,29 +66,8 @@ export default function PagePortfolio({ posts }: { posts: IPost[] }) {
     // }
   };
 
-  useEffect(() => {
-    if (!isMyProfile) {
-      (async () => {
-        const response = await dispatch(
-          getUserDetails({ userId: userIdToLoad })
-        );
-
-        if (response.meta.requestStatus === 'fulfilled') {
-          setUser(response.payload);
-        }
-        // TODO - handle error here
-      })();
-    }
-  }, []);
-
-  console.log({ user, authUser, userIdToLoad, isMyProfile });
-
   return (
     <>
-      <ProfileDetails user={user} />
-
-      {/* <PortfolioNav /> */}
-
       {/* Bio & tech stack */}
       <Flex justifyContent='space-between' my={8} alignItems='start'>
         {user?.bio && (
@@ -108,9 +88,9 @@ export default function PagePortfolio({ posts }: { posts: IPost[] }) {
       <Stack mb={8} gap={2}>
         <Heading size='md'>Featured Work</Heading>
 
-        {posts && posts.length > 0 && (
+        {/* {posts && posts.length > 0 && (
           <Wrap justify='space-between'>
-            {/* {posts
+            {posts
               .filter((post) => post.user._id == user._id)
               .slice(0, 3)
               .map((post) => (
@@ -122,9 +102,9 @@ export default function PagePortfolio({ posts }: { posts: IPost[] }) {
                     starredPost={starredPost}
                   />
                 </WrapItem>
-              ))} */}
+              ))}
           </Wrap>
-        )}
+        )} */}
       </Stack>
 
       {/* Featured Blogs */}

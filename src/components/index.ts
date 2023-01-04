@@ -19,6 +19,7 @@ import FormSignUp from './Forms/FormSignup';
 
 // Layouts
 import Layout from './Layouts/Layout';
+import ProfileLayout from './Layouts/ProfileLayout';
 
 // Lists
 import ListTechStack from './Lists/ListTechStack';
@@ -35,7 +36,7 @@ import ModalContainer from './Modals/ModalContainer';
 // Navs
 import AppNav from './Navs/AppNav';
 import FeedNav from './Navs/FeedNav';
-// import PortfolioNav from './Navs/PortfolioNav';
+import PortfolioNav from './Navs/PortfolioNav';
 import PostNav from './Navs/PostNav';
 
 // Pills
@@ -74,6 +75,7 @@ export {
 
   // Layouts
   Layout,
+  ProfileLayout,
 
   // Lists
   ListTechStack,
@@ -90,7 +92,7 @@ export {
   // Navs
   AppNav,
   FeedNav,
-  // PortfolioNav,
+  PortfolioNav,
   PostNav,
 
   // Pills

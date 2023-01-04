@@ -58,8 +58,6 @@ export default function ProfileDetails({ user }) {
     )
   );
 
-  console.log({ isMyProfile });
-
   return (
     <Flex mb={8} alignItems='center' justifyContent='space-between'>
       <Image
@@ -126,7 +124,7 @@ export default function ProfileDetails({ user }) {
 
             {user?.company ? (
               <Text fontWeight='500' fontSize='xl'>
-                {user.company}
+                {user?.company}
               </Text>
             ) : (
               <Link to='/edit-profile'>
@@ -151,7 +149,7 @@ export default function ProfileDetails({ user }) {
             )}
 
             <Text fontWeight='500' fontSize='xl'>
-              {user.company}
+              {user?.company}
             </Text>
           </Flex>
         )}
@@ -159,7 +157,7 @@ export default function ProfileDetails({ user }) {
         {isMyProfile ? (
           <Flex gap='4'>
             {user?.tags?.length > 0 ? (
-              user.tags.map((tag) => <ProfileTagPill tag={tag} />)
+              user.tags?.map((tag) => <ProfileTagPill tag={tag} />)
             ) : (
               <Link to='/edit-profile'>
                 <Input
@@ -172,7 +170,7 @@ export default function ProfileDetails({ user }) {
           </Flex>
         ) : (
           <Flex gap='4'>
-            {user.tags.map((tag) => (
+            {user?.tags?.map((tag) => (
               <ProfileTagPill tag={tag} />
             ))}
           </Flex>
