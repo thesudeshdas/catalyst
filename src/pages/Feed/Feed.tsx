@@ -8,13 +8,12 @@ import { useAppSelector } from '../../app/hooks';
 
 export default function PageFeed() {
   const posts = useAppSelector((state) => state.feed.posts);
+  const authStatus = useAppSelector((state) => state.auth.signInStatus);
 
   const [activeFeed, setActiveFeed] = useState<string>('Discover');
   const [showFilter, setShowFilter] = useState(false);
   const [following, setFollowing] = useState([]);
   const [finalPosts, setFinalPosts] = useState<IPost[]>([]);
-
-  let status = 'authenticated';
 
   useEffect(() => {
     setFinalPosts(posts);
@@ -54,7 +53,7 @@ export default function PageFeed() {
         </Grid>
       )}
 
-      {activeFeed === 'Following' && status === 'unauthenticated' && (
+      {activeFeed === 'Following' && !authStatus && (
         <Heading textAlign='center' mt={8} size='lg'>
           You are not signed in, sign in now to see what people you follow have
           been creating
@@ -63,25 +62,23 @@ export default function PageFeed() {
         </Heading>
       )}
 
-      {activeFeed === 'Following' &&
-        status === 'authenticated' &&
-        following.length === 0 && (
-          <Stack mt={8}>
-            <Heading textAlign='center' mb={4} size='lg'>
-              You are not following anyone yet
-              <br />
-              😔😕😥
-            </Heading>
+      {activeFeed === 'Following' && authStatus && following.length === 0 && (
+        <Stack mt={8}>
+          <Heading textAlign='center' mb={4} size='lg'>
+            You are not following anyone yet
+            <br />
+            😔😕😥
+          </Heading>
 
-            <Text fontSize='lg' textAlign='center'>
-              Check out what other <br />{' '}
-              <Text as='span' color='brand.600' fontWeight='600'>
-                Developers
-              </Text>{' '}
-              are creating
-            </Text>
-          </Stack>
-        )}
+          <Text fontSize='lg' textAlign='center'>
+            Check out what other <br />{' '}
+            <Text as='span' color='brand.600' fontWeight='600'>
+              Developers
+            </Text>{' '}
+            are creating
+          </Text>
+        </Stack>
+      )}
 
       {activeFeed === 'Following' && (
         <Grid
