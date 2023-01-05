@@ -29,7 +29,7 @@ export default function PageFeed() {
 
       <FeedFilters
         activeFeed={activeFeed}
-        postsArr={[]}
+        postsArr={posts}
         setFinalPosts={setFinalPosts}
         following={following}
         showFilter={showFilter}

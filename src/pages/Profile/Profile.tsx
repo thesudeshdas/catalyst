@@ -35,7 +35,7 @@ export default function PagePortfolio() {
         {posts && posts.length > 0 && (
           <Wrap justify='space-between'>
             {posts
-              .filter((post) => post.user._id == user._id)
+              .filter((post) => post.user?._id == user?._id)
               .slice(0, 3)
               .map((post) => (
                 <WrapItem key={post._id}>

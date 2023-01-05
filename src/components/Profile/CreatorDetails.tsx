@@ -4,6 +4,8 @@ import { Box, Button, Flex, Heading, Image, Spacer } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IUser } from '../../types/auth.type';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../app/hooks';
+import { toggle } from '../../features/modal/modalSlice';
 
 export default function CreatorDetails({
   creator,
@@ -12,7 +14,8 @@ export default function CreatorDetails({
   creator: IUser;
   postName: string;
 }) {
-  const { _id: creatorId, followers, image: creatorDP, name } = creator;
+  const dispatch = useAppDispatch();
+  const { _id: creatorId, followers, profilePic, name } = creator;
 
   const [doIFollow, setDoIFollow] = useState<boolean>(true);
 
@@ -32,7 +35,7 @@ export default function CreatorDetails({
     <Flex gap={4} alignItems='center'>
       <Image
         borderRadius='50%'
-        src={creatorDP}
+        src={profilePic?.src || '/images/blank_profile.png'}
         alt={name}
         width='65px'
         height='65px'
@@ -41,7 +44,10 @@ export default function CreatorDetails({
         <Heading size='lg'>{postName}</Heading>
 
         <Flex gap={2} alignItems='center '>
-          <Link to={`/${creatorId}`}>
+          <Link
+            to={`/${creatorId}/portfolio`}
+            onClick={() => dispatch(toggle(''))}
+          >
             <Button variant='ghost' p={0} mr={3}>
               {name}
             </Button>

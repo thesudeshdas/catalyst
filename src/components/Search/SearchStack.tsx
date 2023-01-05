@@ -134,7 +134,13 @@ export default function SearchStack({ tags, setTags }) {
     <Stack gap={4}>
       <Flex wrap='wrap' gap={4}>
         {techStack.map((icon) => (
-          <Image src={icon.src} alt={icon.alt} width={32} height={32} />
+          <Image
+            key={icon.alt}
+            src={icon.src}
+            alt={icon.alt}
+            width={32}
+            height={32}
+          />
         ))}
       </Flex>
 

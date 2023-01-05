@@ -51,16 +51,14 @@ export default function ProfileLayout() {
   };
 
   useEffect(() => {
-    if (!isMyProfile) {
-      (async () => {
-        const response = await dispatch(getUserDetails({ userId: profileId }));
+    (async () => {
+      const response = await dispatch(getUserDetails({ userId: profileId }));
 
-        if (response.meta.requestStatus === 'fulfilled') {
-          setUser(response.payload);
-        }
-        // TODO - handle error here
-      })();
-    }
+      if (response.meta.requestStatus === 'fulfilled') {
+        setUser(response.payload);
+      }
+      // TODO - handle error here
+    })();
   }, []);
 
   // console.log({ user, authUser, profileId, isMyProfile });

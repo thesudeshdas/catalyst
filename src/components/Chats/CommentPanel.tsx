@@ -12,8 +12,11 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IComment } from '../../types/feed.type';
+import { useAppSelector } from '../../app/hooks';
 
 export default function CommentPanel({ postId, comments: staticComments }) {
+  const authUser = useAppSelector((state) => state.auth.user);
+
   const [comments, setComments] = useState<IComment[]>(staticComments);
   const [comment, setComment] = useState<string>('');
 
@@ -51,7 +54,7 @@ export default function CommentPanel({ postId, comments: staticComments }) {
             overflow='hidden'
           >
             <Image
-              src={comment.user.image}
+              src={comment.user?.profilePic?.src || '/images/blank_profile.png'}
               alt={comment.user.name}
               objectFit='cover'
               w='100%'
@@ -75,12 +78,11 @@ export default function CommentPanel({ postId, comments: staticComments }) {
           position='relative'
           overflow='hidden'
         >
-          {/* <Image
-            src={session?.user.image}
-            alt={session?.user.name}
+          <Image
+            src={authUser.profilePic?.src || '/images/blank_profile.png'}
+            alt={authUser.name}
             objectFit='cover'
-            layout='fill'
-          /> */}
+          />
         </Box>
 
         <Stack w='calc(100% - 3rem)' mt={1}>

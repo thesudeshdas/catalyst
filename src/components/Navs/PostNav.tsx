@@ -23,7 +23,7 @@ export default function PostNav({ likes, comments, creator, setShowComments }) {
       {creator && (
         <Image
           borderRadius='50%'
-          src={creator.image}
+          src={creator.profilePic?.src || '/images/blank_profile.png'}
           alt={creator.name}
           width='50'
           height='50'

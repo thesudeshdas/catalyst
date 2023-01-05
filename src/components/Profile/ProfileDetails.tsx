@@ -157,7 +157,7 @@ export default function ProfileDetails({ user }) {
         {isMyProfile ? (
           <Flex gap='4'>
             {user?.tags?.length > 0 ? (
-              user.tags?.map((tag) => <ProfileTagPill tag={tag} />)
+              user.tags?.map((tag) => <ProfileTagPill key={tag} tag={tag} />)
             ) : (
               <Link to='/edit-profile'>
                 <Input
@@ -171,7 +171,7 @@ export default function ProfileDetails({ user }) {
         ) : (
           <Flex gap='4'>
             {user?.tags?.map((tag) => (
-              <ProfileTagPill tag={tag} />
+              <ProfileTagPill key={tag} tag={tag} />
             ))}
           </Flex>
         )}
