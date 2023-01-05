@@ -45,23 +45,27 @@ export const signinWithCredentials = createAsyncThunk<
   { rejectValue: IRejectErrors }
 >('auth/signinWithCredentials', async (req, { rejectWithValue }) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_AUTH_URL}/sign-in`, {
-      method: 'POST',
+    const body = JSON.stringify(req);
+
+    const config = {
       headers: {
         'Content-type': 'application/json',
       },
-      body: JSON.stringify({ ...req }),
-    });
+    };
 
-    const data = await response.json();
+    const response = await axios.post(
+      `${process.env.REACT_APP_AUTH_URL}/sign-in`,
+      body,
+      config
+    );
 
     if (response.status == 404 || response.status == 401) {
       return rejectWithValue({
         errorStatus: response.status,
-        errorMessage: data.message,
+        errorMessage: response.data.message,
       });
     } else if (response.status == 200) {
-      return data.signedUser as IUser;
+      return response.data.signedUser as IUser;
     } else {
       console.log('unknown error');
       return null;
@@ -80,13 +84,15 @@ export const getUserDetails = createAsyncThunk<
   { rejectValue: IRejectErrors }
 >('auth/getUserDetails', async (req, { rejectWithValue }) => {
   try {
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+
     const response = await axios.get(
       `${process.env.REACT_APP_AUTH_URL}/${req.userId}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
+      config
     );
 
     return response.data.user as IUser;
