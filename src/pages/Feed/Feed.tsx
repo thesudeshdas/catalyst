@@ -19,6 +19,8 @@ export default function PageFeed() {
     setFinalPosts(posts);
   }, [posts]);
 
+  console.log({ posts, finalPosts });
+
   return (
     <>
       <FeedNav
