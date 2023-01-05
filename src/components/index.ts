@@ -13,7 +13,7 @@ import CommentPanel from './Chats/CommentPanel';
 import FeedFilters from './Filters/FeedFilters';
 
 // Forms
-// import FormEditProfile from './Forms/FormEditProfile';
+import FormEditProfile from './Forms/FormEditProfile';
 import FormSignIn from './Forms/FormSignIn';
 import FormSignUp from './Forms/FormSignup';
 
@@ -26,12 +26,12 @@ import ListTechStack from './Lists/ListTechStack';
 
 // Modals
 import ModalContainer from './Modals/ModalContainer';
-// import ModalEditBio from './Modals/ModalEditBio';
-// import ModalEditJob from './Modals/ModalEditJob';
-// import ModalEditName from './Modals/ModalEditName';
-// import ModalEditSocial from './Modals/ModalEditSocial';
-// import ModalEditStack from './Modals/ModalEditStack';
-// import ModalEditTags from './Modals/ModalEditTags';
+import ModalEditBio from './Modals/ModalEditBio';
+import ModalEditJob from './Modals/ModalEditJob';
+import ModalEditName from './Modals/ModalEditName';
+import ModalEditSocial from './Modals/ModalEditSocial';
+import ModalEditStack from './Modals/ModalEditStack';
+import ModalEditTags from './Modals/ModalEditTags';
 
 // Navs
 import AppNav from './Navs/AppNav';
@@ -69,7 +69,7 @@ export {
   FeedFilters,
 
   // Forms
-  // FormEditProfile,
+  FormEditProfile,
   FormSignIn,
   FormSignUp,
 
@@ -82,12 +82,12 @@ export {
 
   // Modals
   ModalContainer,
-  // ModalEditBio,
-  // ModalEditJob,
-  // ModalEditName,
-  // ModalEditSocial,
-  // ModalEditStack,
-  // ModalEditTags,
+  ModalEditBio,
+  ModalEditJob,
+  ModalEditName,
+  ModalEditSocial,
+  ModalEditStack,
+  ModalEditTags,
 
   // Navs
   AppNav,

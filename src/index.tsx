@@ -6,6 +6,7 @@ import { Box, ChakraProvider } from '@chakra-ui/react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import {
   PageCallback,
+  PageEditProfile,
   PageFeed,
   PageHome,
   PagePortfolioWork,
@@ -38,7 +39,10 @@ const router = createBrowserRouter([
           },
         ],
       },
-
+      {
+        path: '/edit-profile',
+        element: <PageEditProfile />,
+      },
       {
         path: '/callback',
         element: <PageCallback />,
