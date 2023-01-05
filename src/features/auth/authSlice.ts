@@ -9,7 +9,7 @@ import {
 let localStatus, localUser;
 
 localStatus = JSON.parse(localStorage?.getItem('localStatus')) || false;
-localUser = JSON.parse(localStorage?.getItem('localUser')) || null;
+localUser = JSON.parse(localStorage?.getItem('localUser')) || {};
 
 const initialState: IAuthState = {
   loading: false,
