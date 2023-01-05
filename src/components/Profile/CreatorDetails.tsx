@@ -12,7 +12,7 @@ export default function CreatorDetails({
   creator: IUser;
   postName: string;
 }) {
-  const { _id: creatorId, followers, image: creatorDP, name } = creator;
+  const { _id: creatorId, followers, profilePic, name } = creator;
 
   const [doIFollow, setDoIFollow] = useState<boolean>(true);
 
@@ -32,7 +32,7 @@ export default function CreatorDetails({
     <Flex gap={4} alignItems='center'>
       <Image
         borderRadius='50%'
-        src={creatorDP}
+        src={profilePic?.src || '/images/blank_profile.png'}
         alt={name}
         width='65px'
         height='65px'
