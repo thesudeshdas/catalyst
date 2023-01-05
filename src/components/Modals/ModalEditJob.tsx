@@ -19,9 +19,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 export default function ModalEditJob() {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
 
   const [title, setTitle] = useState<string>(
@@ -32,10 +34,12 @@ export default function ModalEditJob() {
   );
 
   const handleSubmit = async () => {
-    // const data = await updateUser(user._id, { title, company });
-    // setTitle(data.title);
-    // setCompany(data.company);
-    // onClose();
+    const data = await dispatch(
+      updateUserDetails({ userId: user._id, toUpdate: { title, company } })
+    );
+    setTitle(data.payload.title);
+    setCompany(data.payload.company);
+    onClose();
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

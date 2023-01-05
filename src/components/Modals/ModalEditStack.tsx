@@ -19,24 +19,29 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 import { IStack } from '../../types/auth.type';
 import ProfileTagPill from '../Pills/ProfileTagPill';
 import SearchStack from '../Search/SearchStack';
 
 export default function ModalEditStack() {
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector((state) => state.auth.user?._id);
   const userStack = useAppSelector((state) => state.auth.user?.stack);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const [tags, setTags] = useState<IStack[]>(userStack || []);
+  const [stack, setStack] = useState<IStack[]>(userStack || []);
 
   const handleSubmit = async () => {
-    // const data = await updateUser(user._id, { stack: tags });
-    // console.log({ data });
-    // setTags(data.stack);
-    // onClose();
+    const data = await dispatch(
+      updateUserDetails({ userId, toUpdate: { stack } })
+    );
+
+    setStack(data.payload.stack);
+    onClose();
   };
 
   return (
@@ -47,10 +52,10 @@ export default function ModalEditStack() {
         <InputGroup>
           <InputRightElement pointerEvents='none' children={<EditIcon />} />
 
-          {tags.length > 0 ? (
+          {stack.length > 0 ? (
             <>
               <Flex wrap='wrap' gap={4}>
-                {tags.map((tag) => (
+                {stack.map((tag) => (
                   <ProfileTagPill key={tag.value} tag={tag.label} />
                 ))}
               </Flex>
@@ -90,7 +95,7 @@ export default function ModalEditStack() {
           <ModalBody>
             <Center>
               <Stack w='40rem' gap={4}>
-                <SearchStack tags={tags} setTags={setTags} />
+                <SearchStack tags={stack} setTags={setStack} />
               </Stack>
             </Center>
           </ModalBody>

@@ -20,17 +20,22 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 export default function ModalEditName() {
+  const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
 
   const [name, setName] = useState<string>(user.name);
 
   const handleSubmit = async () => {
-    // const data = await updateUser(user._id, { name });
-    // setName(data.name);
-    // onClose();
+    const data = await dispatch(
+      updateUserDetails({ userId: user._id, toUpdate: { name } })
+    );
+
+    setName(data.payload.name);
+    onClose();
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

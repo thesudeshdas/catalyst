@@ -24,11 +24,14 @@ import {
 } from '@chakra-ui/react';
 
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 import ProfileTagPill from '../Pills/ProfileTagPill';
 
 export default function ModalEditTags() {
+  const dispatch = useAppDispatch();
+  const userId = useAppSelector((state) => state.auth.user?._id);
   const userTags = useAppSelector((state) => state.auth.user?.tags);
 
   const [value, setValue] = useState<string>('');
@@ -44,9 +47,12 @@ export default function ModalEditTags() {
   const handleInputChange = (e) => setValue(e.target.value);
 
   const handleSubmit = async () => {
-    // const data = await updateUser(user._id, { tags });
-    // setTags(data.tags);
-    // onClose();
+    const data = await dispatch(
+      updateUserDetails({ userId, toUpdate: { tags } })
+    );
+
+    setTags(data.payload.tags);
+    onClose();
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

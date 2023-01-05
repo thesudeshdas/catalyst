@@ -19,17 +19,23 @@ import {
 } from '@chakra-ui/react';
 
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 export default function ModalEditBio() {
+  const dipatch = useAppDispatch();
   const userBio = useAppSelector((state) => state.auth.user?.bio);
+  const userId = useAppSelector((state) => state.auth.user?._id);
 
   const [bio, setBio] = useState<string>(userBio || 'Add your bio');
 
   const handleSubmit = async () => {
-    // const data = await updateUser(user._id, { bio: bio });
-    // setBio(data.bio);
-    // onClose();
+    const data = await dipatch(
+      updateUserDetails({ userId, toUpdate: { bio } })
+    );
+
+    setBio(data.payload.bio);
+    onClose();
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();

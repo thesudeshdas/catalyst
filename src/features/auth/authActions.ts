@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IRejectErrors, IUser } from '../../types/auth.type';
+import { IAuthState, IRejectErrors, IUser } from '../../types/auth.type';
 
 export const registerUser = createAsyncThunk<
   IUser,
@@ -80,16 +80,6 @@ export const getUserDetails = createAsyncThunk<
   { rejectValue: IRejectErrors }
 >('auth/getUserDetails', async (req, { rejectWithValue }) => {
   try {
-    // const data = await fetch(
-    //   `${process.env.REACT_APP_AUTH_URL}/${req.userId}1`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //   }
-    // ).then((r) => r.json());
-
     const response = await axios.get(
       `${process.env.REACT_APP_AUTH_URL}/${req.userId}`,
       {
@@ -100,6 +90,35 @@ export const getUserDetails = createAsyncThunk<
     );
 
     return response.data.user as IUser;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
+    });
+  }
+});
+
+export const updateUserDetails = createAsyncThunk<
+  IUser,
+  { userId: string; toUpdate: Partial<IUser> },
+  { rejectValue: IRejectErrors }
+>('auth/updateUserDetails', async (req, { rejectWithValue }) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const body = JSON.stringify(req.toUpdate);
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_AUTH_URL}/${req.userId}`,
+      body,
+      config
+    );
+
+    return response.data.updatedUser as IUser;
   } catch (error) {
     return rejectWithValue({
       errorStatus: error.response.status,
