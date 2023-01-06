@@ -161,3 +161,32 @@ export const followUser = createAsyncThunk<
     });
   }
 });
+
+export const unfollowUser = createAsyncThunk<
+  IUser,
+  { unfollowerUserId: string; unfollowingUserId: string },
+  { rejectValue: IRejectErrors }
+>('auth/unfollowUser', async (req, { rejectWithValue }) => {
+  try {
+    const body = JSON.stringify({ unfollowerUserId: req.unfollowerUserId });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_AUTH_URL}/${req.unfollowingUserId}/unfollow`,
+      body,
+      config
+    );
+
+    return response.data.updatedUnfollower as IUser;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
+    });
+  }
+});

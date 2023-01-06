@@ -5,6 +5,7 @@ import {
   getUserDetails,
   registerUser,
   signinWithCredentials,
+  unfollowUser,
 } from './authActions';
 
 let localStatus, localUser;
@@ -106,6 +107,21 @@ export const modalSlice = createSlice({
     });
 
     builder.addCase(followUser.rejected, (state, { payload }) => {
+      state.loading = false;
+      console.log('handle error');
+    });
+
+    // unfollow user
+    builder.addCase(unfollowUser.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(unfollowUser.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.user.following = payload.following;
+    });
+
+    builder.addCase(unfollowUser.rejected, (state, { payload }) => {
       state.loading = false;
       console.log('handle error');
     });
