@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IAuthState } from '../../types/auth.type';
 import {
+  followUser,
   getUserDetails,
   registerUser,
   signinWithCredentials,
@@ -92,6 +93,21 @@ export const modalSlice = createSlice({
     builder.addCase(getUserDetails.rejected, (state) => {
       state.loading = false;
       console.log('ab kya karein ji?');
+    });
+
+    // follow user
+    builder.addCase(followUser.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(followUser.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.user.following = payload.following;
+    });
+
+    builder.addCase(followUser.rejected, (state, { payload }) => {
+      state.loading = false;
+      console.log('handle error');
     });
   },
 });

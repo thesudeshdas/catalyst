@@ -4,8 +4,9 @@ import { Box, Button, Flex, Heading, Image, Spacer } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IUser } from '../../types/auth.type';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { toggle } from '../../features/modal/modalSlice';
+import { followUser } from '../../features/auth/authActions';
 
 export default function CreatorDetails({
   creator,
@@ -15,13 +16,23 @@ export default function CreatorDetails({
   postName: string;
 }) {
   const dispatch = useAppDispatch();
+  const authUserId = useAppSelector((state) => state.auth.user?._id);
+
   const { _id: creatorId, followers, profilePic, name } = creator;
 
-  const [doIFollow, setDoIFollow] = useState<boolean>(true);
+  const [doIFollow, setDoIFollow] = useState<boolean>(
+    followers.includes(authUserId)
+  );
 
   const handleFollow = async () => {
-    // const response = await followUser(session?.user.id, creatorId);
-    // response && setDoIFollow((prev) => !prev);
+    const response = await dispatch(
+      followUser({
+        followerUserId: authUserId,
+        followingUserId: creatorId,
+      })
+    );
+
+    response && setDoIFollow((prev) => !prev);
   };
 
   const unhandleFollow = async () => {
@@ -29,7 +40,7 @@ export default function CreatorDetails({
     // response && setDoIFollow((prev) => !prev);
   };
 
-  const isMyProfile: boolean = false;
+  const isMyProfile: boolean = authUserId == creatorId;
 
   return (
     <Flex gap={4} alignItems='center'>

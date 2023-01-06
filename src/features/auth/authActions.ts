@@ -132,3 +132,32 @@ export const updateUserDetails = createAsyncThunk<
     });
   }
 });
+
+export const followUser = createAsyncThunk<
+  IUser,
+  { followerUserId: string; followingUserId: string },
+  { rejectValue: IRejectErrors }
+>('auth/followUser', async (req, { rejectWithValue }) => {
+  try {
+    const body = JSON.stringify({ followerUserId: req.followerUserId });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_AUTH_URL}/${req.followingUserId}/follow`,
+      body,
+      config
+    );
+
+    return response.data.updatedFollower as IUser;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
+    });
+  }
+});
