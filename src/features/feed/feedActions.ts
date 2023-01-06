@@ -44,12 +44,41 @@ export const likePost = createAsyncThunk<
     };
 
     const response = await axios.post(
-      `${process.env.REACT_APP_POSTS_API_URL}/${req.postId}`,
+      `${process.env.REACT_APP_POSTS_API_URL}/${req.postId}/like`,
       body,
       config
     );
 
     return response.data.likedPost as IPost;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
+    });
+  }
+});
+
+export const unlikePost = createAsyncThunk<
+  IPost,
+  { postId: string; userId: string },
+  { rejectValue: IFeedRejectErrors }
+>('feed/unlikePost', async (req, { rejectWithValue }) => {
+  try {
+    const body = JSON.stringify({ userId: req.userId });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_POSTS_API_URL}/${req.postId}/unlike`,
+      body,
+      config
+    );
+
+    return response.data.unlikedPost as IPost;
   } catch (error) {
     return rejectWithValue({
       errorStatus: error.response.status,

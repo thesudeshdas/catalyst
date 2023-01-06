@@ -32,7 +32,7 @@ import CarouselImage from '../Carousels/CarouselImage';
 import ListTechStack from '../Lists/ListTechStack';
 import { IPost } from '../../types/feed.type';
 import { getPostDetails } from '../../lib/api/posts.api';
-import { likePost } from '../../features/feed/feedActions';
+import { likePost, unlikePost } from '../../features/feed/feedActions';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
@@ -44,26 +44,24 @@ export default function SinglePowst({ postId }) {
 
   const userId = useAppSelector((state) => state.auth.user._id);
 
-  // const post = useAppSelector((state) =>
-  //   state.feed.posts.find((item) => item._id == details._id)
-  // );
-
   const likeHandler = async () => {
     const response = await dispatch(
       likePost({ postId: postId, userId: userId })
     );
 
-    response && setLikes(response.payload?.likes);
+    response && setLikes((prevLikes) => [...prevLikes, userId]);
   };
 
-  // const unlikeHandler = (postId) => {
-  //   dispatch(unlikePost({ postId: postId, userId: userId }));
-  // };
+  const unlikeHandler = async () => {
+    const response = await dispatch(
+      unlikePost({ postId: postId, userId: userId })
+    );
+
+    response &&
+      setLikes((prevLikes) => prevLikes.filter((item) => item != userId));
+  };
 
   const hasUserLiked = likes?.includes(userId);
-  // const hasUserLiked = true;
-
-  // console.log({ post });
 
   useEffect(() => {
     (async () => {
@@ -134,7 +132,7 @@ export default function SinglePowst({ postId }) {
                   // TODO - add outline icon for like
                   leftIcon={<LikeIcon />}
                   variant='secondary'
-                  // onClick={() => unlikeHandler(_id)}
+                  onClick={unlikeHandler}
                 >
                   Unlike
                 </Button>
