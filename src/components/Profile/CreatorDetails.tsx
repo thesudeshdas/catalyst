@@ -6,7 +6,7 @@ import { IUser } from '../../types/auth.type';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { toggle } from '../../features/modal/modalSlice';
-import { followUser } from '../../features/auth/authActions';
+import { followUser, unfollowUser } from '../../features/auth/authActions';
 
 export default function CreatorDetails({
   creator,
@@ -36,8 +36,14 @@ export default function CreatorDetails({
   };
 
   const unhandleFollow = async () => {
-    // const response = await unfollowUser(session?.user.id, creatorId);
-    // response && setDoIFollow((prev) => !prev);
+    const response = await dispatch(
+      unfollowUser({
+        unfollowerUserId: authUserId,
+        unfollowingUserId: creatorId,
+      })
+    );
+
+    response && setDoIFollow((prev) => !prev);
   };
 
   const isMyProfile: boolean = authUserId == creatorId;
