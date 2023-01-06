@@ -36,6 +36,7 @@ export type IFeedNav = {
 export type IFeedRejectErrors = {
   errorStatus: number;
   errorMessage: string;
+  likes?: string[];
 };
 
 export type IFeedState = {

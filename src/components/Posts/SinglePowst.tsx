@@ -32,6 +32,7 @@ import CarouselImage from '../Carousels/CarouselImage';
 import ListTechStack from '../Lists/ListTechStack';
 import { IPost } from '../../types/feed.type';
 import { getPostDetails } from '../../lib/api/posts.api';
+import { likePost } from '../../features/feed/feedActions';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
@@ -39,23 +40,28 @@ export default function SinglePowst({ postId }) {
   const [post, setPost] = useState<IPost>();
 
   const [showComments, setShowComments] = useState<boolean>(false);
+  const [likes, setLikes] = useState<string[]>(post?.likes);
 
-  // const userId = useAppSelector((state) => state.auth.user._id);
+  const userId = useAppSelector((state) => state.auth.user._id);
 
   // const post = useAppSelector((state) =>
   //   state.feed.posts.find((item) => item._id == details._id)
   // );
 
-  // const likeHandler = (postId) => {
-  //   dispatch(likePost({ postId: postId, userId: userId }));
-  // };
+  const likeHandler = async () => {
+    const response = await dispatch(
+      likePost({ postId: postId, userId: userId })
+    );
+
+    response && setLikes(response.payload?.likes);
+  };
 
   // const unlikeHandler = (postId) => {
   //   dispatch(unlikePost({ postId: postId, userId: userId }));
   // };
 
-  // const hasUserLiked = post?.likes.includes(userId);
-  const hasUserLiked = true;
+  const hasUserLiked = likes?.includes(userId);
+  // const hasUserLiked = true;
 
   // console.log({ post });
 
@@ -63,14 +69,14 @@ export default function SinglePowst({ postId }) {
     (async () => {
       const response = await getPostDetails(postId);
 
-      console.log({ response });
       if (response.status === 200) {
         setPost(response.data.post);
+        setLikes(response.data.post.likes);
       }
     })();
   }, [postId]);
 
-  console.log({ postId, post });
+  console.log({ postId, post, likes });
 
   return (
     <Box bg='#00000080'>
@@ -136,7 +142,7 @@ export default function SinglePowst({ postId }) {
                 <Button
                   leftIcon={<LikeIcon />}
                   variant='primary'
-                  // onClick={() => likeHandler(_id)}
+                  onClick={likeHandler}
                 >
                   Like
                 </Button>
