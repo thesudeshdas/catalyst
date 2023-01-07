@@ -37,6 +37,7 @@ export type IFeedRejectErrors = {
   errorStatus: number;
   errorMessage: string;
   likes?: string[];
+  comments?: IComment[];
 };
 
 export type IFeedState = {

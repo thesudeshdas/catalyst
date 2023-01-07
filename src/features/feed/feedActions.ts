@@ -86,3 +86,35 @@ export const unlikePost = createAsyncThunk<
     });
   }
 });
+
+export const commentPost = createAsyncThunk<
+  IPost,
+  { postId: string; userId: string; commentText: string },
+  { rejectValue: IFeedRejectErrors }
+>('feed/commentPost', async (req, { rejectWithValue }) => {
+  try {
+    const body = JSON.stringify({
+      userId: req.userId,
+      commentText: req.commentText,
+    });
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_POSTS_API_URL}/${req.postId}/comment`,
+      body,
+      config
+    );
+
+    return response.data.commentPost as IPost;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
+    });
+  }
+});

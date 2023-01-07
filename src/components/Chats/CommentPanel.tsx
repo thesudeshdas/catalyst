@@ -12,27 +12,32 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IComment } from '../../types/feed.type';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { commentPost } from '../../features/feed/feedActions';
 
 export default function CommentPanel({ postId, comments: staticComments }) {
+  const dispatch = useAppDispatch();
+
   const authUser = useAppSelector((state) => state.auth.user);
 
   const [comments, setComments] = useState<IComment[]>(staticComments);
   const [comment, setComment] = useState<string>('');
 
-  // const handleComment = async () => {
-  //   const response = await commentPost(postId, session?.user.id, comment);
+  const handleComment = async () => {
+    const response = await dispatch(
+      commentPost({ postId, userId: authUser._id, commentText: comment })
+    );
 
-  //   if (response.comments.length > comments.length) {
-  //     setComments((prevComments) => [
-  //       ...prevComments,
-  //       response.comments[response.comments.length - 1],
-  //     ]);
-  //     setComment('');
-  //   }
-  // };
+    if (response.meta.requestStatus === 'fulfilled') {
+      setComments((prevComments) => [
+        ...prevComments,
 
-  console.log({ comments });
+        response.payload.comments[response.payload.comments.length - 1],
+      ]);
+
+      setComment('');
+    }
+  };
 
   return (
     <Stack
@@ -100,7 +105,7 @@ export default function CommentPanel({ postId, comments: staticComments }) {
             variant='primary'
             w='50%'
             alignSelf='flex-end'
-            // onClick={handleComment}
+            onClick={handleComment}
           >
             Comment
           </Button>
