@@ -7,6 +7,7 @@ import { Outlet } from 'react-router-dom';
 import { getUserDetails } from '../../features/auth/authActions';
 import { useEffect } from 'react';
 import { getAllPosts } from '../../features/feed/feedActions';
+import CreateSinglePowst from '../Posts/CreateSinglePowst';
 // import CommentPanel from '../Chats/CommentPanel';
 
 export default function Layout({
@@ -50,6 +51,12 @@ export default function Layout({
       {showModal && modalComponent == 'SinglePowst' && (
         <ModalContainer>
           <SinglePowst postId={modalData?.postId} />
+        </ModalContainer>
+      )}
+
+      {showModal && modalComponent == 'CreateSinglePowst' && (
+        <ModalContainer>
+          <CreateSinglePowst />
         </ModalContainer>
       )}
     </>

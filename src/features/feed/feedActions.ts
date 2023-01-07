@@ -118,3 +118,34 @@ export const commentPost = createAsyncThunk<
     });
   }
 });
+
+export const createPost = createAsyncThunk<
+  IPost,
+  Partial<IPost>,
+  { rejectValue: IFeedRejectErrors }
+>('feed/createPost', async (req, { rejectWithValue }) => {
+  try {
+    const body = JSON.stringify(req);
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_POSTS_API_URL}/create`,
+      body,
+      config
+    );
+
+    console.log({ response });
+
+    return response.data.addedPost as IPost;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
+    });
+  }
+});

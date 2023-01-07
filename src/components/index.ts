@@ -44,6 +44,7 @@ import PowstTagPill from './Pills/PowstTagPill';
 import ProfileTagPill from './Pills/ProfileTagPill';
 
 // Posts
+import CreateSinglePowst from './Posts/CreateSinglePowst';
 import SinglePowst from './Posts/SinglePowst';
 
 // Profile
@@ -107,5 +108,6 @@ export {
   SearchStack,
 
   // Posts
+  CreateSinglePowst,
   SinglePowst,
 };

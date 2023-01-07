@@ -1,14 +1,18 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Button, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { PortfolioPowstCard } from '../../components';
 import { useUserDetails } from '../../components/Layouts/ProfileLayout';
+import { toggle } from '../../features/modal/modalSlice';
 
 export default function PagePortfolioWork() {
+  const dispatch = useAppDispatch();
   const posts = useAppSelector((state) => state.feed.posts);
 
   const { user } = useUserDetails();
+
+  console.log({ posts });
 
   return (
     <Grid
@@ -27,24 +31,30 @@ export default function PagePortfolioWork() {
               <PortfolioPowstCard details={post} />
             </GridItem>
           ))}
-      <Link to='/create-powst'>
-        <Button
-          borderRadius='xl'
-          overflow='hidden'
-          width='25rem'
-          height='20rem'
-          position='relative'
-          role='group'
-          cursor='pointer'
-        >
-          <Stack>
-            <Heading color='gray' size='4xl' mb={6}>
-              <AddIcon />
-            </Heading>
-            <Text color='gray'>Add a new project</Text>
-          </Stack>
-        </Button>
-      </Link>
+
+      <Button
+        borderRadius='xl'
+        overflow='hidden'
+        width='25rem'
+        height='20rem'
+        position='relative'
+        role='group'
+        cursor='pointer'
+        onClick={() =>
+          dispatch(
+            toggle({
+              modalComponent: 'CreateSinglePowst',
+            })
+          )
+        }
+      >
+        <Stack>
+          <Heading color='gray' size='4xl' mb={6}>
+            <AddIcon />
+          </Heading>
+          <Text color='gray'>Add a new project</Text>
+        </Stack>
+      </Button>
     </Grid>
   );
 }

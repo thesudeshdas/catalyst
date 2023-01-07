@@ -1,6 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IFeedState } from '../../types/feed.type';
-import { commentPost, getAllPosts, likePost, unlikePost } from './feedActions';
+import {
+  commentPost,
+  createPost,
+  getAllPosts,
+  likePost,
+  unlikePost,
+} from './feedActions';
 
 const initialState: IFeedState = {
   loading: false,
@@ -89,6 +95,23 @@ export const feedSlice = createSlice({
 
     builder.addCase(commentPost.rejected, (state, { payload }) => {
       state.loading = false;
+      console.log('ab kya karun?');
+    });
+
+    // create post
+    builder.addCase(createPost.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(createPost.fulfilled, (state, { payload }) => {
+      state.loading = false;
+
+      state.posts = [...state.posts, payload];
+    });
+
+    builder.addCase(createPost.rejected, (state, { payload }) => {
+      state.loading = false;
+
       console.log('ab kya karun?');
     });
   },

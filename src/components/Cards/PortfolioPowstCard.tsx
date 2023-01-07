@@ -96,8 +96,8 @@ export default function PortfolioPowstCard({ details }) {
       </Stack>
 
       <Image
-        src={images[0].src}
-        alt={images[0].alt}
+        src={images[0]?.src}
+        alt={images[0]?.alt}
         w='100%'
         h='100%'
         objectFit='cover'
