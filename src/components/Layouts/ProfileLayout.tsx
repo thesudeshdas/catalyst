@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { getUserDetails } from '../../features/auth/authActions';
+import {
+  getUserDetails,
+  updateUserDetails,
+} from '../../features/auth/authActions';
 import { IRejectErrors, IUser } from '../../types/auth.type';
 import ProfileDetails from '../Profile/ProfileDetails';
 import PortfolioNav from '../Navs/PortfolioNav';
@@ -25,29 +28,44 @@ export default function ProfileLayout() {
   const [user, setUser] = useState<IUser | IRejectErrors>(
     isMyProfile ? authUser : null
   );
-  // const [posts, setPosts] = use;
 
   const [starredPost, setStarredPost] = useState<string[]>(user?.starredPost);
 
   const handleStarPost = async (postId) => {
-    // if (starredPost.length < 3) {
-    //   const newStarredPost = [...starredPost, postId];
-    //   const data = await updateUser(user._id, { starredPost: newStarredPost });
-    //   if (data.starredPost.length > starredPost.length) {
-    //     setStarredPost(data.starredPost);
-    //   }
-    // } else {
-    //   console.log('Only 3 posts can be starred');
-    //   // TODO - Make a notification for this
-    // }
+    console.log({ postId });
+
+    if (starredPost.length < 3) {
+      const newStarredPost = [...starredPost, postId];
+
+      const data = await dispatch(
+        updateUserDetails({
+          userId: user._id,
+          toUpdate: { starredPost: newStarredPost },
+        })
+      );
+
+      if (data.payload.starredPost.length > starredPost.length) {
+        setStarredPost(data.payload.starredPost);
+      }
+    } else {
+      console.log('Only 3 posts can be starred');
+      // TODO - Make a notification for this
+    }
   };
 
   const handleUnstarPost = async (postId) => {
-    // const newStarredPost = starredPost.filter((item) => item != postId);
-    // const data = await updateUser(user._id, { starredPost: newStarredPost });
-    // if (data.starredPost.length < starredPost.length) {
-    //   setStarredPost(data.starredPost);
-    // }
+    const newStarredPost = starredPost.filter((item) => item != postId);
+
+    const data = await dispatch(
+      updateUserDetails({
+        userId: user._id,
+        toUpdate: { starredPost: newStarredPost },
+      })
+    );
+
+    if (data.payload.starredPost.length < starredPost.length) {
+      setStarredPost(data.payload.starredPost);
+    }
   };
 
   useEffect(() => {
@@ -56,6 +74,7 @@ export default function ProfileLayout() {
 
       if (response.meta.requestStatus === 'fulfilled') {
         setUser(response.payload);
+        setStarredPost(response.payload.starredPost);
       }
       // TODO - handle error here
     })();

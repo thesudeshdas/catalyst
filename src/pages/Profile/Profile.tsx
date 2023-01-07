@@ -5,8 +5,7 @@ import { useAppSelector } from '../../app/hooks';
 import { useUserDetails } from '../../components/Layouts/ProfileLayout';
 
 export default function PagePortfolio() {
-  const { user, starredPost, handleStarPost, handleUnstarPost } =
-    useUserDetails();
+  const { user } = useUserDetails();
 
   const posts = useAppSelector((state) => state.feed.posts);
 
@@ -39,12 +38,7 @@ export default function PagePortfolio() {
               .slice(0, 3)
               .map((post) => (
                 <WrapItem key={post._id}>
-                  <PortfolioPowstCard
-                    details={post}
-                    handleUnstarPost={handleUnstarPost}
-                    handleStarPost={handleStarPost}
-                    starredPost={starredPost}
-                  />
+                  <PortfolioPowstCard details={post} />
                 </WrapItem>
               ))}
           </Wrap>
