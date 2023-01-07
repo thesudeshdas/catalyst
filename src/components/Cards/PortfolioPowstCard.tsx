@@ -12,14 +12,12 @@ import PowstTagPill from '../Pills/PowstTagPill';
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
 import { toggle } from '../../features/modal/modalSlice';
+import { useUserDetails } from '../Layouts/ProfileLayout';
 
-export default function PortfolioPowstCard({
-  details,
-  handleUnstarPost,
-  handleStarPost,
-  starredPost,
-}) {
+export default function PortfolioPowstCard({ details }) {
   const dispatch = useAppDispatch();
+
+  const { starredPost, handleStarPost, handleUnstarPost } = useUserDetails();
 
   const { description, name, images, _id } = details;
 

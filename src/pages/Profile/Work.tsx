@@ -8,8 +8,7 @@ import { useUserDetails } from '../../components/Layouts/ProfileLayout';
 export default function PagePortfolioWork() {
   const posts = useAppSelector((state) => state.feed.posts);
 
-  const { user, starredPost, handleStarPost, handleUnstarPost } =
-    useUserDetails();
+  const { user } = useUserDetails();
 
   return (
     <Grid
@@ -25,12 +24,7 @@ export default function PagePortfolioWork() {
           .filter((post) => post.user._id == user._id)
           .map((post) => (
             <GridItem key={post._id}>
-              <PortfolioPowstCard
-                details={post}
-                handleUnstarPost={handleUnstarPost}
-                handleStarPost={handleStarPost}
-                starredPost={starredPost}
-              />
+              <PortfolioPowstCard details={post} />
             </GridItem>
           ))}
       <Link to='/create-powst'>
