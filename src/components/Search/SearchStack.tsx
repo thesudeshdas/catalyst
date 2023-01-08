@@ -15,69 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { techStackIcons } from '../../data/portfolio/portfolio.data';
-
-export const options = [
-  { value: 'javascript', label: 'JavaScript' },
-  { value: 'typescript', label: 'TypeScript' },
-  { value: 'css3', label: 'CSS3' },
-
-  {
-    value: 'figma',
-    label: 'Figma',
-  },
-  {
-    value: 'github',
-    label: 'Github',
-  },
-  {
-    value: 'git',
-    label: 'Git',
-  },
-  {
-    value: 'graphql',
-    label: 'Graphql',
-  },
-  {
-    value: 'html5',
-    label: 'HTML5',
-  },
-  {
-    value: 'materialUI',
-    label: 'MaterialUI',
-  },
-  {
-    value: 'nextJS',
-    label: 'NextJS',
-  },
-  {
-    value: 'nodeJS',
-    label: 'NodeJS',
-  },
-  {
-    value: 'reactJS',
-    label: 'ReactJS',
-  },
-  {
-    value: 'reactQuery',
-    label: 'React Query',
-  },
-  {
-    value: 'remixJS',
-    label: 'RemixJS',
-  },
-  {
-    value: 'sass',
-    label: 'SASS',
-  },
-  {
-    value: 'tailwindCSS',
-    label: 'TailwindCSS',
-  },
-  {
-    value: 'visualStudioCode',
-    label: 'Visual Studio Code',
-  },
-];
+import { techOptions } from '../../data/tech-stack/techStack.data';
 
 export default function SearchStack({ tags, setTags }) {
   const [selected, setSelected] = useState<{ value: string; label: string }[]>(
@@ -87,7 +25,7 @@ export default function SearchStack({ tags, setTags }) {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const handleAddTag = (tag) => {
-    const foundItem = options.find((option) => option.value == tag);
+    const foundItem = techOptions.find((option) => option.value == tag);
 
     const alreadyExists = selected.find((option) => option.value == tag);
 
@@ -111,7 +49,7 @@ export default function SearchStack({ tags, setTags }) {
     setSearchQuery(query);
 
     if (query.length > 0) {
-      const searchResult = options.filter((option) =>
+      const searchResult = techOptions.filter((option) =>
         option.label.toLowerCase().includes(query.toLowerCase())
       );
 
