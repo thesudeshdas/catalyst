@@ -39,6 +39,8 @@ import {
   likePost,
   unlikePost,
 } from '../../features/feed/feedActions';
+import SearchStack from '../Search/SearchStack';
+import { IStack } from '../../types/auth.type';
 
 export default function CreateSinglePowst() {
   const dispatch = useAppDispatch();
@@ -52,6 +54,7 @@ export default function CreateSinglePowst() {
     live: string;
     repo: string;
   }>({ live: '', repo: '' });
+  const [stack, setStack] = useState<IStack[]>();
 
   const handleImgUpload = async (event) => {
     const file = event.target.files[0];
@@ -84,6 +87,7 @@ export default function CreateSinglePowst() {
         images: imgSrc.map((img) => ({ src: img, alt: 'random' })),
         live: projectLinks.live,
         repo: projectLinks.repo,
+        stack: stack,
       })
     );
 
@@ -91,6 +95,8 @@ export default function CreateSinglePowst() {
       dispatch(toggle(''));
     }
   };
+
+  console.log({ stack });
 
   return (
     <Box bg='#00000080'>
@@ -194,10 +200,6 @@ export default function CreateSinglePowst() {
               />
             </Box>
           )}
-
-          <Heading fontWeight='600' size='md'>
-            Add more pictures and videos
-          </Heading>
 
           {imgSrc && imgSrc.length > 0 ? (
             <Flex h='10rem' gap={4}>
@@ -384,37 +386,13 @@ export default function CreateSinglePowst() {
                 />
               </Stack>
 
-              <Stack gap={2}>
+              {/* tech stack */}
+              <Stack>
                 <Heading fontWeight='600' size='md'>
                   Add tech stack
                 </Heading>
 
-                <Flex wrap='wrap' gap={4}>
-                  <IconButton
-                    aria-label='add-icon'
-                    size='lg'
-                    icon={<AddIcon color='gray' />}
-                    w='fit-content'
-                  />
-                  <IconButton
-                    aria-label='add-icon'
-                    size='lg'
-                    icon={<AddIcon color='gray' />}
-                    w='fit-content'
-                  />
-                  <IconButton
-                    aria-label='add-icon'
-                    size='lg'
-                    icon={<AddIcon color='gray' />}
-                    w='fit-content'
-                  />
-                  <IconButton
-                    aria-label='add-icon'
-                    size='lg'
-                    icon={<AddIcon color='gray' />}
-                    w='fit-content'
-                  />
-                </Flex>
+                <SearchStack tags={stack} setTags={setStack} />
               </Stack>
             </Stack>
           </Flex>
