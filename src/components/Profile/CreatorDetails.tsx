@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { EditIcon } from '@chakra-ui/icons';
-import { Box, Button, Flex, Heading, Image, Spacer } from '@chakra-ui/react';
+import { Button, Flex, Heading, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IUser } from '../../types/auth.type';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { toggle } from '../../features/modal/modalSlice';
 import { followUser, unfollowUser } from '../../features/auth/authActions';
+import ProfilePicture from '../Images/ProfilePicture';
 
 export default function CreatorDetails({
   creator,
@@ -46,18 +46,13 @@ export default function CreatorDetails({
     response && setDoIFollow((prev) => !prev);
   };
 
-  const isMyProfile: boolean = authUserId == creatorId;
+  const isMyProfile: boolean = authUserId === creatorId;
 
   return (
     <Flex gap={4} alignItems='center'>
-      <Image
-        borderRadius='50%'
-        src={profilePic?.src || '/images/blank_profile.png'}
-        alt={name}
-        width='65px'
-        height='65px'
-      />
-      <Box>
+      <ProfilePicture src={profilePic?.src} alt={name} />
+
+      <Stack>
         <Heading size='lg'>{postName}</Heading>
 
         <Flex gap={2} alignItems='center '>
@@ -86,7 +81,7 @@ export default function CreatorDetails({
             </Button>
           )}
         </Flex>
-      </Box>
+      </Stack>
     </Flex>
   );
 }

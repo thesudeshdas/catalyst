@@ -33,6 +33,7 @@ import ListTechStack from '../Lists/ListTechStack';
 import { IPost } from '../../types/feed.type';
 import { getPostDetails } from '../../lib/api/posts.api';
 import { likePost, unlikePost } from '../../features/feed/feedActions';
+import ProfileSeparator from '../Profile/ProfileSeparator';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
@@ -189,22 +190,7 @@ export default function SinglePowst({ postId }) {
               </Stack>
             </Flex>
 
-            {/* separator */}
-            {/* // TODO - Take separtor outside as separate component  */}
-            <Flex gap={4} alignItems='center'>
-              <Divider bg='black' h={1} borderRadius='lg' />
-              <Image
-                borderRadius='50%'
-                src={post.user.image}
-                alt={post.user.name}
-                width='200'
-                height='200'
-              />
-              <Divider bg='black' h={1} borderRadius='lg' />
-            </Flex>
-            <Center>
-              <Heading size='lg'>{post.user.name}</Heading>
-            </Center>
+            <ProfileSeparator user={post.user} />
 
             {/* similar */}
             {/* // TODO - Create & Add similar post component */}

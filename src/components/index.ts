@@ -17,6 +17,9 @@ import FormEditProfile from './Forms/FormEditProfile';
 import FormSignIn from './Forms/FormSignIn';
 import FormSignUp from './Forms/FormSignup';
 
+// Images
+import ProfilePicture from './Images/ProfilePicture';
+
 // Layouts
 import Layout from './Layouts/Layout';
 import ProfileLayout from './Layouts/ProfileLayout';
@@ -50,6 +53,7 @@ import SinglePowst from './Posts/SinglePowst';
 // Profile
 import CreatorDetails from './Profile/CreatorDetails';
 import ProfileDetails from './Profile/ProfileDetails';
+import ProfileSeparator from './Profile/ProfileSeparator';
 
 // Search
 import SearchStack from './Search/SearchStack';
@@ -73,6 +77,9 @@ export {
   FormEditProfile,
   FormSignIn,
   FormSignUp,
+
+  // Images
+  ProfilePicture,
 
   // Layouts
   Layout,
@@ -103,6 +110,7 @@ export {
   // Profile
   CreatorDetails,
   ProfileDetails,
+  ProfileSeparator,
 
   // Search
   SearchStack,

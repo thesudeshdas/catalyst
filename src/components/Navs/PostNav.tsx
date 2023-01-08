@@ -1,12 +1,12 @@
-import * as React from 'react';
 import { InfoIcon } from '@chakra-ui/icons';
-import { Box, IconButton, Stack, Text, Image } from '@chakra-ui/react';
+import { Box, IconButton, Stack, Text } from '@chakra-ui/react';
 import {
   CommentIcon,
   LikeIcon,
   SaveIcon,
   ShareIcon,
 } from '../../assets/icons/icons';
+import ProfilePicture from '../Images/ProfilePicture';
 
 // TODO - Add types
 
@@ -20,15 +20,11 @@ export default function PostNav({ likes, comments, creator, setShowComments }) {
       h='fit-content'
       alignItems='center'
     >
-      {creator && (
-        <Image
-          borderRadius='50%'
-          src={creator.profilePic?.src || '/images/blank_profile.png'}
-          alt={creator.name}
-          width='50'
-          height='50'
-        />
-      )}
+      <ProfilePicture
+        src={creator.profilePic?.src}
+        alt={creator.name}
+        size='3rem'
+      />
 
       <Box position='relative'>
         <IconButton
