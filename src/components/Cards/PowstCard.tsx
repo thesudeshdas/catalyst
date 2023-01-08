@@ -20,7 +20,6 @@ export default function PowstCard({ details }) {
       position='relative'
       role='group'
       cursor='pointer'
-      bg='red.200'
       onClick={() =>
         dispatch(
           toggle({
