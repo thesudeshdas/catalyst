@@ -96,6 +96,7 @@ export default function SearchStack({ tags, setTags }) {
     }
 
     setSearchQuery('');
+    setResult([]);
   };
 
   const handleRemoveTag = (tag) => {
@@ -109,14 +110,18 @@ export default function SearchStack({ tags, setTags }) {
 
     setSearchQuery(query);
 
-    const searchResult = options.filter((option) =>
-      option.label.toLowerCase().includes(query.toLowerCase())
-    );
+    if (query.length > 0) {
+      const searchResult = options.filter((option) =>
+        option.label.toLowerCase().includes(query.toLowerCase())
+      );
 
-    if (searchResult.length > 0) {
-      setResult(searchResult);
+      if (searchResult.length > 0) {
+        setResult(searchResult);
+      } else {
+        setResult([{ value: 'nothing', label: 'Can not find any such tech' }]);
+      }
     } else {
-      setResult([{ value: 'nothing', label: 'Can not find any such tech' }]);
+      setResult([]);
     }
   };
 
@@ -124,11 +129,9 @@ export default function SearchStack({ tags, setTags }) {
     selected.some(({ label }) => label == alt)
   );
 
-  // const techStack = techStackIcons;
-
   useEffect(() => {
     setTags(selected);
-  }, [selected]);
+  }, [selected, setTags]);
 
   return (
     <Stack gap={2}>

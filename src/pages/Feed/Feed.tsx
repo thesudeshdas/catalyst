@@ -33,6 +33,7 @@ export default function PageFeed() {
         setFinalPosts={setFinalPosts}
         following={following}
         showFilter={showFilter}
+        setShowFilter={setShowFilter}
       />
 
       {activeFeed === 'Discover' && (

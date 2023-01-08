@@ -10,12 +10,14 @@ export default function FeedFilters({
   postsArr,
   activeFeed,
   showFilter,
+  setShowFilter,
   following,
   setFinalPosts,
 }: {
   postsArr: IPost[];
   activeFeed: string;
   showFilter: boolean;
+  setShowFilter: Function;
   following: string[];
   setFinalPosts: Function;
 }) {
@@ -56,7 +58,9 @@ export default function FeedFilters({
       </Box>
 
       <Flex alignSelf='end' gap={4}>
-        <Button variant='secondary'>Cancel</Button>
+        <Button variant='secondary' onClick={() => setShowFilter(false)}>
+          Cancel
+        </Button>
         <Button variant='primary' onClick={handleApplyFilter}>
           Apply Filters
         </Button>
