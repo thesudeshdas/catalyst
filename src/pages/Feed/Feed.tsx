@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
@@ -8,6 +7,7 @@ import { useAppSelector } from '../../app/hooks';
 
 export default function PageFeed() {
   const posts = useAppSelector((state) => state.feed.posts);
+  const authUser = useAppSelector((state) => state.auth.user);
   const authStatus = useAppSelector((state) => state.auth.signInStatus);
 
   const [activeFeed, setActiveFeed] = useState<string>('Discover');
@@ -17,7 +17,8 @@ export default function PageFeed() {
 
   useEffect(() => {
     setFinalPosts(posts);
-  }, [posts]);
+    setFollowing(authUser.following);
+  }, [posts, authUser]);
 
   return (
     <>

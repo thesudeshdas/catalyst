@@ -9,8 +9,6 @@ export default function ProfilePicture({
   alt: string;
   size?: string;
 }) {
-  console.log({ src });
-
   return (
     <AspectRatio w={size} ratio={1 / 1}>
       <Image
