@@ -23,7 +23,7 @@ export default function PagePortfolio() {
           w='22rem'
           direction='row-reverse'
           wrap='wrap'
-          gap='0.5rem'
+          gap={4}
         />
       </Flex>
 
