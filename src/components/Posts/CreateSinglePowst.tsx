@@ -104,7 +104,6 @@ export default function CreateSinglePowst() {
         direction='row-reverse'
         onClick={() => dispatch(toggle(''))}
         h='3rem'
-        p={2}
       >
         <Center>
           <IconButton
@@ -414,19 +413,10 @@ export default function CreateSinglePowst() {
           </Center>
 
           <Flex alignSelf='flex-end' gap={4}>
-            <Button
-              colorScheme='blue'
-              variant='outline'
-              fontWeight='500'
-              onClick={() => dispatch(toggle(''))}
-            >
+            <Button variant='secondary' onClick={() => dispatch(toggle(''))}>
               Cancel
             </Button>
-            <Button
-              colorScheme='blue'
-              fontWeight='500'
-              onClick={handleCreatePost}
-            >
+            <Button variant='primary' onClick={handleCreatePost}>
               Ready to Post
             </Button>
           </Flex>

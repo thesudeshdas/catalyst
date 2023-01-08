@@ -74,7 +74,7 @@ export default function ProfileDetails({ user }) {
           <Heading size='lg'>{user?.name} </Heading>
           {isMyProfile ? (
             <Link to='/edit-profile'>
-              <Button size='sm' rightIcon={<EditIcon />}>
+              <Button variant='secondary' size='sm' rightIcon={<EditIcon />}>
                 Edit Profile
               </Button>
             </Link>

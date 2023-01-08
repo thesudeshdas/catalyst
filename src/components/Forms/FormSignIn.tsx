@@ -107,7 +107,7 @@ export default function FormSignIn() {
             )}
           </Field>
 
-          <Button mt={6} colorScheme='blue' type='submit'>
+          <Button variant='primary' mt={6} colorScheme='blue' type='submit'>
             Sign in
           </Button>
         </Form>

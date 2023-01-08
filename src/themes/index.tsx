@@ -64,9 +64,21 @@ const theme = extendTheme({
     },
     Button: {
       variants: {
-        primary: { color: 'white', bg: '#4f46e5' },
-        secondary: { color: '#4338ca', border: '2px solid #4f46e5' },
-        secondaryBlack: { color: '#16161D', border: '2px solid #16161D' },
+        primary: {
+          color: 'white',
+          bg: '#4f46e5',
+          _hover: { bg: '#3730a3' },
+        },
+        secondary: {
+          color: '#4338ca',
+          border: '2px solid #4f46e5',
+          _hover: { bg: '#e0e7ff' },
+        },
+        secondaryBlack: {
+          color: '#16161D',
+          border: '2px solid #16161D',
+          _hover: { bg: '#EDF2F7' },
+        },
       },
       defaultProps: {
         variant: 'outline',

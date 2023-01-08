@@ -170,15 +170,10 @@ export default function ModalEditName() {
             </Center>
           </ModalBody>
           <ModalFooter>
-            <Button
-              colorScheme='blue'
-              variant='outline'
-              fontWeight='500'
-              mr={3}
-            >
+            <Button variant='secondary' mr={3}>
               Cancel
             </Button>
-            <Button colorScheme='blue' fontWeight='500' onClick={handleSubmit}>
+            <Button variant='primary' onClick={handleSubmit}>
               Save
             </Button>
           </ModalFooter>

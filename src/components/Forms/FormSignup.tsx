@@ -121,7 +121,7 @@ export default function FormSignUp() {
             )}
           </Field>
 
-          <Button mt={6} colorScheme='blue' type='submit'>
+          <Button variant='primary' mt={6} colorScheme='blue' type='submit'>
             Sign up
           </Button>
         </Form>

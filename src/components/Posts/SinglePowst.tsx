@@ -127,7 +127,7 @@ export default function SinglePowst({ postId }) {
               <Spacer />
 
               {/* save & like */}
-              <Button variant='ghost'>Save</Button>
+              <Button variant='secondary'>Save</Button>
               {hasUserLiked ? (
                 <Button
                   // TODO - add outline icon for like

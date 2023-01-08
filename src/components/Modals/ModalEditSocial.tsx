@@ -174,16 +174,10 @@ export default function ModalEditSocial() {
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Button
-              colorScheme='blue'
-              variant='outline'
-              fontWeight='500'
-              mr={3}
-              onClick={onClose}
-            >
+            <Button variant='secondary' mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue' fontWeight='500' onClick={handleSubmit}>
+            <Button variant='primary' onClick={handleSubmit}>
               Save
             </Button>
           </ModalFooter>
