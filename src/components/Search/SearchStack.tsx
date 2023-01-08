@@ -120,11 +120,11 @@ export default function SearchStack({ tags, setTags }) {
     }
   };
 
-  // const techStack = techStackIcons.filter(({ alt }) =>
-  //   selected.some(({ label }) => label == alt)
-  // );
+  const techStack = techStackIcons.filter(({ alt }) =>
+    selected.some(({ label }) => label == alt)
+  );
 
-  const techStack = techStackIcons;
+  // const techStack = techStackIcons;
 
   useEffect(() => {
     setTags(selected);
@@ -138,8 +138,8 @@ export default function SearchStack({ tags, setTags }) {
             key={icon.alt}
             src={icon.src}
             alt={icon.alt}
-            width={32}
-            height={32}
+            width='40px'
+            height='40px'
           />
         ))}
       </Flex>
