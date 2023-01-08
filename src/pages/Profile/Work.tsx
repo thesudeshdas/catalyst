@@ -10,9 +10,7 @@ export default function PagePortfolioWork() {
   const dispatch = useAppDispatch();
   const posts = useAppSelector((state) => state.feed.posts);
 
-  const { user } = useUserDetails();
-
-  console.log({ posts });
+  const { user, isMyProfile } = useUserDetails();
 
   return (
     <Grid
@@ -32,29 +30,31 @@ export default function PagePortfolioWork() {
             </GridItem>
           ))}
 
-      <Button
-        borderRadius='xl'
-        overflow='hidden'
-        width='25rem'
-        height='20rem'
-        position='relative'
-        role='group'
-        cursor='pointer'
-        onClick={() =>
-          dispatch(
-            toggle({
-              modalComponent: 'CreateSinglePowst',
-            })
-          )
-        }
-      >
-        <Stack>
-          <Heading color='gray' size='4xl' mb={6}>
-            <AddIcon />
-          </Heading>
-          <Text color='gray'>Add a new project</Text>
-        </Stack>
-      </Button>
+      {isMyProfile && (
+        <Button
+          borderRadius='xl'
+          overflow='hidden'
+          width='25rem'
+          height='20rem'
+          position='relative'
+          role='group'
+          cursor='pointer'
+          onClick={() =>
+            dispatch(
+              toggle({
+                modalComponent: 'CreateSinglePowst',
+              })
+            )
+          }
+        >
+          <Stack>
+            <Heading color='gray' size='4xl' mb={6}>
+              <AddIcon />
+            </Heading>
+            <Text color='gray'>Add a new project</Text>
+          </Stack>
+        </Button>
+      )}
     </Grid>
   );
 }
