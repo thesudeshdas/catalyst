@@ -11,7 +11,7 @@ export default function PagePortfolio() {
 
   let featuredPost = posts
     .filter((post) => post.user?._id === user?._id)
-    .filter((post) => starredPost.includes(post._id))
+    .filter((post) => starredPost?.includes(post._id))
     .slice(0, 3);
 
   featuredPost.length < 3 &&

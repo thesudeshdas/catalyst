@@ -79,7 +79,7 @@ export default function ProfileLayout() {
       }
       // TODO - handle error here
     })();
-  }, []);
+  }, [profileId, dispatch]);
 
   // console.log({ user, authUser, profileId, isMyProfile });
 
