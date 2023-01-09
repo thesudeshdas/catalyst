@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IPost } from '../../types/feed.type';
 
 export type ModalState = {
   shown: boolean;
   modalComponent: string | null;
-  modalData: { postId: string } | null;
+  modalData: { postId: string; post: IPost } | null;
   modalFunction: Function | null;
 };
 

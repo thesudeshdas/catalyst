@@ -29,6 +29,35 @@ export const getAllPosts = createAsyncThunk<
   }
 });
 
+export const editPost = createAsyncThunk<
+  IPost,
+  { postId: string; toUpdate: Partial<IPost> },
+  { rejectValue: IFeedRejectErrors }
+>('feed/editPost', async (req, { rejectWithValue }) => {
+  try {
+    const body = JSON.stringify(req.toUpdate);
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const response = await axios.post(
+      `${process.env.REACT_APP_POSTS_API_URL}/${req.postId}`,
+      body,
+      config
+    );
+
+    return response.data.updatedPost as IPost;
+  } catch (error) {
+    return rejectWithValue({
+      errorStatus: error.response.status,
+      errorMessage: error.message,
+    });
+  }
+});
+
 export const likePost = createAsyncThunk<
   IPost,
   { postId: string; userId: string },

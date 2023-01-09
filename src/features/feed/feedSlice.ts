@@ -3,6 +3,7 @@ import { IFeedState } from '../../types/feed.type';
 import {
   commentPost,
   createPost,
+  editPost,
   getAllPosts,
   likePost,
   unlikePost,
@@ -32,6 +33,29 @@ export const feedSlice = createSlice({
     builder.addCase(getAllPosts.rejected, (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+    });
+
+    // edit post
+    builder.addCase(editPost.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(editPost.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+
+      state.loading = false;
+
+      const postIndex = state.posts.findIndex(
+        (item) => item._id === payload._id
+      );
+
+      state.posts[postIndex] = payload;
+    });
+
+    builder.addCase(editPost.rejected, (state, { payload }) => {
+      state.loading = false;
+
+      console.log('ab kya karun?');
     });
 
     // like post
@@ -75,7 +99,7 @@ export const feedSlice = createSlice({
 
     builder.addCase(unlikePost.rejected, (state, { payload }) => {
       state.loading = false;
-      console.log('ab kya karun?');
+      console.log('ab kya karun?', payload);
     });
 
     // comment post

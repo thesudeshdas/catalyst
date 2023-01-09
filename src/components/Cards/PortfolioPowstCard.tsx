@@ -44,16 +44,22 @@ export default function PortfolioPowstCard({ details }) {
         text='project'
       />
       <Flex position='absolute' top={0} right={0} gap={1}>
-        <Link to={`/feed/${_id}/edit-powst`}>
-          <IconButton
-            bg='#00000066'
-            zIndex='2'
-            colorScheme='whiteAlpha'
-            variant='ghost'
-            aria-label='featured'
-            icon={<EditIcon color='white' />}
-          />
-        </Link>
+        <IconButton
+          bg='#00000066'
+          zIndex='2'
+          colorScheme='whiteAlpha'
+          variant='ghost'
+          aria-label='featured'
+          icon={<EditIcon color='white' />}
+          onClick={() =>
+            dispatch(
+              toggle({
+                modalComponent: 'EditPowst',
+                modalData: { post: details },
+              })
+            )
+          }
+        />
 
         {isPostStarred ? (
           <IconButton
