@@ -38,7 +38,7 @@ export default function SinglePowst({ postId }) {
 
   const [showComments, setShowComments] = useState<boolean>(false);
 
-  const userId = useAppSelector((state) => state.auth.user._id);
+  const userId = useAppSelector((state) => state.auth.user?._id);
 
   const likeHandler = async () => {
     await dispatch(likePost({ postId: postId, userId: userId }));

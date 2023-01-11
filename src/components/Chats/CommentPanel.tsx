@@ -87,8 +87,8 @@ export default function CommentPanel({ postId, comments: staticComments }) {
           overflow='hidden'
         >
           <Image
-            src={authUser.profilePic?.src || '/images/blank_profile.png'}
-            alt={authUser.name}
+            src={authUser?.profilePic?.src || '/images/blank_profile.png'}
+            alt={authUser?.name}
             objectFit='cover'
           />
         </Box>

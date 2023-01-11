@@ -25,10 +25,17 @@ const initialState: IAuthState = {
   user: localUser,
 };
 
-export const modalSlice = createSlice({
+export const authSlice = createSlice({
   name: 'modal',
   initialState,
-  reducers: {},
+  reducers: {
+    logoutPressed: (state, action) => {
+      console.log({ action });
+
+      state.signInStatus = false;
+      state.user = null;
+    },
+  },
   extraReducers: (builder) => {
     // register user reducers
     builder.addCase(registerUser.pending, (state) => {
@@ -148,4 +155,6 @@ export const modalSlice = createSlice({
   },
 });
 
-export default modalSlice.reducer;
+export const { logoutPressed } = authSlice.actions;
+
+export default authSlice.reducer;

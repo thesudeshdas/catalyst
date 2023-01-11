@@ -12,9 +12,10 @@ import {
   Image,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { socialIcons } from '../../data/portfolio/portfolio.data';
+import { logoutPressed } from '../../features/auth/authSlice';
 import ProfileTagPill from '../Pills/ProfileTagPill';
 
 // import ProfileTagPill from '../Pills/ProfileTagPill';
@@ -24,6 +25,8 @@ const amIFollowing = (arr, id) => {
 };
 
 export default function ProfileDetails({ user }) {
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
 
   const authUser = useAppSelector((state) => state.auth.user);
@@ -32,6 +35,15 @@ export default function ProfileDetails({ user }) {
   const isMyProfile = authUser._id == user?._id;
 
   const [doIFollow, setDoIFollow] = useState<boolean>(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('localUser');
+    localStorage.removeItem('localStatus');
+
+    dispatch(logoutPressed({}));
+
+    navigate('/');
+  };
 
   // const isMyProfile = user._id == session?.user.id;
 
@@ -198,7 +210,11 @@ export default function ProfileDetails({ user }) {
           {user?.email}
         </Text>
 
-        {authState && <Button variant='secondaryBlack'>Logout</Button>}
+        {authState && (
+          <Button variant='secondaryBlack' onClick={handleLogout}>
+            Logout
+          </Button>
+        )}
       </Stack>
     </Flex>
   );

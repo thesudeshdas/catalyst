@@ -31,16 +31,18 @@ export default function Layout({
   useEffect(() => {
     if (user?._id) {
       (async () => {
-        await dispatch(getUserDetails({ userId: user._id }));
+        await dispatch(getUserDetails({ userId: user?._id }));
       })();
     }
-  }, [user._id, dispatch]);
+  }, [user?._id, dispatch]);
 
   useEffect(() => {
     (async () => {
       await dispatch(getAllPosts({}));
     })();
   }, [dispatch]);
+
+  console.log({ user });
 
   return (
     <>
