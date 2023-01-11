@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { Box, Flex, Image, Spacer, Text } from '@chakra-ui/react';
+import { Flex, Image, Spacer, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 
@@ -21,18 +20,18 @@ export default function AppNav() {
           transition='all 300ms ease-in-out'
           cursor='pointer'
         >
-          <Box
+          <Image
             bg='white'
             display='inline-block'
-            className='box-1'
             position='absolute'
+            zIndex={1}
             left='0'
             top='0'
-            zIndex={1}
-          >
-            <Image src='/icons/neutral/lightbulb.svg' alt='Light bulb' />
-          </Box>
-          <Text position='absolute' right='0'>
+            h='100%'
+            src='/icons/neutral/lightbulb.svg'
+            alt='Light bulb'
+          />
+          <Text position='absolute' right='0' fontWeight='600'>
             Inspiration
           </Text>
         </Flex>
@@ -54,18 +53,18 @@ export default function AppNav() {
           transition='all 300ms ease-in-out'
           cursor='pointer'
         >
-          <Box
+          <Image
             bg='white'
             display='inline-block'
-            className='box-1'
             position='absolute'
+            zIndex={1}
             left='0'
             top='0'
-            zIndex={1}
-          >
-            <Image src='/icons/neutral/briefcase.svg' alt='briefcase' />
-          </Box>
-          <Text position='absolute' right='0'>
+            h='100%'
+            src='/icons/neutral/briefcase.svg'
+            alt='briefcase'
+          />
+          <Text position='absolute' right='0' fontWeight='600'>
             Portfolio
           </Text>
         </Flex>
@@ -83,18 +82,18 @@ export default function AppNav() {
           transition='all 300ms ease-in-out'
           cursor='pointer'
         >
-          <Box
+          <Image
             bg='white'
             display='inline-block'
-            className='box-1'
             position='absolute'
+            zIndex={1}
             left='0'
             top='0'
-            zIndex={1}
-          >
-            <Image src='/icons/neutral/plus.svg' alt='Plus' />
-          </Box>
-          <Text position='absolute' right='0'>
+            h='100%'
+            src='/icons/neutral/plus.svg'
+            alt='Plus'
+          />
+          <Text position='absolute' right='0' fontWeight='600'>
             Create
           </Text>
         </Flex>
@@ -115,24 +114,25 @@ export default function AppNav() {
           w='32px'
           h='32px'
           overflow='hidden'
-          _hover={{ width: '5.5rem' }}
+          _hover={{ width: '6.5rem' }}
           transform='auto'
           transition='all 300ms ease-in-out'
           cursor='pointer'
         >
-          <Box
+          <Image
             bg='white'
             display='inline-block'
-            className='box-1'
             position='absolute'
+            zIndex={1}
             left='0'
             top='0'
-            zIndex={1}
-          >
-            <Image src='/icons/brand/catalystShort.svg' alt='Plus' />
-          </Box>
-          <Text position='absolute' right='0'>
-            Create
+            h='100%'
+            src='/icons/brand/catalystShort.svg'
+            alt='Plus'
+          />
+
+          <Text position='absolute' right='0' fontWeight='600'>
+            Catalyst
           </Text>
         </Flex>
       </Link>
