@@ -45,6 +45,7 @@ export type IFeedState = {
     feedLoading: boolean;
     postLoading: boolean;
     ctaLoading: boolean;
+    commentLoading: boolean;
   };
   posts: IPost[];
   error: IFeedRejectErrors;

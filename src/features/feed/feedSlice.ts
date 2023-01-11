@@ -14,6 +14,7 @@ const initialState: IFeedState = {
     feedLoading: false,
     postLoading: false,
     ctaLoading: false,
+    commentLoading: false,
   },
   posts: [],
   error: null,
@@ -108,11 +109,11 @@ export const feedSlice = createSlice({
 
     // comment post
     builder.addCase(commentPost.pending, (state) => {
-      state.loading.feedLoading = true;
+      state.loading.commentLoading = true;
     });
 
     builder.addCase(commentPost.fulfilled, (state, { payload }) => {
-      state.loading.feedLoading = false;
+      state.loading.commentLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -122,7 +123,7 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(commentPost.rejected, (state, { payload }) => {
-      state.loading.feedLoading = false;
+      state.loading.commentLoading = false;
       console.log('ab kya karun?');
     });
 
