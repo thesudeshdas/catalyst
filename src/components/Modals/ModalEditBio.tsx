@@ -24,17 +24,14 @@ import { updateUserDetails } from '../../features/auth/authActions';
 
 export default function ModalEditBio() {
   const dipatch = useAppDispatch();
+
   const userBio = useAppSelector((state) => state.auth.user?.bio);
   const userId = useAppSelector((state) => state.auth.user?._id);
 
   const [bio, setBio] = useState<string>(userBio || 'Add your bio');
 
   const handleSubmit = async () => {
-    const data = await dipatch(
-      updateUserDetails({ userId, toUpdate: { bio } })
-    );
-
-    setBio(data.payload.bio);
+    await dipatch(updateUserDetails({ userId, toUpdate: { bio } }));
     onClose();
   };
 
@@ -45,7 +42,11 @@ export default function ModalEditBio() {
       <FormControl>
         <FormLabel>Bio</FormLabel>
         <InputGroup>
-          <Textarea variant='flushed' placeholder={bio} onClick={onOpen} />
+          <Textarea
+            variant='flushed'
+            placeholder={userBio || 'loading'}
+            onClick={onOpen}
+          />
         </InputGroup>
       </FormControl>
 
