@@ -11,6 +11,7 @@ import PortfolioNav from '../Navs/PortfolioNav';
 
 export type ContextType = {
   user: IUser;
+  isMyProfile: boolean;
   starredPost: string[];
   handleStarPost: Function;
   handleUnstarPost: Function;
@@ -78,7 +79,7 @@ export default function ProfileLayout() {
       }
       // TODO - handle error here
     })();
-  }, []);
+  }, [profileId, dispatch]);
 
   // console.log({ user, authUser, profileId, isMyProfile });
 

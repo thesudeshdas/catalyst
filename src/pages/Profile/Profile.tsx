@@ -5,9 +5,20 @@ import { useAppSelector } from '../../app/hooks';
 import { useUserDetails } from '../../components/Layouts/ProfileLayout';
 
 export default function PagePortfolio() {
-  const { user } = useUserDetails();
+  const { user, starredPost } = useUserDetails();
 
   const posts = useAppSelector((state) => state.feed.posts);
+
+  let featuredPost = posts
+    .filter((post) => post.user?._id === user?._id)
+    .filter((post) => starredPost?.includes(post._id))
+    .slice(0, 3);
+
+  featuredPost.length < 3 &&
+    (featuredPost = [
+      ...featuredPost,
+      ...posts.filter((post) => post.user?._id === user?._id),
+    ].slice(0, 3));
 
   return (
     <>
@@ -23,7 +34,7 @@ export default function PagePortfolio() {
           w='22rem'
           direction='row-reverse'
           wrap='wrap'
-          gap='0.5rem'
+          gap={4}
         />
       </Flex>
 
@@ -33,14 +44,11 @@ export default function PagePortfolio() {
 
         {posts && posts.length > 0 && (
           <Wrap justify='space-between'>
-            {posts
-              .filter((post) => post.user?._id == user?._id)
-              .slice(0, 3)
-              .map((post) => (
-                <WrapItem key={post._id}>
-                  <PortfolioPowstCard details={post} />
-                </WrapItem>
-              ))}
+            {featuredPost.map((post) => (
+              <WrapItem key={post._id}>
+                <PortfolioPowstCard details={post} />
+              </WrapItem>
+            ))}
           </Wrap>
         )}
       </Stack>

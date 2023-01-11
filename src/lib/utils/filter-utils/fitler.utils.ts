@@ -17,14 +17,14 @@ export const filterPost = (
         )
       : postArr;
 
-  // if (filters.activeFeed == 'Following') {
-  //   finalFiltered =
-  //     filters.followingFilter.length > 0
-  //       ? finalFiltered.filter((post) =>
-  //           filters.followingFilter.includes(post.user._id)
-  //         )
-  //       : finalFiltered;
-  // }
+  if (filters.activeFeed === 'Following') {
+    finalFiltered =
+      filters.followingFilter?.length > 0
+        ? finalFiltered.filter((post) =>
+            filters.followingFilter.includes(post.user._id)
+          )
+        : finalFiltered;
+  }
 
   return finalFiltered;
 };

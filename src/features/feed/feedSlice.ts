@@ -1,9 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IFeedState } from '../../types/feed.type';
-import { commentPost, getAllPosts, likePost, unlikePost } from './feedActions';
+import {
+  commentPost,
+  createPost,
+  editPost,
+  getAllPosts,
+  likePost,
+  unlikePost,
+} from './feedActions';
 
 const initialState: IFeedState = {
-  loading: false,
+  loading: {
+    feedLoading: false,
+    postLoading: false,
+    ctaLoading: false,
+    commentLoading: false,
+  },
   posts: [],
   error: null,
 };
@@ -15,26 +27,28 @@ export const feedSlice = createSlice({
   extraReducers: (builder) => {
     // get all posts reducers
     builder.addCase(getAllPosts.pending, (state) => {
-      state.loading = true;
+      state.loading.feedLoading = true;
     });
 
     builder.addCase(getAllPosts.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
       state.posts = payload;
     });
 
     builder.addCase(getAllPosts.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
       state.error = payload;
     });
 
-    // like post
-    builder.addCase(likePost.pending, (state) => {
-      state.loading = true;
+    // edit post
+    builder.addCase(editPost.pending, (state) => {
+      state.loading.feedLoading = true;
     });
 
-    builder.addCase(likePost.fulfilled, (state, { payload }) => {
-      state.loading = false;
+    builder.addCase(editPost.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+
+      state.loading.feedLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -43,42 +57,63 @@ export const feedSlice = createSlice({
       state.posts[postIndex] = payload;
     });
 
-    builder.addCase(likePost.rejected, (state, { payload }) => {
-      state.loading = false;
+    builder.addCase(editPost.rejected, (state, { payload }) => {
+      state.loading.feedLoading = false;
+
       console.log('ab kya karun?');
     });
 
-    // unlike post
-    builder.addCase(unlikePost.pending, (state) => {
-      state.loading = true;
+    // like post
+    builder.addCase(likePost.pending, (state) => {
+      state.loading.ctaLoading = true;
     });
 
-    builder.addCase(unlikePost.fulfilled, (state, { payload }) => {
+    builder.addCase(likePost.fulfilled, (state, { payload }) => {
       console.log({ payload });
 
-      state.loading = false;
+      state.loading.ctaLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
       );
 
-      state.posts[postIndex].likes = state.posts[postIndex].likes.filter(
-        (item) => item !== payload._id
+      state.posts[postIndex].likes = payload.likes;
+    });
+
+    builder.addCase(likePost.rejected, (state, { payload }) => {
+      state.loading.ctaLoading = false;
+      console.log('ab kya karun?');
+    });
+
+    // unlike post
+    builder.addCase(unlikePost.pending, (state) => {
+      state.loading.ctaLoading = true;
+    });
+
+    builder.addCase(unlikePost.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+
+      state.loading.ctaLoading = false;
+
+      const postIndex = state.posts.findIndex(
+        (item) => item._id === payload._id
       );
+
+      state.posts[postIndex].likes = payload.likes;
     });
 
     builder.addCase(unlikePost.rejected, (state, { payload }) => {
-      state.loading = false;
-      console.log('ab kya karun?');
+      state.loading.ctaLoading = false;
+      console.log('ab kya karun?', payload);
     });
 
     // comment post
     builder.addCase(commentPost.pending, (state) => {
-      state.loading = true;
+      state.loading.commentLoading = true;
     });
 
     builder.addCase(commentPost.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.loading.commentLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -88,7 +123,24 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(commentPost.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.commentLoading = false;
+      console.log('ab kya karun?');
+    });
+
+    // create post
+    builder.addCase(createPost.pending, (state) => {
+      state.loading.feedLoading = true;
+    });
+
+    builder.addCase(createPost.fulfilled, (state, { payload }) => {
+      state.loading.feedLoading = false;
+
+      state.posts = [...state.posts, payload];
+    });
+
+    builder.addCase(createPost.rejected, (state, { payload }) => {
+      state.loading.feedLoading = false;
+
       console.log('ab kya karun?');
     });
   },

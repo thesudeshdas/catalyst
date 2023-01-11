@@ -6,6 +6,7 @@ import {
   registerUser,
   signinWithCredentials,
   unfollowUser,
+  updateUserDetails,
 } from './authActions';
 
 let localStatus, localUser;
@@ -92,6 +93,25 @@ export const modalSlice = createSlice({
     });
 
     builder.addCase(getUserDetails.rejected, (state) => {
+      state.loading = false;
+      console.log('ab kya karein ji?');
+    });
+
+    // update user details reducers
+    builder.addCase(updateUserDetails.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(updateUserDetails.fulfilled, (state, { payload }) => {
+      state.loading = false;
+
+      // set only the authenticated user details to RTK
+      if (payload._id === state.user._id) {
+        state.user = payload;
+      }
+    });
+
+    builder.addCase(updateUserDetails.rejected, (state) => {
       state.loading = false;
       console.log('ab kya karein ji?');
     });

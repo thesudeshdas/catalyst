@@ -1,14 +1,19 @@
 import { Box, Flex, Image, Input, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import ModalEditName from '../Modals/ModalEditName';
 import ModalEditBio from '../Modals/ModalEditBio';
 import ModalEditJob from '../Modals/ModalEditJob';
 import ModalEditSocial from '../Modals/ModalEditSocial';
 import ModalEditStack from '../Modals/ModalEditStack';
 import ModalEditTags from '../Modals/ModalEditTags';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 export default function FormEditProfile() {
+  const dispatch = useAppDispatch();
+
+  const authUser = useAppSelector((state) => state.auth.user);
+
   const userProfilePic = useAppSelector(
     (state) => state.auth.user.profilePic?.src
   );
@@ -24,18 +29,20 @@ export default function FormEditProfile() {
     dataForm.append('file', file);
     dataForm.append('upload_preset', 'catalyst_preset');
 
-    const data = await fetch(
-      'https://api.cloudinary.com/v1_1/thesudeshdas/image/upload',
-      {
-        method: 'POST',
-        body: dataForm,
-      }
-    ).then((r) => r.json());
+    const data = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
+      method: 'POST',
+      body: dataForm,
+    }).then((r) => r.json());
 
     if (data.secure_url) {
-      console.log('main dispatch kar dunga');
-
-      // dispatch(setProfilePic({ imgSrc: data.secure_url, email: user.email }));
+      await dispatch(
+        updateUserDetails({
+          userId: authUser._id,
+          toUpdate: {
+            profilePic: { src: data.secure_url, alt: authUser.name },
+          },
+        })
+      );
     }
 
     setImgSrc(data.secure_url);

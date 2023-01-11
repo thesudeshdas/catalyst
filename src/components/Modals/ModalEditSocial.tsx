@@ -29,10 +29,14 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { socialIcons } from '../../data/portfolio/portfolio.data';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 export default function ModalEditSocial() {
+  const dispatch = useAppDispatch();
+
+  const authUser = useAppSelector((state) => state.auth.user);
   const userSocial = useAppSelector((state) => state.auth.user?.social);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -79,9 +83,11 @@ export default function ModalEditSocial() {
   );
 
   const handleSubmit = async () => {
-    // const data = await updateUser(user._id, { social: socials });
-    // setSocials(data.social);
-    // onClose();
+    await dispatch(
+      updateUserDetails({ userId: authUser._id, toUpdate: { social: socials } })
+    );
+
+    onClose();
   };
 
   const handleSocialChange = (e) => {
@@ -174,16 +180,10 @@ export default function ModalEditSocial() {
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Button
-              colorScheme='blue'
-              variant='outline'
-              fontWeight='500'
-              mr={3}
-              onClick={onClose}
-            >
+            <Button variant='secondary' mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme='blue' fontWeight='500' onClick={handleSubmit}>
+            <Button variant='primary' onClick={handleSubmit}>
               Save
             </Button>
           </ModalFooter>

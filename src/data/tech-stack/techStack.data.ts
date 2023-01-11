@@ -1,4 +1,4 @@
-import { TechStackIcons } from '../../types/techStack.type';
+import { ITechOption, TechStackIcons } from '../../types/techStack.type';
 
 export const techStackIcons: TechStackIcons = [
   {
@@ -69,4 +69,30 @@ export const techStackIcons: TechStackIcons = [
     src: '/icons/tech-stack/LogosVisualStudioCode.svg',
     alt: 'Visual Studio Code',
   },
+];
+
+export const techOptions: ITechOption[] = [
+  { value: 'angularJS', label: 'AngularJS' },
+  { value: 'bootstrap', label: 'Bootstrap' },
+  { value: 'chakraUI', label: 'Chakra UI' },
+  { value: 'css3', label: 'CSS3' },
+  { value: 'figma', label: 'Figma' },
+  { value: 'github', label: 'Github' },
+  { value: 'git', label: 'Git' },
+  { value: 'graphql', label: 'Graphql' },
+  { value: 'html5', label: 'HTML5' },
+  { value: 'javascript', label: 'JavaScript' },
+  { value: 'materialUI', label: 'MaterialUI' },
+  { value: 'nextJS', label: 'NextJS' },
+  { value: 'nodeJS', label: 'NodeJS' },
+  { value: 'reactJS', label: 'ReactJS' },
+  { value: 'reactQuery', label: 'React Query' },
+  { value: 'redux', label: 'Redux' },
+  { value: 'redux', label: 'Redux' },
+  { value: 'remixJS', label: 'RemixJS' },
+  { value: 'sass', label: 'SASS' },
+  { value: 'tailwindCSS', label: 'TailwindCSS' },
+  { value: 'typescript', label: 'TypeScript' },
+  { value: 'visualStudioCode', label: 'Visual Studio Code' },
+  { value: 'vueJS', label: 'VueJS' },
 ];

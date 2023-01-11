@@ -18,6 +18,9 @@ import { commentPost } from '../../features/feed/feedActions';
 export default function CommentPanel({ postId, comments: staticComments }) {
   const dispatch = useAppDispatch();
 
+  const commentLoading = useAppSelector(
+    (state) => state.feed.loading.commentLoading
+  );
   const authUser = useAppSelector((state) => state.auth.user);
 
   const [comments, setComments] = useState<IComment[]>(staticComments);
@@ -106,6 +109,8 @@ export default function CommentPanel({ postId, comments: staticComments }) {
             w='50%'
             alignSelf='flex-end'
             onClick={handleComment}
+            isLoading={commentLoading}
+            loadingText='Commenting...'
           >
             Comment
           </Button>
@@ -114,3 +119,5 @@ export default function CommentPanel({ postId, comments: staticComments }) {
     </Stack>
   );
 }
+
+// TODO - Do not allow if the text is empty

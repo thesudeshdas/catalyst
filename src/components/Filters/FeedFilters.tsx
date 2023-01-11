@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box, Button, Flex, Stack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { filterPost } from '../../lib/utils/filter-utils/fitler.utils';
@@ -10,12 +9,14 @@ export default function FeedFilters({
   postsArr,
   activeFeed,
   showFilter,
+  setShowFilter,
   following,
   setFinalPosts,
 }: {
   postsArr: IPost[];
   activeFeed: string;
   showFilter: boolean;
+  setShowFilter: Function;
   following: string[];
   setFinalPosts: Function;
 }) {
@@ -39,7 +40,7 @@ export default function FeedFilters({
 
   useEffect(() => {
     setFinalPosts(filterPost(postsArr, filters));
-  }, [filters]);
+  }, [postsArr, filters, setFinalPosts]);
 
   useEffect(() => {
     setFilters((prevFilters) => ({
@@ -56,7 +57,9 @@ export default function FeedFilters({
       </Box>
 
       <Flex alignSelf='end' gap={4}>
-        <Button variant='secondary'>Cancel</Button>
+        <Button variant='secondary' onClick={() => setShowFilter(false)}>
+          Cancel
+        </Button>
         <Button variant='primary' onClick={handleApplyFilter}>
           Apply Filters
         </Button>
