@@ -64,13 +64,13 @@ export const feedSlice = createSlice({
 
     // like post
     builder.addCase(likePost.pending, (state) => {
-      state.loading.feedLoading = true;
+      state.loading.ctaLoading = true;
     });
 
     builder.addCase(likePost.fulfilled, (state, { payload }) => {
       console.log({ payload });
 
-      state.loading.feedLoading = false;
+      state.loading.ctaLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -80,19 +80,19 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(likePost.rejected, (state, { payload }) => {
-      state.loading.feedLoading = false;
+      state.loading.ctaLoading = false;
       console.log('ab kya karun?');
     });
 
     // unlike post
     builder.addCase(unlikePost.pending, (state) => {
-      state.loading.feedLoading = true;
+      state.loading.ctaLoading = true;
     });
 
     builder.addCase(unlikePost.fulfilled, (state, { payload }) => {
       console.log({ payload });
 
-      state.loading.feedLoading = false;
+      state.loading.ctaLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -102,7 +102,7 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(unlikePost.rejected, (state, { payload }) => {
-      state.loading.feedLoading = false;
+      state.loading.ctaLoading = false;
       console.log('ab kya karun?', payload);
     });
 

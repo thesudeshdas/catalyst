@@ -9,6 +9,9 @@ import CarouselImage from './Carousels/CarouselImage';
 // Chats
 import CommentPanel from './Chats/CommentPanel';
 
+// CTAs
+import CTAButton from './CTAs/CTAButton';
+
 // Filters
 import FeedFilters from './Filters/FeedFilters';
 
@@ -73,6 +76,9 @@ export {
 
   // Chats
   CommentPanel,
+
+  // CTAs
+  CTAButton,
 
   // Filters
   FeedFilters,

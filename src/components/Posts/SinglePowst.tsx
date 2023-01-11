@@ -23,11 +23,12 @@ import ListTechStack from '../Lists/ListTechStack';
 
 import { likePost, unlikePost } from '../../features/feed/feedActions';
 import ProfileSeparator from '../Profile/ProfileSeparator';
+import CTAButton from '../CTAs/CTAButton';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
 
-  const feedLoading = useAppSelector((state) => state.feed.loading);
+  const ctaLoading = useAppSelector((state) => state.feed.loading.ctaLoading);
   const post = useAppSelector((state) =>
     state.feed.posts.find((post) => post._id == postId)
   );
@@ -48,7 +49,7 @@ export default function SinglePowst({ postId }) {
 
   const hasUserLiked = likes?.includes(userId);
 
-  console.log({ post, likes, feedLoading });
+  console.log({ post, likes, ctaLoading });
 
   return (
     <Box bg='#00000080'>
@@ -101,12 +102,15 @@ export default function SinglePowst({ postId }) {
 
               {/* save & like */}
               <Button variant='secondary'>Save</Button>
+
               {hasUserLiked ? (
                 <Button
                   // TODO - add outline icon for like
                   leftIcon={<LikeIcon />}
                   variant='secondary'
                   onClick={unlikeHandler}
+                  isLoading={ctaLoading}
+                  loadingText='Unliking...'
                 >
                   Unlike
                 </Button>
@@ -115,6 +119,8 @@ export default function SinglePowst({ postId }) {
                   leftIcon={<LikeIcon />}
                   variant='primary'
                   onClick={likeHandler}
+                  isLoading={ctaLoading}
+                  loadingText='Liking...'
                 >
                   Like
                 </Button>
