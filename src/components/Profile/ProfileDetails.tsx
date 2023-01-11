@@ -187,8 +187,8 @@ export default function ProfileDetails({ user }) {
                 key={icon.src}
                 src={icon.src}
                 alt={icon.alt}
-                width={32}
-                height={32}
+                width='32px'
+                height='32px'
               />
             );
           })}
