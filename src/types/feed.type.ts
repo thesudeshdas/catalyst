@@ -41,7 +41,11 @@ export type IFeedRejectErrors = {
 };
 
 export type IFeedState = {
-  loading: boolean;
+  loading: {
+    feedLoading: boolean;
+    postLoading: boolean;
+    ctaLoading: boolean;
+  };
   posts: IPost[];
   error: IFeedRejectErrors;
 };

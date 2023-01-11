@@ -27,6 +27,9 @@ import ProfileLayout from './Layouts/ProfileLayout';
 // Lists
 import ListTechStack from './Lists/ListTechStack';
 
+// Loaders
+import FeedLoader from './Loaders/FeedLoaders';
+
 // Modals
 import ModalContainer from './Modals/ModalContainer';
 import ModalEditBio from './Modals/ModalEditBio';
@@ -88,6 +91,9 @@ export {
 
   // Lists
   ListTechStack,
+
+  // Loaders
+  FeedLoader,
 
   // Modals
   ModalContainer,

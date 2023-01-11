@@ -10,7 +10,11 @@ import {
 } from './feedActions';
 
 const initialState: IFeedState = {
-  loading: false,
+  loading: {
+    feedLoading: false,
+    postLoading: false,
+    ctaLoading: false,
+  },
   posts: [],
   error: null,
 };
@@ -22,28 +26,28 @@ export const feedSlice = createSlice({
   extraReducers: (builder) => {
     // get all posts reducers
     builder.addCase(getAllPosts.pending, (state) => {
-      state.loading = true;
+      state.loading.feedLoading = true;
     });
 
     builder.addCase(getAllPosts.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
       state.posts = payload;
     });
 
     builder.addCase(getAllPosts.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
       state.error = payload;
     });
 
     // edit post
     builder.addCase(editPost.pending, (state) => {
-      state.loading = true;
+      state.loading.feedLoading = true;
     });
 
     builder.addCase(editPost.fulfilled, (state, { payload }) => {
       console.log({ payload });
 
-      state.loading = false;
+      state.loading.feedLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -53,20 +57,20 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(editPost.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
 
       console.log('ab kya karun?');
     });
 
     // like post
     builder.addCase(likePost.pending, (state) => {
-      state.loading = true;
+      state.loading.feedLoading = true;
     });
 
     builder.addCase(likePost.fulfilled, (state, { payload }) => {
       console.log({ payload });
 
-      state.loading = false;
+      state.loading.feedLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -76,19 +80,19 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(likePost.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
       console.log('ab kya karun?');
     });
 
     // unlike post
     builder.addCase(unlikePost.pending, (state) => {
-      state.loading = true;
+      state.loading.feedLoading = true;
     });
 
     builder.addCase(unlikePost.fulfilled, (state, { payload }) => {
       console.log({ payload });
 
-      state.loading = false;
+      state.loading.feedLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -98,17 +102,17 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(unlikePost.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
       console.log('ab kya karun?', payload);
     });
 
     // comment post
     builder.addCase(commentPost.pending, (state) => {
-      state.loading = true;
+      state.loading.feedLoading = true;
     });
 
     builder.addCase(commentPost.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
@@ -118,23 +122,23 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(commentPost.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
       console.log('ab kya karun?');
     });
 
     // create post
     builder.addCase(createPost.pending, (state) => {
-      state.loading = true;
+      state.loading.feedLoading = true;
     });
 
     builder.addCase(createPost.fulfilled, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
 
       state.posts = [...state.posts, payload];
     });
 
     builder.addCase(createPost.rejected, (state, { payload }) => {
-      state.loading = false;
+      state.loading.feedLoading = false;
 
       console.log('ab kya karun?');
     });
