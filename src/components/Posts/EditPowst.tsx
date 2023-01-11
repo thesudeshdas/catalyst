@@ -48,6 +48,7 @@ import { IStack } from '../../types/auth.type';
 import ProfileSeparator from '../Profile/ProfileSeparator';
 import ProfilePicture from '../Images/ProfilePicture';
 import { Link } from 'react-router-dom';
+import BackdropSinglePost from '../Backdrops/Backdrop';
 
 export default function EditPowst({ post }) {
   const dispatch = useAppDispatch();
@@ -85,20 +86,7 @@ export default function EditPowst({ post }) {
 
   return (
     <Box bg='#00000080'>
-      <Flex
-        direction='row-reverse'
-        onClick={() => dispatch(toggle(''))}
-        h='3rem'
-      >
-        <Center>
-          <IconButton
-            aria-label='Close Single Powst'
-            icon={<CloseIcon />}
-            variant='ghost'
-            color='white'
-          />
-        </Center>
-      </Flex>
+      <BackdropSinglePost />
 
       {/* content */}
 

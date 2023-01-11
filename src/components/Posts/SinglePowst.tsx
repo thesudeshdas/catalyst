@@ -24,6 +24,7 @@ import ListTechStack from '../Lists/ListTechStack';
 import { likePost, unlikePost } from '../../features/feed/feedActions';
 import ProfileSeparator from '../Profile/ProfileSeparator';
 import CTAButton from '../CTAs/CTAButton';
+import BackdropSinglePost from '../Backdrops/Backdrop';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
@@ -53,140 +54,113 @@ export default function SinglePowst({ postId }) {
 
   return (
     <Box bg='#00000080'>
-      <Flex
-        direction='row-reverse'
-        onClick={() => dispatch(toggle(''))}
-        h='3rem'
-        p={2}
-      >
-        <Center>
-          <IconButton
-            aria-label='Close Single Powst'
-            icon={<CloseIcon />}
-            variant='ghost'
-            color='white'
-          />
-        </Center>
-      </Flex>
+      <BackdropSinglePost />
 
       {/* content */}
-      {post ? (
-        <Flex
-          direction='row-reverse'
-          bg='white'
-          height='calc(100vh - 3rem)'
-          p={8}
-          overflowY='scroll'
-          position='relative'
-          borderTopRadius='3xl'
-          justifyContent='center'
-          gap={4}
-        >
-          {showComments && (
-            <CommentPanel comments={post.comments} postId={post._id} />
-          )}
+      <Flex
+        direction='row-reverse'
+        bg='white'
+        height='calc(100vh - 3rem)'
+        p={8}
+        overflowY='scroll'
+        position='relative'
+        borderTopRadius='3xl'
+        justifyContent='center'
+        gap={4}
+      >
+        {showComments && (
+          <CommentPanel comments={post.comments} postId={post._id} />
+        )}
 
-          <PostNav
-            likes={post.likes}
-            comments={post.comments}
-            creator={post.user}
-            setShowComments={setShowComments}
-          />
+        <PostNav
+          likes={post.likes}
+          comments={post.comments}
+          creator={post.user}
+          setShowComments={setShowComments}
+        />
 
-          <Stack gap={6}>
-            {/* user details */}
-            <Flex gap={4} alignItems='center'>
-              <CreatorDetails creator={post.user} postName={post.name} />
+        <Stack gap={6}>
+          {/* user details */}
+          <Flex gap={4} alignItems='center'>
+            <CreatorDetails creator={post.user} postName={post.name} />
 
-              <Spacer />
+            <Spacer />
 
-              {/* save & like */}
-              <Button variant='secondary'>Save</Button>
+            {/* save & like */}
+            <Button variant='secondary'>Save</Button>
 
-              {hasUserLiked ? (
+            {hasUserLiked ? (
+              <Button
+                // TODO - add outline icon for like
+                leftIcon={<LikeIcon />}
+                variant='secondary'
+                onClick={unlikeHandler}
+                isLoading={ctaLoading}
+                loadingText='Unliking...'
+              >
+                Unlike
+              </Button>
+            ) : (
+              <Button
+                leftIcon={<LikeIcon />}
+                variant='primary'
+                onClick={likeHandler}
+                isLoading={ctaLoading}
+                loadingText='Liking...'
+              >
+                Like
+              </Button>
+            )}
+          </Flex>
+
+          <CarouselImage images={post.images} />
+
+          {/* texts & stack & links */}
+          <Flex>
+            <Text w='60%'>{post.description}</Text>
+
+            <Spacer />
+
+            <Stack w='25%' alignItems='flex-end' gap={2}>
+              {post.live != undefined && (
                 <Button
-                  // TODO - add outline icon for like
-                  leftIcon={<LikeIcon />}
-                  variant='secondary'
-                  onClick={unlikeHandler}
-                  isLoading={ctaLoading}
-                  loadingText='Unliking...'
-                >
-                  Unlike
-                </Button>
-              ) : (
-                <Button
-                  leftIcon={<LikeIcon />}
                   variant='primary'
-                  onClick={likeHandler}
-                  isLoading={ctaLoading}
-                  loadingText='Liking...'
+                  as='a'
+                  w='70%'
+                  href={post.live}
+                  target='blank'
                 >
-                  Like
+                  Live Preview
                 </Button>
               )}
-            </Flex>
 
-            <CarouselImage images={post.images} />
+              {post.repo != undefined && (
+                <Button
+                  variant='secondary'
+                  as='a'
+                  w='70%'
+                  href={post.repo}
+                  target='blank'
+                >
+                  Repo Link
+                </Button>
+              )}
 
-            {/* texts & stack & links */}
-            <Flex>
-              <Text w='60%'>{post.description}</Text>
+              <ListTechStack
+                stack={post.stack}
+                direction='row-reverse'
+                wrap='wrap'
+                gap={4}
+              />
+            </Stack>
+          </Flex>
 
-              <Spacer />
+          <ProfileSeparator user={post.user} />
 
-              <Stack w='25%' alignItems='flex-end' gap={2}>
-                {post.live != undefined && (
-                  <Button
-                    variant='primary'
-                    as='a'
-                    w='70%'
-                    href={post.live}
-                    target='blank'
-                  >
-                    Live Preview
-                  </Button>
-                )}
-
-                {post.repo != undefined && (
-                  <Button
-                    variant='secondary'
-                    as='a'
-                    w='70%'
-                    href={post.repo}
-                    target='blank'
-                  >
-                    Repo Link
-                  </Button>
-                )}
-
-                <ListTechStack
-                  stack={post.stack}
-                  direction='row-reverse'
-                  wrap='wrap'
-                  gap={4}
-                />
-              </Stack>
-            </Flex>
-
-            <ProfileSeparator user={post.user} />
-
-            {/* similar */}
-            {/* // TODO - Create & Add similar post component */}
-          </Stack>
-        </Flex>
-      ) : (
-        <Box
-          bg='white'
-          height='calc(100vh - 3rem)'
-          p={4}
-          overflowY='scroll'
-          position='relative'
-          borderTopRadius='2xl'
-        >
-          <Heading>Nothing to show</Heading>
-        </Box>
-      )}
+          {/* similar */}
+          {/* // TODO - Create & Add similar post component */}
+        </Stack>
+      </Flex>
     </Box>
   );
 }

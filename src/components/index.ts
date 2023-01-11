@@ -1,3 +1,6 @@
+// Backdrops
+import BackdropSinglePost from './Backdrops/Backdrop';
+
 // Cards
 // import PortfolioBlogCard from './Cards/PortfolioBlogCard';
 import PortfolioPowstCard from './Cards/PortfolioPowstCard';
@@ -66,6 +69,9 @@ import ProfileSeparator from './Profile/ProfileSeparator';
 import SearchStack from './Search/SearchStack';
 
 export {
+  // Backdrops
+  BackdropSinglePost,
+
   // Cards
   // PortfolioBlogCard,
   PortfolioPowstCard,

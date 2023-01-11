@@ -41,6 +41,7 @@ import {
 } from '../../features/feed/feedActions';
 import SearchStack from '../Search/SearchStack';
 import { IStack } from '../../types/auth.type';
+import BackdropSinglePost from '../Backdrops/Backdrop';
 
 export default function CreateSinglePowst() {
   const dispatch = useAppDispatch();
@@ -100,20 +101,7 @@ export default function CreateSinglePowst() {
 
   return (
     <Box bg='#00000080'>
-      <Flex
-        direction='row-reverse'
-        onClick={() => dispatch(toggle(''))}
-        h='3rem'
-      >
-        <Center>
-          <IconButton
-            aria-label='Close Single Powst'
-            icon={<CloseIcon />}
-            variant='ghost'
-            color='white'
-          />
-        </Center>
-      </Flex>
+      <BackdropSinglePost />
 
       {/* content */}
 
