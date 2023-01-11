@@ -2,16 +2,6 @@
 
 import axios from 'axios';
 
-export const getAllPosts = async () => {
-  try {
-    const response = await axios.get(`${process.env.REACT_APP_POSTS_API_URL}`);
-
-    return response;
-  } catch (error) {
-    return error.response;
-  }
-};
-
 export const getPostDetails = async (postId) => {
   try {
     const response = await axios.get(

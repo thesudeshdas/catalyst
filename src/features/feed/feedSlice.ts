@@ -64,13 +64,15 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(likePost.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+
       state.loading = false;
 
       const postIndex = state.posts.findIndex(
         (item) => item._id === payload._id
       );
 
-      state.posts[postIndex] = payload;
+      state.posts[postIndex].likes = payload.likes;
     });
 
     builder.addCase(likePost.rejected, (state, { payload }) => {
@@ -92,9 +94,7 @@ export const feedSlice = createSlice({
         (item) => item._id === payload._id
       );
 
-      state.posts[postIndex].likes = state.posts[postIndex].likes.filter(
-        (item) => item !== payload._id
-      );
+      state.posts[postIndex].likes = payload.likes;
     });
 
     builder.addCase(unlikePost.rejected, (state, { payload }) => {

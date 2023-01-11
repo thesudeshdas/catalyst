@@ -1,81 +1,54 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { CloseIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
   Center,
-  chakra,
-  Divider,
   Flex,
   Heading,
   IconButton,
   Spacer,
   Stack,
   Text,
-  Image,
 } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import {
-  CommentIcon,
-  InfoIcon,
-  LikeIcon,
-  SaveIcon,
-  ShareIcon,
-} from '../../assets/icons/icons';
-import { techStackIcons } from '../../data/portfolio/portfolio.data';
+import { LikeIcon } from '../../assets/icons/icons';
+
 import { toggle } from '../../features/modal/modalSlice';
 import CommentPanel from '../Chats/CommentPanel';
 import PostNav from '../Navs/PostNav';
 import CreatorDetails from '../Profile/CreatorDetails';
 import CarouselImage from '../Carousels/CarouselImage';
 import ListTechStack from '../Lists/ListTechStack';
-import { IPost } from '../../types/feed.type';
-import { getPostDetails } from '../../lib/api/posts.api';
+
 import { likePost, unlikePost } from '../../features/feed/feedActions';
 import ProfileSeparator from '../Profile/ProfileSeparator';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
 
-  const [post, setPost] = useState<IPost>();
+  const feedLoading = useAppSelector((state) => state.feed.loading);
+  const post = useAppSelector((state) =>
+    state.feed.posts.find((post) => post._id == postId)
+  );
+
+  const { likes } = post;
 
   const [showComments, setShowComments] = useState<boolean>(false);
-  const [likes, setLikes] = useState<string[]>(post?.likes);
 
   const userId = useAppSelector((state) => state.auth.user._id);
 
   const likeHandler = async () => {
-    const response = await dispatch(
-      likePost({ postId: postId, userId: userId })
-    );
-
-    response && setLikes((prevLikes) => [...prevLikes, userId]);
+    await dispatch(likePost({ postId: postId, userId: userId }));
   };
 
   const unlikeHandler = async () => {
-    const response = await dispatch(
-      unlikePost({ postId: postId, userId: userId })
-    );
-
-    response &&
-      setLikes((prevLikes) => prevLikes.filter((item) => item != userId));
+    await dispatch(unlikePost({ postId: postId, userId: userId }));
   };
 
   const hasUserLiked = likes?.includes(userId);
 
-  useEffect(() => {
-    (async () => {
-      const response = await getPostDetails(postId);
-
-      if (response.status === 200) {
-        setPost(response.data.post);
-        setLikes(response.data.post.likes);
-      }
-    })();
-  }, [postId]);
-
-  console.log({ postId, post, likes });
+  console.log({ post, likes, feedLoading });
 
   return (
     <Box bg='#00000080'>

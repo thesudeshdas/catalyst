@@ -33,7 +33,7 @@ import CreatorDetails from '../Profile/CreatorDetails';
 import CarouselImage from '../Carousels/CarouselImage';
 import ListTechStack from '../Lists/ListTechStack';
 import { IPost } from '../../types/feed.type';
-import { getPostDetails } from '../../lib/api/posts.api';
+
 import {
   createPost,
   likePost,
