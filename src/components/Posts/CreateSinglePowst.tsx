@@ -42,6 +42,7 @@ import {
 import SearchStack from '../Search/SearchStack';
 import { IStack } from '../../types/auth.type';
 import BackdropSinglePost from '../Backdrops/Backdrop';
+import ProfilePicture from '../Images/ProfilePicture';
 
 export default function CreateSinglePowst() {
   const dispatch = useAppDispatch();
@@ -122,13 +123,11 @@ export default function CreateSinglePowst() {
         <Stack w='80em' gap={6}>
           {/* user details & title */}
           <Flex gap={4} alignItems='center'>
-            <Image
-              alt='profile'
-              borderRadius='50%'
-              src={authUser.profilePic.src || '/images/blank_profile.png'}
-              width='65'
-              height='65'
+            <ProfilePicture
+              src={authUser?.profilePic?.src}
+              alt={authUser?.name}
             />
+
             <Box>
               <Heading mb={4} size='lg'>
                 Create a Powst
