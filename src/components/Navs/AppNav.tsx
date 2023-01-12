@@ -1,8 +1,10 @@
 import { Flex, Image, Spacer, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { toggle } from '../../features/modal/modalSlice';
 
 export default function AppNav() {
+  const dispatch = useAppDispatch();
   const authUserId = useAppSelector((state) => state.auth.user?._id);
 
   return (
@@ -70,34 +72,39 @@ export default function AppNav() {
         </Flex>
       </Link>
 
-      <Link to='/sign-in'>
-        <Flex
-          alignItems='center'
-          position='relative'
-          w='32px'
-          h='32px'
-          overflow='hidden'
-          _hover={{ width: '5.5rem' }}
-          transform='auto'
-          transition='all 300ms ease-in-out'
-          cursor='pointer'
-        >
-          <Image
-            bg='white'
-            display='inline-block'
-            position='absolute'
-            zIndex={1}
-            left='0'
-            top='0'
-            h='100%'
-            src='/icons/neutral/plus.svg'
-            alt='Plus'
-          />
-          <Text position='absolute' right='0' fontWeight='600'>
-            Create
-          </Text>
-        </Flex>
-      </Link>
+      <Flex
+        alignItems='center'
+        position='relative'
+        w='32px'
+        h='32px'
+        overflow='hidden'
+        _hover={{ width: '5.5rem' }}
+        transform='auto'
+        transition='all 300ms ease-in-out'
+        cursor='pointer'
+        onClick={() =>
+          dispatch(
+            toggle({
+              modalComponent: 'CreateSinglePowst',
+            })
+          )
+        }
+      >
+        <Image
+          bg='white'
+          display='inline-block'
+          position='absolute'
+          zIndex={1}
+          left='0'
+          top='0'
+          h='100%'
+          src='/icons/neutral/plus.svg'
+          alt='Plus'
+        />
+        <Text position='absolute' right='0' fontWeight='600'>
+          Create
+        </Text>
+      </Flex>
 
       <Spacer />
       <Image
