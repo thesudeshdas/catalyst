@@ -193,8 +193,6 @@ export const createPost = createAsyncThunk<
       config
     );
 
-    console.log({ response });
-
     return response.data.addedPost as IPost;
   } catch (error) {
     return rejectWithValue({

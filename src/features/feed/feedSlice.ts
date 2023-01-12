@@ -46,8 +46,6 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(editPost.fulfilled, (state, { payload }) => {
-      console.log({ payload });
-
       state.loading.feedLoading = false;
 
       const postIndex = state.posts.findIndex(
@@ -59,8 +57,6 @@ export const feedSlice = createSlice({
 
     builder.addCase(editPost.rejected, (state, { payload }) => {
       state.loading.feedLoading = false;
-
-      console.log('ab kya karun?');
     });
 
     // like post
@@ -69,8 +65,6 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(likePost.fulfilled, (state, { payload }) => {
-      console.log({ payload });
-
       state.loading.ctaLoading = false;
 
       const postIndex = state.posts.findIndex(
@@ -82,7 +76,6 @@ export const feedSlice = createSlice({
 
     builder.addCase(likePost.rejected, (state, { payload }) => {
       state.loading.ctaLoading = false;
-      console.log('ab kya karun?');
     });
 
     // unlike post
@@ -91,8 +84,6 @@ export const feedSlice = createSlice({
     });
 
     builder.addCase(unlikePost.fulfilled, (state, { payload }) => {
-      console.log({ payload });
-
       state.loading.ctaLoading = false;
 
       const postIndex = state.posts.findIndex(
@@ -104,7 +95,6 @@ export const feedSlice = createSlice({
 
     builder.addCase(unlikePost.rejected, (state, { payload }) => {
       state.loading.ctaLoading = false;
-      console.log('ab kya karun?', payload);
     });
 
     // comment post
@@ -124,7 +114,6 @@ export const feedSlice = createSlice({
 
     builder.addCase(commentPost.rejected, (state, { payload }) => {
       state.loading.commentLoading = false;
-      console.log('ab kya karun?');
     });
 
     // create post
@@ -140,8 +129,6 @@ export const feedSlice = createSlice({
 
     builder.addCase(createPost.rejected, (state, { payload }) => {
       state.loading.feedLoading = false;
-
-      console.log('ab kya karun?');
     });
   },
 });

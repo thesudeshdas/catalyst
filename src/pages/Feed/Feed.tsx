@@ -19,7 +19,7 @@ export default function PageFeed() {
 
   useEffect(() => {
     setFinalPosts(posts);
-    setFollowing(authUser.following);
+    setFollowing(authUser?.following);
   }, [posts, authUser]);
 
   return (

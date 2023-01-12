@@ -5,8 +5,8 @@ import reportWebVitals from './reportWebVitals';
 import { Box, ChakraProvider } from '@chakra-ui/react';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import {
-  PageCallback,
   PageEditProfile,
+  PageError,
   PageFeed,
   PageHome,
   PagePortfolioWork,
@@ -23,6 +23,7 @@ import { Layout, ProfileLayout } from './components';
 const root = createRoot(document.getElementById('root')!);
 
 const router = createBrowserRouter([
+  { path: '/error', element: <PageError /> },
   {
     element: <Layout />,
     children: [
@@ -42,10 +43,6 @@ const router = createBrowserRouter([
       {
         path: '/edit-profile',
         element: <PageEditProfile />,
-      },
-      {
-        path: '/callback',
-        element: <PageCallback />,
       },
       {
         path: '/',

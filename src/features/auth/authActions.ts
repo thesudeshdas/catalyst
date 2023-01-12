@@ -8,8 +8,6 @@ export const registerUser = createAsyncThunk<
   { rejectValue: IRejectErrors }
 >('auth/registerUser', async (req, { rejectWithValue }) => {
   try {
-    console.log('yahan na?', req);
-
     const response = await fetch(`${process.env.REACT_APP_AUTH_URL}/sign-up`, {
       method: 'POST',
       headers: {
@@ -28,7 +26,6 @@ export const registerUser = createAsyncThunk<
     } else if (response.status == 200) {
       return data.createdUser as IUser;
     } else {
-      console.log('unknown error');
       return null;
     }
   } catch (error) {
@@ -67,7 +64,6 @@ export const signinWithCredentials = createAsyncThunk<
     } else if (response.status == 200) {
       return response.data.signedUser as IUser;
     } else {
-      console.log('unknown error');
       return null;
     }
   } catch (error) {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 
 export default function AppNav() {
-  const authUserId = useAppSelector((state) => state.auth.user._id);
+  const authUserId = useAppSelector((state) => state.auth.user?._id);
 
   return (
     <Flex alignItems='center' p={4} gap={4} top='0' left='0' position='sticky'>

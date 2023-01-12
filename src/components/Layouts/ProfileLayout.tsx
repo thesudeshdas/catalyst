@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Outlet, useOutletContext, useParams } from 'react-router-dom';
+import {
+  Outlet,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   getUserDetails,
@@ -18,6 +23,7 @@ export type ContextType = {
 };
 
 export default function ProfileLayout() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { profileId } = useParams();
 
@@ -33,8 +39,6 @@ export default function ProfileLayout() {
   const [starredPost, setStarredPost] = useState<string[]>(user?.starredPost);
 
   const handleStarPost = async (postId) => {
-    console.log({ postId });
-
     if (starredPost.length < 3) {
       const newStarredPost = [...starredPost, postId];
 
@@ -76,14 +80,12 @@ export default function ProfileLayout() {
       if (response.meta.requestStatus === 'fulfilled') {
         setUser(response.payload);
         setStarredPost(response.payload.starredPost);
+      } else {
+        navigate('/error');
       }
       // TODO - handle error here
     })();
   }, [profileId, dispatch]);
-
-  // console.log({ user, authUser, profileId, isMyProfile });
-
-  console.log('render');
 
   return (
     <>

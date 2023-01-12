@@ -72,8 +72,6 @@ export default function CreateSinglePowst() {
       }
     ).then((r) => r.json());
 
-    console.log({ data });
-
     if (data.secure_url) {
       setImgSrc((prevImgs) => [...prevImgs, data.secure_url]);
     }
@@ -96,8 +94,6 @@ export default function CreateSinglePowst() {
       dispatch(toggle(''));
     }
   };
-
-  console.log({ stack });
 
   return (
     <Box bg='#00000080'>

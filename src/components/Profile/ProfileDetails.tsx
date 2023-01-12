@@ -12,9 +12,10 @@ import {
   Image,
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { socialIcons } from '../../data/portfolio/portfolio.data';
+import { logoutPressed } from '../../features/auth/authSlice';
 import ProfileTagPill from '../Pills/ProfileTagPill';
 
 // import ProfileTagPill from '../Pills/ProfileTagPill';
@@ -24,13 +25,25 @@ const amIFollowing = (arr, id) => {
 };
 
 export default function ProfileDetails({ user }) {
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
 
   const authUser = useAppSelector((state) => state.auth.user);
+  const authState = useAppSelector((state) => state.auth.signInStatus);
 
   const isMyProfile = authUser._id == user?._id;
 
   const [doIFollow, setDoIFollow] = useState<boolean>(false);
+
+  const handleLogout = () => {
+    localStorage.removeItem('localUser');
+    localStorage.removeItem('localStatus');
+
+    dispatch(logoutPressed({}));
+
+    navigate('/');
+  };
 
   // const isMyProfile = user._id == session?.user.id;
 
@@ -179,7 +192,7 @@ export default function ProfileDetails({ user }) {
 
       <Spacer />
 
-      <Flex>
+      <Stack alignItems='flex-end' gap={2}>
         <Flex w='12rem' direction='row-reverse' wrap='wrap' gap='0.5rem'>
           {socialToBeShown.map((icon) => {
             return (
@@ -192,9 +205,17 @@ export default function ProfileDetails({ user }) {
               />
             );
           })}
-          <Text>{user?.email}</Text>
         </Flex>
-      </Flex>
+        <Text fontWeight='600' size='lg'>
+          {user?.email}
+        </Text>
+
+        {authState && (
+          <Button variant='secondaryBlack' onClick={handleLogout}>
+            Logout
+          </Button>
+        )}
+      </Stack>
     </Flex>
   );
 }
