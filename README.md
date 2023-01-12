@@ -1,6 +1,8 @@
 # Catalyst
 
-<img src='/public/icons/brand/catalystLong.svg' alt='catalyst' w='200px' />
+![Catalyst](/docs/catalystLong.png)
+
+<img src="/docs/catalystLong.png" alt='catalyst' w='200px' />
 
 # Getting Started with Create React App
 
