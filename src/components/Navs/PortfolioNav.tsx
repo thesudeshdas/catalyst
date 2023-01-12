@@ -22,21 +22,22 @@ export default function PortfolioNav({ userId }) {
         matcher: `/${userId}/work`,
         url: `/${userId}/work`,
       },
-      {
-        text: 'Blogs',
-        matcher: '/${userId}/blogs',
-        url: `/${userId}/blogs`,
-      },
-      {
-        text: 'Experience',
-        matcher: '/${userId}/experience',
-        url: `/${userId}/experience`,
-      },
-      {
-        text: 'About',
-        matcher: '/${userId}/about',
-        url: `/${userId}/about`,
-      },
+      // * - hidden for now
+      // {
+      //   text: 'Blogs',
+      //   matcher: '/${userId}/blogs',
+      //   url: `/${userId}/blogs`,
+      // },
+      // {
+      //   text: 'Experience',
+      //   matcher: '/${userId}/experience',
+      //   url: `/${userId}/experience`,
+      // },
+      // {
+      //   text: 'About',
+      //   matcher: '/${userId}/about',
+      //   url: `/${userId}/about`,
+      // },
     ],
   };
 
