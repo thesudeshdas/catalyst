@@ -59,7 +59,7 @@ Show the world what you've been working on.
 1 - Clone the project
 
 ```bash
-  git clone https://github.com/thesudeshdas/catalyst-react
+  git clone https://github.com/thesudeshdas/catalyst-react.git
 ```
 
 2 - Go to the project directory

@@ -1,7 +1,11 @@
 import { Center, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 
+import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
+
 export default function PageHome() {
+  useDocumentTitle('Catalyst | Home');
+
   return (
     <Stack alignItems='center'>
       <Heading>The homepage is under construction</Heading>

@@ -1,8 +1,8 @@
-import { useAppSelector } from '../../app/hooks';
 import { FormEditProfile } from '../../components';
+import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
 
 export default function PageEditProfile() {
-  const user = useAppSelector((state) => state.auth.user);
+  useDocumentTitle('Catalyst | Edit Portfolio');
 
   return (
     <>

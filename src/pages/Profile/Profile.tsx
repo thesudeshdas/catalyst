@@ -3,8 +3,11 @@ import { Flex, Heading, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react';
 import { ListTechStack, PortfolioPowstCard } from '../../components';
 import { useAppSelector } from '../../app/hooks';
 import { useUserDetails } from '../../components/Layouts/ProfileLayout';
+import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
 
 export default function PagePortfolio() {
+  useDocumentTitle('Catalyst | Portfolio');
+
   const { user, starredPost } = useUserDetails();
 
   const posts = useAppSelector((state) => state.feed.posts);

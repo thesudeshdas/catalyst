@@ -5,7 +5,11 @@ import { FeedFilters, FeedLoader, FeedNav, PowstCard } from '../../components';
 import { IPost } from '../../types/feed.type';
 import { useAppSelector } from '../../app/hooks';
 
+import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
+
 export default function PageFeed() {
+  useDocumentTitle('Catalyst | Feed');
+
   const feedLoading = useAppSelector((state) => state.feed.loading.feedLoading);
 
   const posts = useAppSelector((state) => state.feed.posts);
