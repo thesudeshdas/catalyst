@@ -1,76 +1,132 @@
-# Catalyst
+<a style="color:Black; cursor:pointer; text-decoration:none; display:block;" href='https://catalyst-react.netlify.app' target='blank'><h1 align='center'>Catalyst</h1></a>
 
-![Catalyst](/docs/catalystLong.png)
+<a style="cursor:pointer; text-decoration:none;" href='https://catalyst-react.netlify.app' target='blank'>![Catalyst](/docs/catalystLong.png)</a>
 
-<img src="https://github.com/thesudeshdas/catalyst-react/blob/dev/docs/catalystLong.png" alt='catalyst' w='200px' />
+Catalyst is a portfolio sharing platform for developers.
+Show the world what you've been working on.
 
-# Getting Started with Create React App
+<br />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Tech Stack
 
-## Available Scripts
+<img src="https://github-readme-tech-stack.vercel.app/api/cards?showBorder=false&width=800&lineCount=&hideBg=true&hideTitle=true&line1=react,react,61DAFB;redux,redux%20toolkit,764ABC;typescript,typescript,3178C6;chakra%20ui,chakra%20ui,319795;react%20router,react%20router%20v6,CA4245;" alt="My Tech Stack" />
 
-In the project directory, you can run:
+<br />
 
-## `npm start`
+## Important Links
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Live Preview](https://catalyst-react.netlify.app)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- [Catalyst Backend](https://github.com/thesudeshdas/catalyst-backend)
 
-### `npm test`
+<br />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+<div style="display: flex; width: 100%; justify-content: space-between;"> 
+  <div>
+  
+**Auth**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- User Authentication
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Sign-in, Sign-up & Logout
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Post**
 
-### `npm run eject`
+- Single Post
+- Create a post
+- Edit a post
+- Like / Unlike Post
+- Comment on Post
+  </div>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  <div>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Profile**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- User Profile
+- Edit Profile
+- Follow / Unfollow User
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Misc**
 
-## Learn More
+- Error page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Filtering
+  </div>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+</div>
 
-### Code Splitting
+<br />
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Run Locally
 
-### Analyzing the Bundle Size
+> ❗Make sure to install the [Backend](https://github.com/thesudeshdas/catalyst-backend) prior to the following steps.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1 - Clone the project
 
-### Making a Progressive Web App
+```bash
+  git clone https://github.com/thesudeshdas/catalyst-react
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2 - Go to the project directory
 
-### Advanced Configuration
+```bash
+  cd catalyst-react
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3 - Install dependencies
 
-### Deployment
+```bash
+  npm install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+4 - Add environment variables
 
-### `npm run build` fails to minify
+```bash
+  REACT_APP_POSTS_API_URL
+  REACT_APP_AUTH_URL
+  REACT_APP_CLOUDINARY_UR
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+5 - Start the server
+
+```bash
+  npm run start
+```
+
+<br />
+
+## Environment Variables
+
+> 💡 To run this project, you will need to add the following environment variables to your .env file
+
+`REACT_APP_POSTS_API_URL` -
+The URL for `/posts` API (ex - http://localhost:8000/posts)
+
+`REACT_APP_AUTH_URL` - The URL for `/auth` API (ex - http://localhost:8000/users)
+
+`REACT_APP_CLOUDINARY_URL` - The URL for cloudinary where images will be uploaded
+
+<br />
+
+## Future Roadmap
+
+> The following are the features that I'll be working on in the future.
+
+- [ ] Save Post
+- [ ] Share Post
+- [ ] Draft Post
+- [ ] Form Validation
+- [ ] Responsiveness
+- [ ] Search
+- [ ] OAuth 2.0
+- [ ] Blogs as posts
+- [ ] Notifications
+
+<br />
+
+## Feedback
+
+If you have any feedback, please reach out to me via mail [sudeshkumardas7@gmail.com](mailto:sudeshkumardas7@gmail.com)
