@@ -18,9 +18,12 @@ import {
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { FormSignUp } from '../../components';
-// import { FormSignUp } from '../../../components';
+
+import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
 
 export default function PageSignUp() {
+  useDocumentTitle('Catalyst | Sign Up');
+
   return (
     <Flex>
       <Image
@@ -36,9 +39,11 @@ export default function PageSignUp() {
             Already a member? <Link to='/sign-in'>Sign in</Link>
           </Text>
           <Heading>Sign up to Catalyst</Heading>
+
+          {/* // ? - hidden for now
           <Button my={6} colorScheme='blue'>
             Sign up with Google
-          </Button>
+          </Button> */}
 
           <Flex w='100%' alignItems='center' gap='1rem'>
             <Divider

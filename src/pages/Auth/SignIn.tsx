@@ -1,26 +1,11 @@
-import * as React from 'react';
-import {
-  Box,
-  Button,
-  Center,
-  Divider,
-  Flex,
-  Heading,
-  Image,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Center, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { FormSignIn } from '../../components';
 
-export default function PageSignIn() {
-  const handleSignIn = async () => {
-    window.open(`${process.env.REACT_APP_AUTH_URL}/google`, '_self');
-  };
+import useDocumentTitle from '../../lib/hooks/useDocumentTitle';
 
-  const handleSignOut = async () => {
-    window.open(`${process.env.REACT_APP_AUTH_URL}/logout`, '_self');
-  };
+export default function PageSignIn() {
+  useDocumentTitle('Catalyst | Sign In');
 
   return (
     <Flex>
@@ -38,6 +23,7 @@ export default function PageSignIn() {
             Not a member? <Link to='/sign-up'>Sign up now</Link>
           </Text>
           <Heading>Sign in to Catalyst</Heading>
+          {/* // ? - Hidden for now
           <Button my={6} colorScheme='blue' onClick={handleSignIn}>
             Sign in with Google
           </Button>
@@ -58,7 +44,7 @@ export default function PageSignIn() {
               borderWidth='1px'
               borderRadius='1rem'
             />
-          </Flex>
+          </Flex> */}
 
           <FormSignIn />
         </Box>
