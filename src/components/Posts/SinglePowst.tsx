@@ -50,8 +50,6 @@ export default function SinglePowst({ postId }) {
 
   const hasUserLiked = likes?.includes(userId);
 
-  console.log({ post, likes, ctaLoading });
-
   return (
     <Box bg='#00000080'>
       <BackdropSinglePost />

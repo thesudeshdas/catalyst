@@ -42,8 +42,6 @@ export default function Layout({
     })();
   }, [dispatch]);
 
-  console.log({ user });
-
   return (
     <>
       <AppNav />

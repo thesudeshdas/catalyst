@@ -39,8 +39,6 @@ export default function ProfileLayout() {
   const [starredPost, setStarredPost] = useState<string[]>(user?.starredPost);
 
   const handleStarPost = async (postId) => {
-    console.log({ postId });
-
     if (starredPost.length < 3) {
       const newStarredPost = [...starredPost, postId];
 
@@ -88,10 +86,6 @@ export default function ProfileLayout() {
       // TODO - handle error here
     })();
   }, [profileId, dispatch]);
-
-  // console.log({ user, authUser, profileId, isMyProfile });
-
-  console.log('render');
 
   return (
     <>

@@ -30,8 +30,6 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     logoutPressed: (state, action) => {
-      console.log({ action });
-
       state.signInStatus = false;
       state.user = null;
     },
@@ -65,8 +63,6 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(signinWithCredentials.fulfilled, (state, { payload }) => {
-      console.log({ payload });
-
       state.loading = true;
       state.signInStatus = true;
       state.user = payload;
@@ -101,7 +97,6 @@ export const authSlice = createSlice({
 
     builder.addCase(getUserDetails.rejected, (state) => {
       state.loading = false;
-      console.log('ab kya karein ji?');
     });
 
     // update user details reducers
@@ -120,7 +115,6 @@ export const authSlice = createSlice({
 
     builder.addCase(updateUserDetails.rejected, (state) => {
       state.loading = false;
-      console.log('ab kya karein ji?');
     });
 
     // follow user
@@ -135,7 +129,6 @@ export const authSlice = createSlice({
 
     builder.addCase(followUser.rejected, (state, { payload }) => {
       state.loading = false;
-      console.log('handle error');
     });
 
     // unfollow user
@@ -150,7 +143,6 @@ export const authSlice = createSlice({
 
     builder.addCase(unfollowUser.rejected, (state, { payload }) => {
       state.loading = false;
-      console.log('handle error');
     });
   },
 });
