@@ -2,7 +2,7 @@
 
 ![Catalyst](/docs/catalystLong.png)
 
-<img src="/docs/catalystLong.png" alt='catalyst' w='200px' />
+<img src="https://github.com/thesudeshdas/catalyst-react/blob/dev/docs/catalystLong.png" alt='catalyst' w='200px' />
 
 # Getting Started with Create React App
 
