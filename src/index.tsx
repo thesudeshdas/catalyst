@@ -7,6 +7,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import {
   PageCallback,
   PageEditProfile,
+  PageError,
   PageFeed,
   PageHome,
   PagePortfolioWork,
@@ -23,6 +24,7 @@ import { Layout, ProfileLayout } from './components';
 const root = createRoot(document.getElementById('root')!);
 
 const router = createBrowserRouter([
+  { path: '/error', element: <PageError /> },
   {
     element: <Layout />,
     children: [
