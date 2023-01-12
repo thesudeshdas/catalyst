@@ -1,18 +1,9 @@
-import * as React from 'react';
 import {
   Box,
-  Button,
   Center,
-  chakra,
-  Checkbox,
   Divider,
   Flex,
-  FormControl,
-  FormHelperText,
-  FormLabel,
   Heading,
-  Input,
-  Spacer,
   Image,
   Text,
 } from '@chakra-ui/react';

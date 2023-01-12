@@ -90,7 +90,7 @@ export const authSlice = createSlice({
       state.loading = false;
 
       // set only the authenticated user details to RTK
-      if (payload._id == state.user._id) {
+      if (payload._id === state.user._id) {
         state.user = payload;
       }
     });

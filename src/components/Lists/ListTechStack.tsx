@@ -1,11 +1,9 @@
-import * as React from 'react';
 import { Flex, Image } from '@chakra-ui/react';
 import { techStackIcons } from '../../data/tech-stack/techStack.data';
-import { IStack } from '../../types/auth.type';
 
 export default function ListTechStack({ stack, ...props }) {
   const techStack = techStackIcons.filter(({ alt }) =>
-    stack?.some(({ label }) => label == alt)
+    stack?.some(({ label }) => label === alt)
   );
 
   return (

@@ -1,20 +1,9 @@
+import { EditIcon } from '@chakra-ui/icons';
 import {
-  CloseIcon,
-  EditIcon,
-  InfoIcon,
-  InfoOutlineIcon,
-} from '@chakra-ui/icons';
-import {
-  Box,
   Button,
-  Center,
   Flex,
   FormControl,
-  FormErrorMessage,
   FormLabel,
-  Heading,
-  HStack,
-  IconButton,
   Image,
   Input,
   InputGroup,
@@ -93,7 +82,7 @@ export default function ModalEditSocial() {
   const handleSocialChange = (e) => {
     setSocials((prev) =>
       [...prev].map((item) => {
-        if (item.platform == e.target.name) {
+        if (item.platform === e.target.name) {
           return { ...item, link: e.target.value };
         } else {
           return item;
@@ -127,8 +116,8 @@ export default function ModalEditSocial() {
                   <Input
                     variant='flushed'
                     placeholder={
-                      socials.find((item) => item.platform == icon.alt)?.link ||
-                      'add this social'
+                      socials.find((item) => item.platform === icon.alt)
+                        ?.link || 'add this social'
                     }
                     onClick={onOpen}
                     readOnly
@@ -169,7 +158,7 @@ export default function ModalEditSocial() {
                       name={icon.alt}
                       variant='flushed'
                       placeholder={
-                        socials.find((item) => item.platform == icon.alt)
+                        socials.find((item) => item.platform === icon.alt)
                           ?.link || 'add this social'
                       }
                       onChange={(e) => handleSocialChange(e)}

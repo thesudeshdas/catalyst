@@ -1,17 +1,15 @@
-import * as React from 'react';
 import { Box, Heading, Image, Stack, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 import PowstTagPill from '../Pills/PowstTagPill';
 import { useAppDispatch } from '../../app/hooks';
 import { toggle } from '../../features/modal/modalSlice';
+import { IPost } from '../../types/feed.type';
 
-export default function PowstCard({ details }) {
+export default function PowstCard({ details }: { details: IPost }) {
   const dispatch = useAppDispatch();
 
   const { description, name, images, _id } = details;
 
   return (
-    // <Link to={`/feed/${_id}`}>
     <Box
       borderRadius='xl'
       overflow='hidden'
@@ -77,6 +75,5 @@ export default function PowstCard({ details }) {
         _groupHover={{ display: 'block' }}
       />
     </Box>
-    // </Link>
   );
 }

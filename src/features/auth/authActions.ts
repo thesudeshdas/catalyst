@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IAuthState, IRejectErrors, IUser } from '../../types/auth.type';
+import { IRejectErrors, IUser } from '../../types/auth.type';
 
 export const registerUser = createAsyncThunk<
   IUser,
@@ -18,12 +18,12 @@ export const registerUser = createAsyncThunk<
 
     const data = await response.json();
 
-    if (response.status == 409 || response.status == 403) {
+    if (response.status === 409 || response.status === 403) {
       return rejectWithValue({
         errorStatus: response.status,
         errorMessage: data.message,
       });
-    } else if (response.status == 200) {
+    } else if (response.status === 200) {
       return data.createdUser as IUser;
     } else {
       return null;
@@ -56,12 +56,12 @@ export const signinWithCredentials = createAsyncThunk<
       config
     );
 
-    if (response.status == 404 || response.status == 401) {
+    if (response.status === 404 || response.status === 401) {
       return rejectWithValue({
         errorStatus: response.status,
         errorMessage: response.data.message,
       });
-    } else if (response.status == 200) {
+    } else if (response.status === 200) {
       return response.data.signedUser as IUser;
     } else {
       return null;

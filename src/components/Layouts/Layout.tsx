@@ -11,22 +11,14 @@ import CreateSinglePowst from '../Posts/CreateSinglePowst';
 import EditPowst from '../Posts/EditPowst';
 // import CommentPanel from '../Chats/CommentPanel';
 
-export default function Layout({
-  // children,
-  comment,
-}: {
-  // children: any;
-  comment?: boolean;
-}) {
+export default function Layout({ comment }: { comment?: boolean }) {
   const dispatch = useAppDispatch();
 
   const showModal = useAppSelector((state) => state.modal.shown);
   const modalComponent = useAppSelector((state) => state.modal.modalComponent);
   const modalData = useAppSelector((state) => state.modal.modalData);
-  const modalFunction = useAppSelector((state) => state.modal.modalFunction);
 
   const user = useAppSelector((state) => state.auth.user);
-  const posts = useAppSelector((state) => state.feed.posts);
 
   useEffect(() => {
     if (user?._id) {

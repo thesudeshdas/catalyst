@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   Box,
   Button,
@@ -15,7 +14,13 @@ import { IComment } from '../../types/feed.type';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { commentPost } from '../../features/feed/feedActions';
 
-export default function CommentPanel({ postId, comments: staticComments }) {
+export default function CommentPanel({
+  postId,
+  comments: staticComments,
+}: {
+  postId: string;
+  comments: IComment[];
+}) {
   const dispatch = useAppDispatch();
 
   const commentLoading = useAppSelector(

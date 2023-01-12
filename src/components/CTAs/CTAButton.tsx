@@ -17,7 +17,12 @@ export default function CTAButton({
   loading?: boolean;
 }) {
   return (
-    <Button leftIcon={leftIcon} variant={variant} onClick={handler}>
+    <Button
+      leftIcon={leftIcon}
+      rightIcon={rightIcon}
+      variant={variant}
+      onClick={handler}
+    >
       {text}
     </Button>
   );

@@ -1,6 +1,5 @@
 import { AddIcon } from '@chakra-ui/icons';
 import { Button, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { PortfolioPowstCard } from '../../components';
 import { useUserDetails } from '../../components/Layouts/ProfileLayout';
@@ -23,7 +22,7 @@ export default function PagePortfolioWork() {
     >
       {posts.length > 0 &&
         posts
-          .filter((post) => post.user._id == user._id)
+          .filter((post) => post.user._id === user._id)
           .map((post) => (
             <GridItem key={post._id}>
               <PortfolioPowstCard details={post} />
