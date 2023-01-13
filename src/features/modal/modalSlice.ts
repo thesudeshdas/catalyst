@@ -6,6 +6,7 @@ export type ModalState = {
   modalComponent: string | null;
   modalData: { postId: string; post: IPost } | null;
   modalFunction: Function | null;
+  loginPrompt: boolean;
 };
 
 const initialState: ModalState = {
@@ -13,6 +14,7 @@ const initialState: ModalState = {
   modalComponent: null,
   modalData: null,
   modalFunction: null,
+  loginPrompt: false,
 };
 
 export const modalSlice = createSlice({
@@ -25,9 +27,13 @@ export const modalSlice = createSlice({
       state.modalData = action.payload.modalData;
       state.modalFunction = action.payload.modalFunction;
     },
+
+    promptLogin: (state) => {
+      state.loginPrompt = !state.loginPrompt;
+    },
   },
 });
 
-export const { toggle } = modalSlice.actions;
+export const { toggle, promptLogin } = modalSlice.actions;
 
 export default modalSlice.reducer;

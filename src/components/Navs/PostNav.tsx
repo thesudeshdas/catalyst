@@ -6,11 +6,21 @@ import {
   SaveIcon,
   ShareIcon,
 } from '../../assets/icons/icons';
+import { IUser } from '../../types/auth.type';
+import { IComment } from '../../types/feed.type';
 import ProfilePicture from '../Images/ProfilePicture';
 
-// TODO - Add types
-
-export default function PostNav({ likes, comments, creator, setShowComments }) {
+export default function PostNav({
+  likes,
+  comments,
+  creator,
+  setShowComments,
+}: {
+  likes: string[];
+  comments: IComment[];
+  creator: IUser;
+  setShowComments: Function;
+}) {
   return (
     <Stack
       gap={2}

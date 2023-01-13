@@ -29,7 +29,7 @@ export default function ProfileLayout() {
 
   const authUser = useAppSelector((state) => state.auth.user);
 
-  const isMyProfile = authUser._id == profileId;
+  const isMyProfile = authUser._id === profileId;
 
   // * - this is the wrong way
   const [user, setUser] = useState<IUser | IRejectErrors>(
@@ -59,7 +59,7 @@ export default function ProfileLayout() {
   };
 
   const handleUnstarPost = async (postId) => {
-    const newStarredPost = starredPost.filter((item) => item != postId);
+    const newStarredPost = starredPost.filter((item) => item !== postId);
 
     const data = await dispatch(
       updateUserDetails({
@@ -85,7 +85,7 @@ export default function ProfileLayout() {
       }
       // TODO - handle error here
     })();
-  }, [profileId, dispatch]);
+  }, [profileId, dispatch, navigate]);
 
   return (
     <>

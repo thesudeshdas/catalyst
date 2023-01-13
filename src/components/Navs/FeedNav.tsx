@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {
   Button,
   Divider,
@@ -16,7 +15,7 @@ export default function FeedNav({ activeFeed, setActiveFeed, setShowFilter }) {
   return (
     <Flex gap={12}>
       {feedNav.items.map((item) =>
-        activeFeed == item.text ? (
+        activeFeed === item.text ? (
           <Stack key={item.text}>
             <Button variant='ghost' onClick={handleFeedChange}>
               <Heading size='md' fontWeight='600' color='black'>

@@ -1,6 +1,4 @@
-import React from 'react';
 import {
-  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -13,7 +11,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { signinWithCredentials } from '../../features/auth/authActions';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const pwdRegex =
   /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;

@@ -44,6 +44,7 @@ import ModalEditName from './Modals/ModalEditName';
 import ModalEditSocial from './Modals/ModalEditSocial';
 import ModalEditStack from './Modals/ModalEditStack';
 import ModalEditTags from './Modals/ModalEditTags';
+import ModalLoginPrompt from './Modals/ModalLoginPrompt';
 
 // Navs
 import AppNav from './Navs/AppNav';
@@ -115,6 +116,7 @@ export {
   ModalEditSocial,
   ModalEditStack,
   ModalEditTags,
+  ModalLoginPrompt,
 
   // Navs
   AppNav,

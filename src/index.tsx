@@ -2,8 +2,8 @@ import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { Box, ChakraProvider } from '@chakra-ui/react';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import {
   PageEditProfile,
   PageError,

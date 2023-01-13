@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Box, Flex, Image } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IPostPic } from '../../types/feed.type';
@@ -33,7 +32,7 @@ export default function CarouselImage({ images }: { images: IPostPic[] }) {
               position='relative'
               borderRadius='2xl'
               overflow='hidden'
-              border={curImg.src == image.src ? '4px solid' : ''}
+              border={curImg.src === image.src ? '4px solid' : ''}
               borderColor='brand.600'
             >
               <Image

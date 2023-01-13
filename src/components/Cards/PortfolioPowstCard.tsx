@@ -9,12 +9,12 @@ import {
   Text,
 } from '@chakra-ui/react';
 import PowstTagPill from '../Pills/PowstTagPill';
-import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
 import { toggle } from '../../features/modal/modalSlice';
 import { useUserDetails } from '../Layouts/ProfileLayout';
+import { IPost } from '../../types/feed.type';
 
-export default function PortfolioPowstCard({ details }) {
+export default function PortfolioPowstCard({ details }: { details: IPost }) {
   const dispatch = useAppDispatch();
 
   const { starredPost, handleStarPost, handleUnstarPost } = useUserDetails();

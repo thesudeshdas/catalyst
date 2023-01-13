@@ -1,16 +1,16 @@
-import { Button, Divider, Flex, Heading, Stack, Text } from '@chakra-ui/react';
+import { Button, Divider, Flex, Heading, Stack } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
 
-export type PortfolioNavItem = { text: string; matcher: string; url: string };
+export type IPortfolioNavItem = { text: string; matcher: string; url: string };
 
-export type PortfolioNav = {
-  items: PortfolioNavItem[];
+export type IPortfolioNav = {
+  items: IPortfolioNavItem[];
 };
 
 export default function PortfolioNav({ userId }) {
   const location = useLocation();
 
-  const portfolioNav: PortfolioNav = {
+  const portfolioNav: IPortfolioNav = {
     items: [
       {
         text: 'Portfolio',
@@ -44,7 +44,7 @@ export default function PortfolioNav({ userId }) {
   return (
     <Flex gap={12}>
       {portfolioNav.items.map((item) => {
-        return location.pathname == item.matcher ? (
+        return location.pathname === item.matcher ? (
           <Stack key={item.text}>
             <Link to={item.url}>
               <Button variant='ghost'>

@@ -41,7 +41,7 @@ export default function ModalEditTags() {
     setTags((prevArr) => (prevArr ? [...prevArr, tag] : [tag]));
 
   const handleRemoveTag = (tag) => {
-    setTags((prevArr) => prevArr.filter((item) => item != tag));
+    setTags((prevArr) => prevArr.filter((item) => item !== tag));
   };
 
   const handleInputChange = (e) => setValue(e.target.value);

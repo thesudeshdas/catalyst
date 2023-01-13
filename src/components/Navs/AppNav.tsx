@@ -1,11 +1,25 @@
 import { Flex, Image, Spacer, Text } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { toggle } from '../../features/modal/modalSlice';
 
 export default function AppNav() {
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
+
+  const authStatus = useAppSelector((state) => state.auth.signInStatus);
   const authUserId = useAppSelector((state) => state.auth.user?._id);
+
+  const handleCreate = () => {
+    authStatus
+      ? dispatch(
+          toggle({
+            modalComponent: 'CreateSinglePowst',
+          })
+        )
+      : navigate('/sign-in');
+  };
 
   return (
     <Flex alignItems='center' p={4} gap={4} top='0' left='0' position='sticky'>
@@ -82,13 +96,7 @@ export default function AppNav() {
         transform='auto'
         transition='all 300ms ease-in-out'
         cursor='pointer'
-        onClick={() =>
-          dispatch(
-            toggle({
-              modalComponent: 'CreateSinglePowst',
-            })
-          )
-        }
+        onClick={handleCreate}
       >
         <Image
           bg='white'
