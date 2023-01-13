@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { getAllPosts } from '../../features/feed/feedActions';
 import CreateSinglePowst from '../Posts/CreateSinglePowst';
 import EditPowst from '../Posts/EditPowst';
-// import CommentPanel from '../Chats/CommentPanel';
+import ModalLoginPrompt from '../Modals/ModalLoginPrompt';
 
 export default function Layout({ comment }: { comment?: boolean }) {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ export default function Layout({ comment }: { comment?: boolean }) {
   const showModal = useAppSelector((state) => state.modal.shown);
   const modalComponent = useAppSelector((state) => state.modal.modalComponent);
   const modalData = useAppSelector((state) => state.modal.modalData);
-
+  const loginPrompt = useAppSelector((state) => state.modal.loginPrompt);
   const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
@@ -58,6 +58,8 @@ export default function Layout({ comment }: { comment?: boolean }) {
           <EditPowst post={modalData?.post} />
         </ModalContainer>
       )}
+
+      {loginPrompt && <ModalLoginPrompt />}
     </>
   );
 }

@@ -14,7 +14,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { LikeIcon } from '../../assets/icons/icons';
 
-import { toggle } from '../../features/modal/modalSlice';
+import { promptLogin, toggle } from '../../features/modal/modalSlice';
 import CommentPanel from '../Chats/CommentPanel';
 import PostNav from '../Navs/PostNav';
 import CreatorDetails from '../Profile/CreatorDetails';
@@ -29,6 +29,7 @@ import BackdropSinglePost from '../Backdrops/Backdrop';
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
 
+  const authStatus = useAppSelector((state) => state.auth.signInStatus);
   const ctaLoading = useAppSelector((state) => state.feed.loading.ctaLoading);
   const post = useAppSelector((state) =>
     state.feed.posts.find((post) => post._id == postId)
@@ -41,11 +42,15 @@ export default function SinglePowst({ postId }) {
   const userId = useAppSelector((state) => state.auth.user?._id);
 
   const likeHandler = async () => {
-    await dispatch(likePost({ postId: postId, userId: userId }));
+    authStatus
+      ? await dispatch(likePost({ postId: postId, userId: userId }))
+      : dispatch(promptLogin());
   };
 
   const unlikeHandler = async () => {
-    await dispatch(unlikePost({ postId: postId, userId: userId }));
+    authStatus
+      ? await dispatch(unlikePost({ postId: postId, userId: userId }))
+      : dispatch(promptLogin());
   };
 
   const hasUserLiked = likes?.includes(userId);

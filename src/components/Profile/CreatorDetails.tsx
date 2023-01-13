@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { IUser } from '../../types/auth.type';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { toggle } from '../../features/modal/modalSlice';
+import { promptLogin, toggle } from '../../features/modal/modalSlice';
 import { followUser, unfollowUser } from '../../features/auth/authActions';
 import ProfilePicture from '../Images/ProfilePicture';
 
@@ -16,6 +16,7 @@ export default function CreatorDetails({
   postName: string;
 }) {
   const dispatch = useAppDispatch();
+  const authStatus = useAppSelector((state) => state.auth.signInStatus);
   const authUserId = useAppSelector((state) => state.auth.user?._id);
 
   const { _id: creatorId, followers, profilePic, name } = creator;
@@ -25,14 +26,18 @@ export default function CreatorDetails({
   );
 
   const handleFollow = async () => {
-    const response = await dispatch(
-      followUser({
-        followerUserId: authUserId,
-        followingUserId: creatorId,
-      })
-    );
+    if (authStatus) {
+      const response = await dispatch(
+        followUser({
+          followerUserId: authUserId,
+          followingUserId: creatorId,
+        })
+      );
 
-    response && setDoIFollow((prev) => !prev);
+      response && setDoIFollow((prev) => !prev);
+    } else {
+      dispatch(promptLogin());
+    }
   };
 
   const unhandleFollow = async () => {
