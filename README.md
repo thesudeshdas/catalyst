@@ -59,13 +59,13 @@ Show the world what you've been working on.
 1 - Clone the project
 
 ```bash
-  git clone https://github.com/thesudeshdas/catalyst-react.git
+  git clone https://github.com/thesudeshdas/catalyst.git
 ```
 
 2 - Go to the project directory
 
 ```bash
-  cd catalyst-react
+  cd catalyst
 ```
 
 3 - Install dependencies
@@ -79,7 +79,7 @@ Show the world what you've been working on.
 ```bash
   REACT_APP_POSTS_API_URL
   REACT_APP_AUTH_URL
-  REACT_APP_CLOUDINARY_UR
+  REACT_APP_CLOUDINARY_URL
 ```
 
 5 - Start the server
@@ -117,4 +117,4 @@ The URL for `/posts` API (ex - http://localhost:8000/posts)
 
 ## Feedback
 
-If you have any feedback, please reach out to me via mail [sudeshkumardas7@gmail.com](mailto:sudeshkumardas7@gmail.com)
+If you have any feedback, please reach out to me via mail [sudesh_das@outlook.com](mailto:sudesh_das@outlook.com)
