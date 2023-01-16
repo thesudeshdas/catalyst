@@ -10,6 +10,7 @@ import { getAllPosts } from '../../features/feed/feedActions';
 import CreateSinglePowst from '../Posts/CreateSinglePowst';
 import EditPowst from '../Posts/EditPowst';
 import ModalLoginPrompt from '../Modals/ModalLoginPrompt';
+import AppFooter from '../Footers/AppFooter';
 
 export default function Layout({ comment }: { comment?: boolean }) {
   const dispatch = useAppDispatch();
@@ -37,9 +38,11 @@ export default function Layout({ comment }: { comment?: boolean }) {
   return (
     <>
       <AppNav />
-      <Box maxW={comment ? '90vw' : '70vw'} m='2rem auto'>
+      <Box maxW={comment ? '90vw' : '70vw'} m='2rem auto' minH='78vh'>
         <Outlet />
       </Box>
+
+      <AppFooter />
 
       {showModal && modalComponent === 'SinglePowst' && (
         <ModalContainer>
