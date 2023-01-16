@@ -18,6 +18,9 @@ import CTAButton from './CTAs/CTAButton';
 // Filters
 import FeedFilters from './Filters/FeedFilters';
 
+// Footers
+import AppFooter from './Footers/AppFooter';
+
 // Forms
 import FormEditProfile from './Forms/FormEditProfile';
 import FormSignIn from './Forms/FormSignIn';
@@ -89,6 +92,9 @@ export {
 
   // Filters
   FeedFilters,
+
+  // Footers
+  AppFooter,
 
   // Forms
   FormEditProfile,
