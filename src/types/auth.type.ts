@@ -28,6 +28,7 @@ export type IUser = {
   followers: string[];
   following: string[];
   starredPost: string[];
+  savedPost: string[];
 };
 
 export type IRejectErrors = {
@@ -50,6 +51,7 @@ export type IRejectErrors = {
   followers?: string[];
   following?: string[];
   starredPost?: string[];
+  savedPost?: string[];
   user?: any;
   accessToken?: any;
 };

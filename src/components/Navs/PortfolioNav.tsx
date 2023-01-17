@@ -22,6 +22,11 @@ export default function PortfolioNav({ userId }) {
         matcher: `/${userId}/work`,
         url: `/${userId}/work`,
       },
+      {
+        text: 'Saved',
+        matcher: `/${userId}/saved`,
+        url: `/${userId}/saved`,
+      },
       // * - hidden for now
       // {
       //   text: 'Blogs',

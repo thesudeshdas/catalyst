@@ -129,8 +129,12 @@ export const updateUserDetails = createAsyncThunk<
       config
     );
 
+    console.log({ response });
+
     return response.data.updatedUser as IUser;
   } catch (error) {
+    console.log({ error });
+
     return rejectWithValue({
       errorStatus: error.response.status,
       errorMessage: error.message,

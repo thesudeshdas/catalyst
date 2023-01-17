@@ -25,10 +25,12 @@ import { likePost, unlikePost } from '../../features/feed/feedActions';
 import ProfileSeparator from '../Profile/ProfileSeparator';
 import CTAButton from '../CTAs/CTAButton';
 import BackdropSinglePost from '../Backdrops/Backdrop';
+import { updateUserDetails } from '../../features/auth/authActions';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
 
+  const authUser = useAppSelector((state) => state.auth.user);
   const authStatus = useAppSelector((state) => state.auth.signInStatus);
   const ctaLoading = useAppSelector((state) => state.feed.loading.ctaLoading);
   const post = useAppSelector((state) =>
@@ -40,6 +42,38 @@ export default function SinglePowst({ postId }) {
   const [showComments, setShowComments] = useState<boolean>(false);
 
   const userId = useAppSelector((state) => state.auth.user?._id);
+
+  const handleSavePost = async () => {
+    if (authStatus) {
+      const newSavedPost = [...authUser?.savedPost, postId];
+
+      await dispatch(
+        updateUserDetails({
+          userId: authUser._id,
+          toUpdate: { savedPost: newSavedPost },
+        })
+      );
+    } else {
+      dispatch(promptLogin());
+    }
+  };
+
+  const handleUnSavePost = async () => {
+    if (authStatus) {
+      const newSavedPost = authUser?.savedPost.filter(
+        (item) => item !== postId
+      );
+
+      await dispatch(
+        updateUserDetails({
+          userId: authUser._id,
+          toUpdate: { savedPost: newSavedPost },
+        })
+      );
+    } else {
+      dispatch(promptLogin());
+    }
+  };
 
   const likeHandler = async () => {
     authStatus
@@ -54,6 +88,9 @@ export default function SinglePowst({ postId }) {
   };
 
   const hasUserLiked = likes?.includes(userId);
+  const hasUserSaved = authUser.savedPost?.includes(postId);
+
+  console.log({ hasUserSaved });
 
   return (
     <Box bg='#00000080'>
@@ -90,7 +127,15 @@ export default function SinglePowst({ postId }) {
             <Spacer />
 
             {/* save & like */}
-            <Button variant='secondary'>Save</Button>
+            {hasUserSaved ? (
+              <Button variant='secondary' onClick={handleUnSavePost}>
+                Saved
+              </Button>
+            ) : (
+              <Button variant='secondary' onClick={handleSavePost}>
+                Save
+              </Button>
+            )}
 
             {hasUserLiked ? (
               <Button
