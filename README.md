@@ -103,9 +103,9 @@ The URL for `/posts` API (ex - http://localhost:8000/posts)
 
 > 🛣️ The following are the features that I'll be working on in the future.
 
-- [ ] Homepage
+- [x] Homepage
+- [x] Save Post
 - [ ] Help
-- [ ] Save Post
 - [ ] Share Post
 - [ ] Draft Post
 - [ ] Form Validation

@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { IAuthState } from '../../types/auth.type';
 import { IFeedRejectErrors, IPost } from '../../types/feed.type';
 
 export const getAllPosts = createAsyncThunk<
@@ -58,13 +59,18 @@ export const editPost = createAsyncThunk<
   IPost,
   { postId: string; toUpdate: Partial<IPost> },
   { rejectValue: IFeedRejectErrors }
->('feed/editPost', async (req, { rejectWithValue }) => {
+>('feed/editPost', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify(req.toUpdate);
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -87,13 +93,18 @@ export const likePost = createAsyncThunk<
   IPost,
   { postId: string; userId: string },
   { rejectValue: IFeedRejectErrors }
->('feed/likePost', async (req, { rejectWithValue }) => {
+>('feed/likePost', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify({ userId: req.userId });
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -116,13 +127,18 @@ export const unlikePost = createAsyncThunk<
   IPost,
   { postId: string; userId: string },
   { rejectValue: IFeedRejectErrors }
->('feed/unlikePost', async (req, { rejectWithValue }) => {
+>('feed/unlikePost', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify({ userId: req.userId });
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -145,8 +161,12 @@ export const commentPost = createAsyncThunk<
   IPost,
   { postId: string; userId: string; commentText: string },
   { rejectValue: IFeedRejectErrors }
->('feed/commentPost', async (req, { rejectWithValue }) => {
+>('feed/commentPost', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify({
       userId: req.userId,
       commentText: req.commentText,
@@ -155,6 +175,7 @@ export const commentPost = createAsyncThunk<
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -177,13 +198,18 @@ export const createPost = createAsyncThunk<
   IPost,
   Partial<IPost>,
   { rejectValue: IFeedRejectErrors }
->('feed/createPost', async (req, { rejectWithValue }) => {
+>('feed/createPost', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify(req);
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 

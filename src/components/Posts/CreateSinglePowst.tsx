@@ -43,6 +43,7 @@ import SearchStack from '../Search/SearchStack';
 import { IStack } from '../../types/auth.type';
 import BackdropSinglePost from '../Backdrops/Backdrop';
 import ProfilePicture from '../Images/ProfilePicture';
+import ProfileSeparator from '../Profile/ProfileSeparator';
 
 export default function CreateSinglePowst() {
   const dispatch = useAppDispatch();
@@ -379,21 +380,7 @@ export default function CreateSinglePowst() {
             </Stack>
           </Flex>
 
-          {/* separator */}
-          <Flex gap={4} alignItems='center'>
-            <Divider bg='black' h={1} borderRadius='lg' />
-            <Image
-              borderRadius='50%'
-              src={authUser.profilePic.src || '/images/blank_profile.png'}
-              alt={authUser.name}
-              width='200'
-              height='200'
-            />
-            <Divider bg='black' h={1} borderRadius='lg' />
-          </Flex>
-          <Center>
-            <Heading size='lg'>{authUser.name}</Heading>
-          </Center>
+          <ProfileSeparator user={authUser} />
 
           <Flex alignSelf='flex-end' gap={4}>
             <Button variant='secondary' onClick={() => dispatch(toggle(''))}>

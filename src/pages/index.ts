@@ -6,6 +6,7 @@ import PageFeed from './Feed/Feed';
 import PageHome from './Home/Home';
 import PageProfile from './Profile/Profile';
 import PagePortfolioWork from './Profile/Work';
+import PagePortfolioSaved from './Profile/Saved';
 
 export {
   PageSignIn,
@@ -15,5 +16,6 @@ export {
   PageFeed,
   PageHome,
   PageProfile,
+  PagePortfolioSaved,
   PagePortfolioWork,
 };

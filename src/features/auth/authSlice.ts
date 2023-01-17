@@ -9,10 +9,11 @@ import {
   updateUserDetails,
 } from './authActions';
 
-let localStatus, localUser;
+let localStatus, localUser, localToken;
 
 localStatus = JSON.parse(localStorage?.getItem('localStatus')) || false;
 localUser = JSON.parse(localStorage?.getItem('localUser')) || {};
+localToken = JSON.parse(localStorage?.getItem('accTkn')) || null;
 
 const initialState: IAuthState = {
   loading: false,
@@ -23,6 +24,7 @@ const initialState: IAuthState = {
     username: '',
   },
   user: localUser,
+  accessToken: localToken,
 };
 
 export const authSlice = createSlice({
@@ -32,6 +34,7 @@ export const authSlice = createSlice({
     logoutPressed: (state, action) => {
       state.signInStatus = false;
       state.user = null;
+      state.accessToken = null;
     },
   },
   extraReducers: (builder) => {
@@ -63,9 +66,12 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(signinWithCredentials.fulfilled, (state, { payload }) => {
+      console.log({ payload });
+
       state.loading = true;
       state.signInStatus = true;
-      state.user = payload;
+      state.user = payload.user;
+      state.accessToken = payload.accessToken;
     });
 
     builder.addCase(signinWithCredentials.rejected, (state, { payload }) => {

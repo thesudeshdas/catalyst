@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IRejectErrors, IUser } from '../../types/auth.type';
+
+import { IAuthState, IRejectErrors, IUser } from '../../types/auth.type';
 
 export const registerUser = createAsyncThunk<
   IUser,
@@ -37,7 +38,7 @@ export const registerUser = createAsyncThunk<
 });
 
 export const signinWithCredentials = createAsyncThunk<
-  IUser,
+  { user: IUser; accessToken: string },
   { email: string; password: string },
   { rejectValue: IRejectErrors }
 >('auth/signinWithCredentials', async (req, { rejectWithValue }) => {
@@ -62,7 +63,10 @@ export const signinWithCredentials = createAsyncThunk<
         errorMessage: response.data.message,
       });
     } else if (response.status === 200) {
-      return response.data.signedUser as IUser;
+      return {
+        user: response.data.signedUser,
+        accessToken: response.data.accessToken,
+      };
     } else {
       return null;
     }
@@ -104,11 +108,16 @@ export const updateUserDetails = createAsyncThunk<
   IUser,
   { userId: string; toUpdate: Partial<IUser> },
   { rejectValue: IRejectErrors }
->('auth/updateUserDetails', async (req, { rejectWithValue }) => {
+>('auth/updateUserDetails', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -120,8 +129,12 @@ export const updateUserDetails = createAsyncThunk<
       config
     );
 
+    console.log({ response });
+
     return response.data.updatedUser as IUser;
   } catch (error) {
+    console.log({ error });
+
     return rejectWithValue({
       errorStatus: error.response.status,
       errorMessage: error.message,
@@ -133,13 +146,18 @@ export const followUser = createAsyncThunk<
   IUser,
   { followerUserId: string; followingUserId: string },
   { rejectValue: IRejectErrors }
->('auth/followUser', async (req, { rejectWithValue }) => {
+>('auth/followUser', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify({ followerUserId: req.followerUserId });
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -149,8 +167,12 @@ export const followUser = createAsyncThunk<
       config
     );
 
+    console.log({ response });
+
     return response.data.updatedFollower as IUser;
   } catch (error) {
+    console.log({ error });
+
     return rejectWithValue({
       errorStatus: error.response.status,
       errorMessage: error.message,
@@ -162,13 +184,18 @@ export const unfollowUser = createAsyncThunk<
   IUser,
   { unfollowerUserId: string; unfollowingUserId: string },
   { rejectValue: IRejectErrors }
->('auth/unfollowUser', async (req, { rejectWithValue }) => {
+>('auth/unfollowUser', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify({ unfollowerUserId: req.unfollowerUserId });
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 

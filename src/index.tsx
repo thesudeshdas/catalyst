@@ -9,6 +9,7 @@ import {
   PageError,
   PageFeed,
   PageHome,
+  PagePortfolioSaved,
   PagePortfolioWork,
   PageProfile,
   PageSignIn,
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
             children: [
               { path: 'portfolio', element: <PageProfile /> },
               { path: 'work', element: <PagePortfolioWork /> },
+              { path: 'saved', element: <PagePortfolioSaved /> },
             ],
           },
         ],
