@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Center,
   Flex,
@@ -61,7 +62,7 @@ export default function PageHome() {
               Resume + Portfolio + Catalyst = Jobs Easy Peasy
             </Text>
 
-            <Text fontSize='lg'>
+            <Box>
               <Text display='inline' fontWeight='600'>
                 YOU
               </Text>{' '}
@@ -72,7 +73,7 @@ export default function PageHome() {
                 CATALYST
               </Text>
               , easily showcase your proof of work to your next recruiter. 🚀🚀
-            </Text>
+            </Box>
           </Stack>
         </Flex>
       </Center>
@@ -83,11 +84,8 @@ export default function PageHome() {
 
           <Text fontSize='lg' textAlign='center'>
             Here are some by our top developers.{' '}
-            <Link to='/feed'>
-              {' '}
-              <Text display='inline' fontWeight='600' color='brand.600'>
-                Check out everything else
-              </Text>
+            <Link to='/feed' className='react-router-link'>
+              Check out everything else
             </Link>
           </Text>
 
