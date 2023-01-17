@@ -108,11 +108,12 @@ export default function PageHome() {
       </Center>
 
       <Center mb={100}>
-        <Flex transform='auto'>
+        <Flex transform='auto' alignItems='center'>
           <Stack
             transform='auto'
             transformOrigin='bottom'
             translateY='45%'
+            h='fit-content'
             transition='all ease-out 300ms'
             role='group'
             onMouseEnter={() => setShowInspire(true)}
@@ -154,6 +155,7 @@ export default function PageHome() {
             transform='auto'
             transformOrigin='bottom'
             translateY='45%'
+            h='fit-content'
             transition='all ease-out 300ms'
             role='group'
             onMouseEnter={() => setShowInspired(true)}
