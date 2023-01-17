@@ -19,6 +19,9 @@ export default function CreatorDetails({
   const authStatus = useAppSelector((state) => state.auth.signInStatus);
   const authUserId = useAppSelector((state) => state.auth.user?._id);
 
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
+  const authUser = useAppSelector((state) => state.auth);
+
   const { _id: creatorId, followers, profilePic, name } = creator;
 
   const [doIFollow, setDoIFollow] = useState<boolean>(
@@ -27,6 +30,8 @@ export default function CreatorDetails({
 
   const handleFollow = async () => {
     if (authStatus) {
+      console.log('follow button se', authUser, accessToken);
+
       const response = await dispatch(
         followUser({
           followerUserId: authUserId,

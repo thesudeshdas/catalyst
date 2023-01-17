@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IRejectErrors, IUser } from '../../types/auth.type';
+
+import { store } from '../../app/store';
+import { IAuthState, IRejectErrors, IUser } from '../../types/auth.type';
+
+// const accessToken = useAppSelector((state) => state.auth.accessToken);
 
 export const registerUser = createAsyncThunk<
   IUser,
@@ -37,10 +41,10 @@ export const registerUser = createAsyncThunk<
 });
 
 export const signinWithCredentials = createAsyncThunk<
-  IUser,
+  { user: IUser; accessToken: string },
   { email: string; password: string },
   { rejectValue: IRejectErrors }
->('auth/signinWithCredentials', async (req, { rejectWithValue }) => {
+>('auth/signinWithCredentials', async (req, { getState, rejectWithValue }) => {
   try {
     const body = JSON.stringify(req);
 
@@ -62,7 +66,10 @@ export const signinWithCredentials = createAsyncThunk<
         errorMessage: response.data.message,
       });
     } else if (response.status === 200) {
-      return response.data.signedUser as IUser;
+      return {
+        user: response.data.signedUser,
+        accessToken: response.data.accessToken,
+      };
     } else {
       return null;
     }
@@ -133,13 +140,20 @@ export const followUser = createAsyncThunk<
   IUser,
   { followerUserId: string; followingUserId: string },
   { rejectValue: IRejectErrors }
->('auth/followUser', async (req, { rejectWithValue }) => {
+>('auth/followUser', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
+    console.log({ accessToken });
+
     const body = JSON.stringify({ followerUserId: req.followerUserId });
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -149,8 +163,12 @@ export const followUser = createAsyncThunk<
       config
     );
 
+    console.log({ response });
+
     return response.data.updatedFollower as IUser;
   } catch (error) {
+    console.log({ error });
+
     return rejectWithValue({
       errorStatus: error.response.status,
       errorMessage: error.message,

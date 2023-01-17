@@ -37,19 +37,26 @@ export default function FormSignIn() {
   const handleSignin = async (values) => {
     const response = await dispatch(signinWithCredentials(values));
 
+    console.log({ response });
+
     if (response.meta.requestStatus === 'fulfilled') {
       localStorage.setItem(
         'localUser',
         JSON.stringify({
-          email: response.payload.email,
-          name: response.payload.name,
-          _id: response.payload._id,
+          email: response.payload.user.email,
+          name: response.payload.user.name,
+          _id: response.payload.user._id,
         })
       );
 
       localStorage.setItem(
         'localStatus',
         JSON.stringify({ signInStatus: true })
+      );
+
+      localStorage.setItem(
+        'accTkn',
+        JSON.stringify(response.payload.accessToken)
       );
 
       navigate('/');
