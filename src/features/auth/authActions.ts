@@ -1,10 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-import { store } from '../../app/store';
 import { IAuthState, IRejectErrors, IUser } from '../../types/auth.type';
-
-// const accessToken = useAppSelector((state) => state.auth.accessToken);
 
 export const registerUser = createAsyncThunk<
   IUser,
@@ -44,7 +41,7 @@ export const signinWithCredentials = createAsyncThunk<
   { user: IUser; accessToken: string },
   { email: string; password: string },
   { rejectValue: IRejectErrors }
->('auth/signinWithCredentials', async (req, { getState, rejectWithValue }) => {
+>('auth/signinWithCredentials', async (req, { rejectWithValue }) => {
   try {
     const body = JSON.stringify(req);
 
@@ -111,11 +108,16 @@ export const updateUserDetails = createAsyncThunk<
   IUser,
   { userId: string; toUpdate: Partial<IUser> },
   { rejectValue: IRejectErrors }
->('auth/updateUserDetails', async (req, { rejectWithValue }) => {
+>('auth/updateUserDetails', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
@@ -145,8 +147,6 @@ export const followUser = createAsyncThunk<
     const {
       auth: { accessToken },
     } = getState() as { auth: IAuthState };
-
-    console.log({ accessToken });
 
     const body = JSON.stringify({ followerUserId: req.followerUserId });
 
@@ -180,13 +180,18 @@ export const unfollowUser = createAsyncThunk<
   IUser,
   { unfollowerUserId: string; unfollowingUserId: string },
   { rejectValue: IRejectErrors }
->('auth/unfollowUser', async (req, { rejectWithValue }) => {
+>('auth/unfollowUser', async (req, { getState, rejectWithValue }) => {
   try {
+    const {
+      auth: { accessToken },
+    } = getState() as { auth: IAuthState };
+
     const body = JSON.stringify({ unfollowerUserId: req.unfollowerUserId });
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: accessToken,
       },
     };
 
