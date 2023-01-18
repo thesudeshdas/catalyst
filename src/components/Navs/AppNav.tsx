@@ -22,7 +22,15 @@ export default function AppNav() {
   };
 
   return (
-    <Flex alignItems='center' p={4} gap={4} top='0' left='0' position='sticky'>
+    <Flex
+      alignItems='center'
+      p={4}
+      gap={4}
+      top='0'
+      left='0'
+      position='sticky'
+      maxW='100vw'
+    >
       <Link to='/feed'>
         <Flex
           alignItems='center'
