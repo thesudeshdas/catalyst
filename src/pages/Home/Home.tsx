@@ -57,7 +57,7 @@ export default function PageHome() {
       <Center mt={{ base: 4, lg: 24 }}>
         <Flex
           gap={{ base: 2, lg: 8 }}
-          w={{ base: '80%', md: '60%', lg: '80%', xl: '55%' }}
+          w={{ base: '80%', md: '60%', lg: '80%' }}
           alignItems='center'
           direction={{ base: 'column', lg: 'row' }}
         >
