@@ -1,4 +1,4 @@
-import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
 import { FeedFilters, FeedLoader, FeedNav, PowstCard } from '../../components';
@@ -43,13 +43,17 @@ export default function PageFeed() {
         setShowFilter={setShowFilter}
       />
 
-      {/* {feedLoading ? (
+      {feedLoading ? (
         <FeedLoader />
       ) : (
-        <>
+        <Box>
           {activeFeed === 'Discover' && (
             <Grid
-              templateColumns='repeat(3, 1fr)'
+              templateColumns={{
+                base: 'repeat(1, 1fr)',
+                lg: 'repeat(2, 1fr)',
+                xl: 'repeat(3, 1fr)',
+              }}
               my={8}
               gap={4}
               justifyItems='center'
@@ -96,7 +100,11 @@ export default function PageFeed() {
 
           {activeFeed === 'Following' && (
             <Grid
-              templateColumns='repeat(3, 1fr)'
+              templateColumns={{
+                base: 'repeat(1, 1fr)',
+                lg: 'repeat(2, 1fr)',
+                xl: 'repeat(3, 1fr)',
+              }}
               my={8}
               gap={4}
               justifyItems='center'
@@ -109,8 +117,8 @@ export default function PageFeed() {
               ))}
             </Grid>
           )}
-        </>
-      )} */}
+        </Box>
+      )}
     </>
   );
 }

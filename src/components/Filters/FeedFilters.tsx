@@ -52,7 +52,7 @@ export default function FeedFilters({
 
   return (
     <Stack
-      // display={showFilter ? 'flex' : 'none'}
+      display={showFilter ? 'flex' : 'none'}
       mt={6}
       mx={{ base: 2, md: 16, lg: 0 }}
       gap={2}
