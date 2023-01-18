@@ -57,7 +57,7 @@ export default function PageHome() {
       <Center mt={{ base: 4, lg: 24 }}>
         <Flex
           gap={{ base: 2, lg: 8 }}
-          w={{ base: '80vw', md: '60vw', lg: '80vw', xl: '55vw' }}
+          w={{ base: '80%', md: '60%', lg: '80%', xl: '55%' }}
           alignItems='center'
           direction={{ base: 'column', lg: 'row' }}
         >
@@ -101,14 +101,14 @@ export default function PageHome() {
         <Stack
           alignItems='center'
           gap={2}
-          w={{ base: '100vw', md: '60vw', lg: '80vw', xl: '55vw' }}
+          w={{ base: '100%', md: '60%', lg: '80%', xl: '55%' }}
         >
           <Heading>Proof of Work</Heading>
 
           <Text
             fontSize={{ lg: 'lg' }}
             textAlign='center'
-            w={{ base: '70vw', md: '40vw', lg: '80vw' }}
+            w={{ base: '70%', md: '40%', lg: '80%' }}
           >
             Here are some by our top developers.{' '}
             <Link to='/feed' className='react-router-link'>
