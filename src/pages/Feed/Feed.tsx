@@ -34,16 +34,16 @@ export default function PageFeed() {
         setShowFilter={setShowFilter}
       />
 
-      <FeedFilters
+      {/* <FeedFilters
         activeFeed={activeFeed}
         postsArr={posts}
         setFinalPosts={setFinalPosts}
         following={following}
         showFilter={showFilter}
         setShowFilter={setShowFilter}
-      />
+      /> */}
 
-      {feedLoading ? (
+      {/* {feedLoading ? (
         <FeedLoader />
       ) : (
         <>
@@ -110,7 +110,7 @@ export default function PageFeed() {
             </Grid>
           )}
         </>
-      )}
+      )} */}
     </>
   );
 }
