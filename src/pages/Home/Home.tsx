@@ -28,18 +28,21 @@ export default function PageHome() {
 
   return (
     <>
-      <Stack alignItems='center' gap={2}>
-        <Heading size='xl'>Built Something Amazing?</Heading>
+      <Stack alignItems='center' gap={{ lg: 2 }}>
+        <Heading>Built Something Amazing?</Heading>
 
-        <Flex gap={4}>
-          <Heading size='xl' color='brand.600'>
+        <Flex
+          gap={{ base: 2, lg: 4 }}
+          direction={{ base: 'column', lg: 'row' }}
+        >
+          <Heading color='brand.600'>
             <Link to='/feed'>SHOW OFF</Link>
           </Heading>
-          <Heading size='xl'>to the World Right Now</Heading>
+          <Heading>to the World Right Now</Heading>
         </Flex>
       </Stack>
 
-      <Center mt={8}>
+      <Center mt={{ base: 4, lg: 8 }}>
         <Link to='/feed'>
           <Button variant='primary' fontSize='lg' margin='0 auto'>
             Let's Go 🔥
@@ -47,22 +50,38 @@ export default function PageHome() {
         </Link>
       </Center>
 
-      <Center mt={24}>
-        <Flex gap={8} w='60vw' alignItems='center'>
+      <Heading mt={12} display={{ base: 'block', lg: 'none' }}>
+        How Catalyst works
+      </Heading>
+
+      <Center mt={{ base: 4, lg: 24 }}>
+        <Flex
+          gap={{ base: 2, lg: 8 }}
+          w={{ base: '80vw', md: '60vw', lg: '80vw', xl: '55vw' }}
+          alignItems='center'
+          direction={{ base: 'column', lg: 'row' }}
+        >
           <Image
             src='/images/chemistry.jpg'
-            w='30rem'
+            w={{ base: '100%', lg: '40%' }}
             objectFit='cover'
             borderRadius='2xl'
           />
 
-          <Stack gap={2}>
-            <Heading>How Catalyst Works?</Heading>
-            <Text fontSize='2xl' fontWeight='600' color='brand.600'>
+          <Stack>
+            <Heading display={{ base: 'none', lg: 'block' }} textAlign='left'>
+              How Catalyst Works?
+            </Heading>
+            <Text
+              fontSize='2xl'
+              fontWeight='600'
+              color='brand.600'
+              textAlign={{ base: 'center', lg: 'left' }}
+            >
               Resume + Portfolio + Catalyst = Jobs Easy Peasy
             </Text>
 
-            <Box>
+            <Box textAlign={{ base: 'center', lg: 'left' }}>
               <Text display='inline' fontWeight='600'>
                 YOU
               </Text>{' '}
@@ -78,19 +97,33 @@ export default function PageHome() {
         </Flex>
       </Center>
 
-      <Center mt={24}>
-        <Stack gap={2} w='60vw'>
-          <Heading textAlign='center'>Proof of Work</Heading>
+      <Center mt={{ base: 12, lg: 24 }}>
+        <Stack
+          alignItems='center'
+          gap={2}
+          w={{ base: '100vw', md: '60vw', lg: '80vw', xl: '55vw' }}
+        >
+          <Heading>Proof of Work</Heading>
 
-          <Text fontSize='lg' textAlign='center'>
+          <Text
+            fontSize={{ lg: 'lg' }}
+            textAlign='center'
+            w={{ base: '70vw', md: '40vw', lg: '80vw' }}
+          >
             Here are some by our top developers.{' '}
             <Link to='/feed' className='react-router-link'>
               Check out everything else
             </Link>
           </Text>
 
+          {/* // TODO - Change this to Carousel */}
           <Grid
-            templateColumns='repeat(3, 1fr)'
+            templateColumns={{
+              base: 'repeat(1, 1fr)',
+              lg: 'repeat(2, 1fr)',
+              xl: 'repeat(3, 1fr)',
+            }}
+            column={3}
             my={8}
             gap={4}
             justifyItems='center'
@@ -105,7 +138,8 @@ export default function PageHome() {
         </Stack>
       </Center>
 
-      <Center mb={100}>
+      {/* // TODO - create a different component for mobile */}
+      <Center mb={100} display={{ base: 'none', lg: 'flex' }}>
         <Flex transform='auto' alignItems='center'>
           <Stack
             transform='auto'

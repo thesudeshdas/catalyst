@@ -38,7 +38,11 @@ export default function Layout({ comment }: { comment?: boolean }) {
   return (
     <>
       <AppNav />
-      <Box maxW={comment ? '90vw' : '70vw'} m='2rem auto' minH='78vh'>
+      <Box
+        maxW={comment ? '90vw' : { base: '100vw', lg: '90vw', xl: '70vw' }}
+        m='2rem auto'
+        minH='78vh'
+      >
         <Outlet />
       </Box>
 

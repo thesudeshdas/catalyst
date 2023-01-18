@@ -7,10 +7,11 @@ const fonts = {
 };
 
 const breakpoints = {
-  sm: '40em',
-  md: '52em',
-  lg: '64em',
-  xl: '80em',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  '2xl': '1400px',
 };
 
 const theme = extendTheme({
@@ -60,6 +61,14 @@ const theme = extendTheme({
       },
       defaultProps: {
         variant: 'linkPrimary',
+      },
+    },
+    Heading: {
+      baseStyle: {
+        textAlign: 'center',
+      },
+      defaultProps: {
+        size: 'lg',
       },
     },
     Button: {
