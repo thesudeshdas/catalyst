@@ -51,8 +51,13 @@ export default function FeedFilters({
   }, [following, activeFeed]);
 
   return (
-    <Stack display={showFilter ? 'flex' : 'none'} mt={4} gap={2}>
-      <Box bg='bg.secondary' borderRadius='lg' p={4}>
+    <Stack
+      // display={showFilter ? 'flex' : 'none'}
+      mt={6}
+      mx={{ base: 2, md: 16, lg: 0 }}
+      gap={2}
+    >
+      <Box borderRadius='lg' p={4} border='2px solid black'>
         <SearchStack tags={stack} setTags={setStack} />
       </Box>
 

@@ -35,10 +35,10 @@ const theme = extendTheme({
     },
   },
   colors: {
-    black: '#16161D',
+    black: '#334155',
     bg: {
-      primary: 'lightpink',
-      secondary: '#EDF2F7',
+      primary: '#f8fafc',
+      secondary: '#f1f5f9',
     },
     brand: {
       100: '#e0e7ff',
@@ -93,6 +93,14 @@ const theme = extendTheme({
         variant: 'outline',
       },
     },
+  },
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: '#f8fafc',
+        color: '#334155',
+      },
+    }),
   },
 });
 
