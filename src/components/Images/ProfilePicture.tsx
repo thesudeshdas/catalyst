@@ -10,15 +10,12 @@ export default function ProfilePicture({
   size?: string;
 }) {
   return (
-    <AspectRatio w={size} ratio={1 / 1}>
-      <Image
-        src={src}
-        alt={alt}
-        objectFit='cover'
-        w='8rem'
-        h='8rem'
-        borderRadius='full'
-      />
+    <AspectRatio
+      w={{ base: `calc(${size} / 2)`, md: size }}
+      h={{ base: `calc(${size} / 2)`, md: size }}
+      ratio={1 / 1}
+    >
+      <Image src={src} alt={alt} objectFit='cover' borderRadius='full' />
     </AspectRatio>
   );
 }

@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { Box, Center, VStack } from '@chakra-ui/react';
 import AppNav from '../Navs/AppNav';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import ModalContainer from '../Modals/ModalContainer';
@@ -36,9 +36,13 @@ export default function Layout({ comment }: { comment?: boolean }) {
   }, [dispatch]);
 
   return (
-    <>
+    <VStack maxW='100vw'>
       <AppNav />
-      <Box maxW={comment ? '90vw' : '70vw'} m='2rem auto' minH='78vh'>
+      <Box
+        w={comment ? '90vw' : { base: '100vw', lg: '90vw', xl: '70vw' }}
+        m='2rem auto'
+        minH='78vh'
+      >
         <Outlet />
       </Box>
 
@@ -63,6 +67,6 @@ export default function Layout({ comment }: { comment?: boolean }) {
       )}
 
       {loginPrompt && <ModalLoginPrompt />}
-    </>
+    </VStack>
   );
 }

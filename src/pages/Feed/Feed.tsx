@@ -49,7 +49,11 @@ export default function PageFeed() {
         <>
           {activeFeed === 'Discover' && (
             <Grid
-              templateColumns='repeat(3, 1fr)'
+              templateColumns={{
+                base: 'repeat(1, 1fr)',
+                md: 'repeat(2, 1fr)',
+                xl: 'repeat(3, 1fr)',
+              }}
               my={8}
               gap={4}
               justifyItems='center'
@@ -96,7 +100,11 @@ export default function PageFeed() {
 
           {activeFeed === 'Following' && (
             <Grid
-              templateColumns='repeat(3, 1fr)'
+              templateColumns={{
+                base: 'repeat(1, 1fr)',
+                md: 'repeat(2, 1fr)',
+                xl: 'repeat(3, 1fr)',
+              }}
               my={8}
               gap={4}
               justifyItems='center'

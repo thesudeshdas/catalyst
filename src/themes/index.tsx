@@ -7,10 +7,11 @@ const fonts = {
 };
 
 const breakpoints = {
-  sm: '40em',
-  md: '52em',
-  lg: '64em',
-  xl: '80em',
+  sm: '576px',
+  md: '768px',
+  lg: '992px',
+  xl: '1200px',
+  '2xl': '1400px',
 };
 
 const theme = extendTheme({
@@ -34,10 +35,10 @@ const theme = extendTheme({
     },
   },
   colors: {
-    black: '#16161D',
+    black: '#334155',
     bg: {
-      primary: 'lightpink',
-      secondary: '#EDF2F7',
+      primary: '#f8fafc',
+      secondary: '#f1f5f9',
     },
     brand: {
       100: '#e0e7ff',
@@ -56,10 +57,21 @@ const theme = extendTheme({
   components: {
     Link: {
       variants: {
-        linkPrimary: { color: '#2200ff' },
+        linkPrimary: {
+          color: 'white',
+          bg: '#4f46e5',
+          _hover: { bg: '#3730a3' },
+          textAlign: 'center',
+          fontWeight: 600,
+        },
+      },
+    },
+    Heading: {
+      baseStyle: {
+        textAlign: 'center',
       },
       defaultProps: {
-        variant: 'linkPrimary',
+        size: 'lg',
       },
     },
     Button: {
@@ -84,6 +96,14 @@ const theme = extendTheme({
         variant: 'outline',
       },
     },
+  },
+  styles: {
+    global: (props) => ({
+      body: {
+        bg: '#f8fafc',
+        color: '#334155',
+      },
+    }),
   },
 });
 

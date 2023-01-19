@@ -8,13 +8,15 @@ import {
   Text,
   Image,
   Textarea,
+  Heading,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IComment } from '../../types/feed.type';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { commentPost } from '../../features/feed/feedActions';
+import ProfilePicture from '../Images/ProfilePicture';
 
-export default function CommentPanel({
+export default function MobileCommentPanel({
   postId,
   comments: staticComments,
 }: {
@@ -49,34 +51,17 @@ export default function CommentPanel({
   };
 
   return (
-    <Stack
-      w='25%'
-      h='fit-content'
-      position='sticky'
-      top={3}
-      borderLeft='2px solid black'
-      px={3}
-      gap={2}
-    >
+    <Stack display={{ base: 'block', lg: 'none' }}>
+      <Heading textAlign='left'>Comments</Heading>
+
       {comments?.map((comment) => (
         <Flex key={comment._id} gap={2}>
-          <Box
-            w='2rem'
-            h='2rem'
-            borderRadius='full'
-            position='relative'
-            overflow='hidden'
-          >
-            <Image
-              src={comment.user?.profilePic?.src || '/images/blank_profile.png'}
-              alt={comment.user.name}
-              objectFit='cover'
-              w='100%'
-              h='100%'
-            />
-          </Box>
+          <ProfilePicture
+            src={comment.user?.profilePic?.src}
+            alt={comment.user.name}
+          />
 
-          <Stack w='calc(100% - 3rem)' mt={1}>
+          <Stack mt={1}>
             <Text fontWeight='600'>{comment.user.name}</Text>
             <Text>{comment.text}</Text>
           </Stack>

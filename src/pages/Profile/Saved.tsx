@@ -10,16 +10,11 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppSelector } from '../../app/hooks';
 import { PortfolioPowstCard } from '../../components';
-import { useUserDetails } from '../../components/Layouts/ProfileLayout';
-import { toggle } from '../../features/modal/modalSlice';
 
 export default function PagePortfolioSaved() {
-  const dispatch = useAppDispatch();
   const posts = useAppSelector((state) => state.feed.posts);
-
-  const { user, isMyProfile } = useUserDetails();
 
   const authUser = useAppSelector((state) => state.auth.user);
 
@@ -29,9 +24,12 @@ export default function PagePortfolioSaved() {
 
   return savedPost.length > 0 ? (
     <Grid
-      templateColumns='repeat(3, 1fr)'
-      mt={8}
-      mb={8}
+      templateColumns={{
+        base: 'repeat(1, 1fr)',
+        md: 'repeat(2, 1fr)',
+        xl: 'repeat(3, 1fr)',
+      }}
+      my={8}
       gap={4}
       justifyItems='center'
       alignItems='center'
@@ -46,8 +44,8 @@ export default function PagePortfolioSaved() {
           ))}
     </Grid>
   ) : (
-    <>
-      <Stack alignItems='center' gap={2}>
+    <Center>
+      <Stack alignItems='center' gap={2} w={{ base: '80%', md: '100%' }}>
         <Heading size='lg' mt={8}>
           You have not saved anything yet
         </Heading>
@@ -59,6 +57,6 @@ export default function PagePortfolioSaved() {
           </Link>
         </Text>
       </Stack>
-    </>
+    </Center>
   );
 }

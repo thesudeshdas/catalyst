@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { FormSignIn } from '../../components';
 
@@ -8,8 +8,9 @@ export default function PageSignIn() {
   useDocumentTitle('Catalyst | Sign In');
 
   return (
-    <Flex>
+    <Flex alignItems='center' justifyContent='center' h='100vh'>
       <Image
+        display={{ base: 'none', md: 'block' }}
         src='https://images.unsplash.com/photo-1632245889029-e406faaa34cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80'
         alt='porsche'
         objectFit='cover'
@@ -17,12 +18,17 @@ export default function PageSignIn() {
         h='100vh'
       />
 
-      <Center w='60%'>
-        <Box w='30rem'>
+      <Stack w={{ base: '70%', md: '60%' }} alignItems='center'>
+        <Box w={{ base: '100%', md: '70%', lg: '30rem' }}>
           <Text position='absolute' top='2rem' right='2rem'>
-            Not a member? <Link to='/sign-up'>Sign up now</Link>
+            Not a member?{' '}
+            <Link to='/sign-up' className='react-router-link'>
+              Sign up now
+            </Link>
           </Text>
-          <Heading>Sign in to Catalyst</Heading>
+          <Heading mb={6} textAlign={{ base: 'center', md: 'left' }}>
+            Sign in to Catalyst
+          </Heading>
           {/* // ? - Hidden for now
           <Button my={6} colorScheme='blue' onClick={handleSignIn}>
             Sign in with Google
@@ -48,7 +54,7 @@ export default function PageSignIn() {
 
           <FormSignIn />
         </Box>
-      </Center>
+      </Stack>
     </Flex>
   );
 }

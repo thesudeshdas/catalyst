@@ -9,7 +9,7 @@ export default function ModalContainer({ children }) {
       right='0'
       width='100vw'
       height='100vh'
-      zIndex='2'
+      zIndex='4'
     >
       {children}
     </Box>

@@ -12,10 +12,15 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { LikeIcon } from '../../assets/icons/icons';
+import {
+  LikeIcon,
+  SaveIcon,
+  UnlikeIcon,
+  UnsaveIcon,
+} from '../../assets/icons/icons';
 
 import { promptLogin, toggle } from '../../features/modal/modalSlice';
-import CommentPanel from '../Chats/CommentPanel';
+import CommentPanel from '../Panels/CommentPanel';
 import PostNav from '../Navs/PostNav';
 import CreatorDetails from '../Profile/CreatorDetails';
 import CarouselImage from '../Carousels/CarouselImage';
@@ -26,6 +31,7 @@ import ProfileSeparator from '../Profile/ProfileSeparator';
 import CTAButton from '../CTAs/CTAButton';
 import BackdropSinglePost from '../Backdrops/Backdrop';
 import { updateUserDetails } from '../../features/auth/authActions';
+import MobileCommentPanel from '../Panels/MobileCommentPanel';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
@@ -75,13 +81,13 @@ export default function SinglePowst({ postId }) {
     }
   };
 
-  const likeHandler = async () => {
+  const handleLike = async () => {
     authStatus
       ? await dispatch(likePost({ postId: postId, userId: userId }))
       : dispatch(promptLogin());
   };
 
-  const unlikeHandler = async () => {
+  const handleUnlike = async () => {
     authStatus
       ? await dispatch(unlikePost({ postId: postId, userId: userId }))
       : dispatch(promptLogin());
@@ -90,8 +96,6 @@ export default function SinglePowst({ postId }) {
   const hasUserLiked = likes?.includes(userId);
   const hasUserSaved = authUser.savedPost?.includes(postId);
 
-  console.log({ hasUserSaved });
-
   return (
     <Box bg='#00000080'>
       <BackdropSinglePost />
@@ -99,84 +103,115 @@ export default function SinglePowst({ postId }) {
       {/* content */}
       <Flex
         direction='row-reverse'
-        bg='white'
+        bg='bg.primary'
         height='calc(100vh - 3rem)'
-        p={8}
+        p={{ base: 0, md: 4, lg: 8 }}
+        paddingTop='4'
         overflowY='scroll'
         position='relative'
-        borderTopRadius='3xl'
+        borderTopRadius={{ base: 'xl', lg: '3xl' }}
         justifyContent='center'
-        gap={4}
+        gap={{ base: 2, md: 4 }}
       >
         {showComments && (
           <CommentPanel comments={post.comments} postId={post._id} />
         )}
 
         <PostNav
+          postId={postId}
           likes={post.likes}
           comments={post.comments}
           creator={post.user}
           setShowComments={setShowComments}
         />
 
-        <Stack gap={6}>
+        <Box gap={{ base: 0, md: 4, lg: 6 }} w={{ base: '87%', md: '70%' }}>
           {/* user details */}
-          <Flex gap={4} alignItems='center'>
+          <Flex
+            gap={{ base: 1, md: 4 }}
+            alignItems={{ md: 'center' }}
+            direction={{ base: 'column', md: 'row' }}
+            mb={{ base: 0, md: 4 }}
+          >
             <CreatorDetails creator={post.user} postName={post.name} />
 
             <Spacer />
 
             {/* save & like */}
-            {hasUserSaved ? (
-              <Button variant='secondary' onClick={handleUnSavePost}>
-                Saved
-              </Button>
-            ) : (
-              <Button variant='secondary' onClick={handleSavePost}>
-                Save
-              </Button>
-            )}
+            <Flex gap={4} display={{ base: 'none', lg: 'flex' }}>
+              {hasUserSaved ? (
+                <Button
+                  leftIcon={<UnsaveIcon />}
+                  size={{ base: 'sm', lg: 'md' }}
+                  variant='secondary'
+                  onClick={handleUnSavePost}
+                >
+                  Saved
+                </Button>
+              ) : (
+                <Button
+                  leftIcon={<UnsaveIcon />}
+                  size={{ base: 'sm', lg: 'md' }}
+                  variant='secondary'
+                  onClick={handleSavePost}
+                >
+                  Save
+                </Button>
+              )}
 
-            {hasUserLiked ? (
-              <Button
-                // TODO - add outline icon for like
-                leftIcon={<LikeIcon />}
-                variant='secondary'
-                onClick={unlikeHandler}
-                isLoading={ctaLoading}
-                loadingText='Unliking...'
-              >
-                Unlike
-              </Button>
-            ) : (
-              <Button
-                leftIcon={<LikeIcon />}
-                variant='primary'
-                onClick={likeHandler}
-                isLoading={ctaLoading}
-                loadingText='Liking...'
-              >
-                Like
-              </Button>
-            )}
+              {hasUserLiked ? (
+                <Button
+                  // TODO - add outline icon for like
+                  leftIcon={<UnlikeIcon />}
+                  size={{ base: 'sm', lg: 'md' }}
+                  variant='secondary'
+                  onClick={handleUnlike}
+                  isLoading={ctaLoading}
+                  loadingText='Unliking...'
+                >
+                  Unlike
+                </Button>
+              ) : (
+                <Button
+                  leftIcon={<LikeIcon />}
+                  size={{ base: 'sm', lg: 'md' }}
+                  variant='primary'
+                  onClick={handleLike}
+                  isLoading={ctaLoading}
+                  loadingText='Liking...'
+                >
+                  Like
+                </Button>
+              )}
+            </Flex>
           </Flex>
 
           <CarouselImage images={post.images} />
 
           {/* texts & stack & links */}
-          <Flex>
-            <Text w='60%'>{post.description}</Text>
+          <Flex
+            mt={4}
+            mb={12}
+            direction={{ base: 'column', md: 'row' }}
+            gap={4}
+          >
+            <Text w={{ base: '100%', md: '60%' }}>{post.description}</Text>
 
             <Spacer />
 
-            <Stack w='25%' alignItems='flex-end' gap={2}>
-              {post.live != undefined && (
+            <Stack
+              w={{ base: '100%', md: '30%' }}
+              alignItems={{ base: 'flex-start', md: 'flex-end' }}
+              gap={2}
+            >
+              {post.live !== undefined && (
                 <Button
                   variant='primary'
                   as='a'
-                  w='70%'
+                  w={{ base: '50%', md: '70%' }}
                   href={post.live}
                   target='blank'
+                  size={{ base: 'sm', lg: 'md' }}
                 >
                   Live Preview
                 </Button>
@@ -186,9 +221,10 @@ export default function SinglePowst({ postId }) {
                 <Button
                   variant='secondary'
                   as='a'
-                  w='70%'
+                  w={{ base: '50%', md: '70%' }}
                   href={post.repo}
                   target='blank'
+                  size={{ base: 'sm', lg: 'md' }}
                 >
                   Repo Link
                 </Button>
@@ -196,18 +232,22 @@ export default function SinglePowst({ postId }) {
 
               <ListTechStack
                 stack={post.stack}
-                direction='row-reverse'
+                direction={{ base: 'row', md: 'row-reverse' }}
                 wrap='wrap'
                 gap={4}
               />
             </Stack>
           </Flex>
 
+          {showComments && (
+            <MobileCommentPanel comments={post.comments} postId={post._id} />
+          )}
+
           <ProfileSeparator user={post.user} />
 
           {/* similar */}
           {/* // TODO - Create & Add similar post component */}
-        </Stack>
+        </Box>
       </Flex>
     </Box>
   );

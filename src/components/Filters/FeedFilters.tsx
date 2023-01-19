@@ -51,16 +51,29 @@ export default function FeedFilters({
   }, [following, activeFeed]);
 
   return (
-    <Stack display={showFilter ? 'flex' : 'none'} mt={4} gap={2}>
-      <Box bg='bg.secondary' borderRadius='lg' p={4}>
+    <Stack
+      display={showFilter ? 'flex' : 'none'}
+      mt={6}
+      mx={{ base: 2, md: 16, lg: 0 }}
+      gap={2}
+    >
+      <Box borderRadius='lg' p={4} border='2px solid black'>
         <SearchStack tags={stack} setTags={setStack} />
       </Box>
 
       <Flex alignSelf='end' gap={4}>
-        <Button variant='secondary' onClick={() => setShowFilter(false)}>
+        <Button
+          variant='secondary'
+          onClick={() => setShowFilter(false)}
+          size={{ base: 'sm', lg: 'md' }}
+        >
           Cancel
         </Button>
-        <Button variant='primary' onClick={handleApplyFilter}>
+        <Button
+          variant='primary'
+          onClick={handleApplyFilter}
+          size={{ base: 'sm', lg: 'md' }}
+        >
           Apply Filters
         </Button>
       </Flex>

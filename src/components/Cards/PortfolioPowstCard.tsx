@@ -27,8 +27,8 @@ export default function PortfolioPowstCard({ details }: { details: IPost }) {
     <Box
       borderRadius='xl'
       overflow='hidden'
-      width='25rem'
-      height='20rem'
+      width={{ base: '22.5rem', lg: '25rem' }}
+      height={{ base: '18rem', lg: '20rem' }}
       position='relative'
       role='group'
       cursor='pointer'
@@ -94,10 +94,10 @@ export default function PortfolioPowstCard({ details }: { details: IPost }) {
         transform='auto'
         transformOrigin='bottom'
         transition='all ease-out 300ms'
-        translateY={'calc(100% - 2.5rem)'}
+        translateY={'calc(100% - 1.5rem)'}
         _groupHover={{ transform: 'translateY(0%)' }}
       >
-        <Heading>{name}</Heading>
+        <Heading textAlign='left'>{name}</Heading>
         <Text noOfLines={5}>{description}</Text>
       </Stack>
 

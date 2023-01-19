@@ -4,14 +4,14 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  Link,
+  Stack,
   Text,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { signinWithCredentials } from '../../features/auth/authActions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const pwdRegex =
   /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -73,48 +73,61 @@ export default function FormSignIn() {
     >
       {({ errors, touched }) => (
         <Form>
-          <Field name='email'>
-            {({ field, form }) => (
-              <FormControl
-                my={6}
-                isInvalid={Boolean(errors.email) || Boolean(authErrors?.email)}
-              >
-                <FormLabel>Username or Email address</FormLabel>
-                <Input {...field} />
-                {(errors.email && touched.email) || authErrors?.email ? (
-                  <FormErrorMessage>
-                    {errors.email || authErrors.email}
-                  </FormErrorMessage>
-                ) : null}
-              </FormControl>
-            )}
-          </Field>
+          <Stack gap={4} alignItems={{ base: 'center', md: 'flex-start' }}>
+            <Field name='email'>
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={
+                    Boolean(errors.email) || Boolean(authErrors?.email)
+                  }
+                >
+                  <FormLabel>Username or Email address</FormLabel>
+                  <Input {...field} />
+                  {(errors.email && touched.email) || authErrors?.email ? (
+                    <FormErrorMessage>
+                      {errors.email || authErrors.email}
+                    </FormErrorMessage>
+                  ) : null}
+                </FormControl>
+              )}
+            </Field>
 
-          <Field name='password'>
-            {({ field, form }) => (
-              <FormControl
-                isInvalid={
-                  Boolean(errors.password) || Boolean(authErrors?.password)
-                }
-              >
-                <FormLabel display='flex' justifyContent='space-between' mr={0}>
-                  <Text>Password</Text>
-                  <Link href='/auth/forgot-password'>Forgot password?</Link>
-                </FormLabel>
-                <Input {...field} type='password' placeholder='6+ characters' />
-                {(errors.password && touched.password) ||
-                authErrors?.password ? (
-                  <FormErrorMessage>
-                    {errors.password || authErrors.password}
-                  </FormErrorMessage>
-                ) : null}
-              </FormControl>
-            )}
-          </Field>
+            <Field name='password'>
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={
+                    Boolean(errors.password) || Boolean(authErrors?.password)
+                  }
+                >
+                  <FormLabel
+                    display='flex'
+                    justifyContent='space-between'
+                    mr={0}
+                  >
+                    <Text>Password</Text>
+                    <Link to='/forgot-password' className='react-router-link'>
+                      Forgot password?
+                    </Link>
+                  </FormLabel>
+                  <Input
+                    {...field}
+                    type='password'
+                    placeholder='6+ characters'
+                  />
+                  {(errors.password && touched.password) ||
+                  authErrors?.password ? (
+                    <FormErrorMessage>
+                      {errors.password || authErrors.password}
+                    </FormErrorMessage>
+                  ) : null}
+                </FormControl>
+              )}
+            </Field>
 
-          <Button variant='primary' mt={6} colorScheme='blue' type='submit'>
-            Sign in
-          </Button>
+            <Button variant='primary' colorScheme='blue' type='submit'>
+              Sign in
+            </Button>
+          </Stack>
         </Form>
       )}
     </Formik>

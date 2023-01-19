@@ -1,4 +1,4 @@
-import { Box, Flex, Image } from '@chakra-ui/react';
+import { AspectRatio, Box, Flex, Image, Stack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IPostPic } from '../../types/feed.type';
 
@@ -10,42 +10,40 @@ export default function CarouselImage({ images }: { images: IPostPic[] }) {
   }>(images[0]);
 
   return (
-    <>
-      <Image
-        src={curImg.src}
-        alt={curImg.alt}
-        width={1500}
-        height={750}
-        objectFit='cover'
-        borderRadius='2xl'
-      />
+    <Stack gap={4}>
+      <AspectRatio w='100%' ratio={16 / 9}>
+        <Image
+          src={curImg.src}
+          alt={curImg.alt}
+          objectFit='cover'
+          borderRadius='2xl'
+        />
+      </AspectRatio>
 
       {images.length > 1 && (
         <Flex gap={4}>
           {images.map((image) => (
-            <Box
+            <AspectRatio
               key={image._id}
               w='15rem'
-              h='10rem'
+              ratio={16 / 9}
               onClick={() => setCurImg(image)}
               cursor='pointer'
               position='relative'
-              borderRadius='2xl'
+              border={
+                curImg.src === image.src
+                  ? { base: '2px solid', md: '4px solid' }
+                  : ''
+              }
+              borderColor={{ base: 'brand.600', md: 'brand.600' }}
               overflow='hidden'
-              border={curImg.src === image.src ? '4px solid' : ''}
-              borderColor='brand.600'
+              borderRadius={{ base: 'xl', lg: '2xl' }}
             >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                objectFit='cover'
-                width='100%'
-                height='100%'
-              />
-            </Box>
+              <Image src={image.src} alt={image.alt} objectFit='cover' />
+            </AspectRatio>
           ))}
         </Flex>
       )}
-    </>
+    </Stack>
   );
 }
