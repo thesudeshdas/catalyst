@@ -6,6 +6,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Stack,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -59,71 +60,79 @@ export default function FormSignUp() {
     >
       {({ errors, touched }) => (
         <Form>
-          <Flex gap={6} mt={6}>
-            <Field name='name'>
-              {({ field, form }) => (
-                <FormControl isInvalid={Boolean(errors.name)}>
-                  <FormLabel>Name</FormLabel>
-                  <Input {...field} />
-                  {errors.name && touched.name ? (
-                    <FormErrorMessage>{errors.name}</FormErrorMessage>
-                  ) : null}
-                </FormControl>
-              )}
-            </Field>
+          <Stack gap={4} alignItems={{ base: 'center', md: 'flex-start' }}>
+            <Flex gap={6}>
+              <Field name='name'>
+                {({ field, form }) => (
+                  <FormControl isInvalid={Boolean(errors.name)}>
+                    <FormLabel>Name</FormLabel>
+                    <Input {...field} />
+                    {errors.name && touched.name ? (
+                      <FormErrorMessage>{errors.name}</FormErrorMessage>
+                    ) : null}
+                  </FormControl>
+                )}
+              </Field>
 
-            <Field name='username'>
+              <Field name='username'>
+                {({ field, form }) => (
+                  <FormControl
+                    isInvalid={
+                      Boolean(errors.username) || Boolean(userErrors?.username)
+                    }
+                  >
+                    <FormLabel>Username</FormLabel>
+                    <Input {...field} />
+                    {(errors.username && touched.username) ||
+                    userErrors?.username ? (
+                      <FormErrorMessage>
+                        {errors.username || userErrors.username}
+                      </FormErrorMessage>
+                    ) : null}
+                  </FormControl>
+                )}
+              </Field>
+            </Flex>
+
+            <Field name='email'>
               {({ field, form }) => (
                 <FormControl
+                  my={6}
                   isInvalid={
-                    Boolean(errors.username) || Boolean(userErrors?.username)
+                    Boolean(errors.email) || Boolean(userErrors?.email)
                   }
                 >
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Email address</FormLabel>
                   <Input {...field} />
-                  {(errors.username && touched.username) ||
-                  userErrors?.username ? (
+                  {(errors.email && touched.email) || userErrors?.email ? (
                     <FormErrorMessage>
-                      {errors.username || userErrors.username}
+                      {errors.email || userErrors.email}
                     </FormErrorMessage>
                   ) : null}
                 </FormControl>
               )}
             </Field>
-          </Flex>
 
-          <Field name='email'>
-            {({ field, form }) => (
-              <FormControl
-                my={6}
-                isInvalid={Boolean(errors.email) || Boolean(userErrors?.email)}
-              >
-                <FormLabel>Email address</FormLabel>
-                <Input {...field} />
-                {(errors.email && touched.email) || userErrors?.email ? (
-                  <FormErrorMessage>
-                    {errors.email || userErrors.email}
-                  </FormErrorMessage>
-                ) : null}
-              </FormControl>
-            )}
-          </Field>
+            <Field name='password'>
+              {({ field, form }) => (
+                <FormControl isInvalid={Boolean(errors.password)}>
+                  <FormLabel>Password</FormLabel>
+                  <Input
+                    {...field}
+                    type='password'
+                    placeholder='6+ characters'
+                  />
+                  {errors.password && touched.password ? (
+                    <FormErrorMessage>{errors.password}</FormErrorMessage>
+                  ) : null}
+                </FormControl>
+              )}
+            </Field>
 
-          <Field name='password'>
-            {({ field, form }) => (
-              <FormControl isInvalid={Boolean(errors.password)}>
-                <FormLabel>Password</FormLabel>
-                <Input {...field} type='password' placeholder='6+ characters' />
-                {errors.password && touched.password ? (
-                  <FormErrorMessage>{errors.password}</FormErrorMessage>
-                ) : null}
-              </FormControl>
-            )}
-          </Field>
-
-          <Button variant='primary' mt={6} colorScheme='blue' type='submit'>
-            Sign up
-          </Button>
+            <Button variant='primary' colorScheme='blue' type='submit'>
+              Sign up
+            </Button>
+          </Stack>
         </Form>
       )}
     </Formik>
