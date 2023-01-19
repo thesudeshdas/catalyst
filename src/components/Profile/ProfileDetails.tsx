@@ -94,6 +94,10 @@ export default function ProfileDetails({ user }) {
     )
   );
 
+  const handleInputRouting = () => {
+    navigate('/edit-profile');
+  };
+
   return (
     <Flex
       mb={8}
@@ -153,15 +157,14 @@ export default function ProfileDetails({ user }) {
                   {user?.title}
                 </Text>
               ) : (
-                // <Link to='/edit-profile'>
                 <Input
+                  onClick={handleInputRouting}
                   w={{ base: '43%', md: 'auto' }}
                   fontSize={{ base: 'sm', md: 'md' }}
                   variant='flushed'
                   isReadOnly
                   placeholder="What's your job title? 👷"
                 />
-                // </Link>
               )}
 
               {user?.title && user?.company && (
@@ -175,15 +178,14 @@ export default function ProfileDetails({ user }) {
                   {user?.company}
                 </Text>
               ) : (
-                // <Link to='/edit-profile'>
                 <Input
+                  onClick={handleInputRouting}
                   w={{ base: '43%', md: 'auto' }}
                   fontSize={{ base: 'sm', md: 'md' }}
                   variant='flushed'
                   isReadOnly
                   placeholder='Where do you work? 🏢'
                 />
-                // </Link>
               )}
             </Flex>
           ) : (
@@ -209,15 +211,14 @@ export default function ProfileDetails({ user }) {
               {user?.tags?.length > 0 ? (
                 user.tags?.map((tag) => <ProfileTagPill key={tag} tag={tag} />)
               ) : (
-                // <Link to='/edit-profile'>
                 <Input
+                  onClick={handleInputRouting}
                   w={{ base: '43%', md: 'auto' }}
                   fontSize={{ base: 'sm', md: 'md' }}
                   isReadOnly
                   variant='flushed'
                   placeholder='Add your tags 🚩'
                 />
-                // </Link>
               )}
             </Flex>
           ) : (
