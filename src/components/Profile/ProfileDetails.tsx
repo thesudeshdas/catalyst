@@ -15,7 +15,9 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { socialIcons } from '../../data/portfolio/portfolio.data';
+import { followUser, unfollowUser } from '../../features/auth/authActions';
 import { logoutPressed } from '../../features/auth/authSlice';
+import { promptLogin } from '../../features/modal/modalSlice';
 import ProfileTagPill from '../Pills/ProfileTagPill';
 
 // import ProfileTagPill from '../Pills/ProfileTagPill';
@@ -29,6 +31,10 @@ export default function ProfileDetails({ user }) {
 
   const dispatch = useAppDispatch();
 
+  const authStatus = useAppSelector((state) => state.auth.signInStatus);
+  const authUserId = useAppSelector((state) => state.auth.user?._id);
+
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
   const authUser = useAppSelector((state) => state.auth.user);
   const authState = useAppSelector((state) => state.auth.signInStatus);
 
@@ -49,17 +55,31 @@ export default function ProfileDetails({ user }) {
   // const isMyProfile = user._id == session?.user.id;
 
   const handleFollow = async () => {
-    // const response = await followUser(session?.user.id, user._id);
-    // if (response) {
-    //   setDoIFollow((prev) => !prev);
-    // }
+    if (authStatus) {
+      console.log('follow button se', authUser, accessToken);
+
+      const response = await dispatch(
+        followUser({
+          followerUserId: authUserId,
+          followingUserId: user._id,
+        })
+      );
+
+      response && setDoIFollow((prev) => !prev);
+    } else {
+      dispatch(promptLogin());
+    }
   };
 
   const unhandleFollow = async () => {
-    // const response = await unfollowUser(session?.user.id, user._id);
-    // if (response) {
-    //   setDoIFollow((prev) => !prev);
-    // }
+    const response = await dispatch(
+      unfollowUser({
+        unfollowerUserId: authUserId,
+        unfollowingUserId: user._id,
+      })
+    );
+
+    response && setDoIFollow((prev) => !prev);
   };
 
   // useEffect(() => {
@@ -93,21 +113,11 @@ export default function ProfileDetails({ user }) {
               </Button>
             </Link>
           ) : doIFollow ? (
-            <Button
-              size='sm'
-              color='white'
-              bg='brand.600'
-              onClick={unhandleFollow}
-            >
+            <Button variant='secondary' size='sm' onClick={unhandleFollow}>
               Unfollow
             </Button>
           ) : (
-            <Button
-              size='sm'
-              color='white'
-              bg='brand.600'
-              onClick={handleFollow}
-            >
+            <Button variant='primary' size='sm' onClick={handleFollow}>
               Follow
             </Button>
           )}
