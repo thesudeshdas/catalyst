@@ -13,8 +13,8 @@ export default function PowstCard({ details }: { details: IPost }) {
     <Box
       borderRadius='xl'
       overflow='hidden'
-      width='25rem'
-      height='20rem'
+      width={{ base: '22.5rem', lg: '25rem' }}
+      height={{ base: '18rem', lg: '20rem' }}
       position='relative'
       role='group'
       cursor='pointer'

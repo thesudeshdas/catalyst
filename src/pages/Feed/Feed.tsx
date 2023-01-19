@@ -46,12 +46,12 @@ export default function PageFeed() {
       {feedLoading ? (
         <FeedLoader />
       ) : (
-        <Box>
+        <>
           {activeFeed === 'Discover' && (
             <Grid
               templateColumns={{
                 base: 'repeat(1, 1fr)',
-                lg: 'repeat(2, 1fr)',
+                md: 'repeat(2, 1fr)',
                 xl: 'repeat(3, 1fr)',
               }}
               my={8}
@@ -102,7 +102,7 @@ export default function PageFeed() {
             <Grid
               templateColumns={{
                 base: 'repeat(1, 1fr)',
-                lg: 'repeat(2, 1fr)',
+                md: 'repeat(2, 1fr)',
                 xl: 'repeat(3, 1fr)',
               }}
               my={8}
@@ -117,7 +117,7 @@ export default function PageFeed() {
               ))}
             </Grid>
           )}
-        </Box>
+        </>
       )}
     </>
   );

@@ -29,7 +29,9 @@ export default function AppNav() {
       top='0'
       left='0'
       position='sticky'
+      w='100%'
       maxW='100vw'
+      zIndex={3}
     >
       <Link to='/feed'>
         <Flex
