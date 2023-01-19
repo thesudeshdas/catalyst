@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
+import { Grid, GridItem, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { useEffect, useState } from 'react';
 import { FeedFilters, FeedLoader, FeedNav, PowstCard } from '../../components';
