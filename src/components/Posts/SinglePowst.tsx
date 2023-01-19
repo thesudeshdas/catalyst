@@ -12,7 +12,12 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { LikeIcon } from '../../assets/icons/icons';
+import {
+  LikeIcon,
+  SaveIcon,
+  UnlikeIcon,
+  UnsaveIcon,
+} from '../../assets/icons/icons';
 
 import { promptLogin, toggle } from '../../features/modal/modalSlice';
 import CommentPanel from '../Panels/CommentPanel';
@@ -76,13 +81,13 @@ export default function SinglePowst({ postId }) {
     }
   };
 
-  const likeHandler = async () => {
+  const handleLike = async () => {
     authStatus
       ? await dispatch(likePost({ postId: postId, userId: userId }))
       : dispatch(promptLogin());
   };
 
-  const unlikeHandler = async () => {
+  const handleUnlike = async () => {
     authStatus
       ? await dispatch(unlikePost({ postId: postId, userId: userId }))
       : dispatch(promptLogin());
@@ -113,6 +118,7 @@ export default function SinglePowst({ postId }) {
         )}
 
         <PostNav
+          postId={postId}
           likes={post.likes}
           comments={post.comments}
           creator={post.user}
@@ -135,6 +141,7 @@ export default function SinglePowst({ postId }) {
             <Flex gap={4} display={{ base: 'none', lg: 'flex' }}>
               {hasUserSaved ? (
                 <Button
+                  leftIcon={<UnsaveIcon />}
                   size={{ base: 'sm', lg: 'md' }}
                   variant='secondary'
                   onClick={handleUnSavePost}
@@ -143,6 +150,7 @@ export default function SinglePowst({ postId }) {
                 </Button>
               ) : (
                 <Button
+                  leftIcon={<UnsaveIcon />}
                   size={{ base: 'sm', lg: 'md' }}
                   variant='secondary'
                   onClick={handleSavePost}
@@ -154,10 +162,10 @@ export default function SinglePowst({ postId }) {
               {hasUserLiked ? (
                 <Button
                   // TODO - add outline icon for like
-                  leftIcon={<LikeIcon />}
+                  leftIcon={<UnlikeIcon />}
                   size={{ base: 'sm', lg: 'md' }}
                   variant='secondary'
-                  onClick={unlikeHandler}
+                  onClick={handleUnlike}
                   isLoading={ctaLoading}
                   loadingText='Unliking...'
                 >
@@ -168,7 +176,7 @@ export default function SinglePowst({ postId }) {
                   leftIcon={<LikeIcon />}
                   size={{ base: 'sm', lg: 'md' }}
                   variant='primary'
-                  onClick={likeHandler}
+                  onClick={handleLike}
                   isLoading={ctaLoading}
                   loadingText='Liking...'
                 >
