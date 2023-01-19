@@ -1,5 +1,13 @@
 import { EditIcon } from '@chakra-ui/icons';
-import { Button, Flex, Heading, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  IconButton,
+  Stack,
+  VStack,
+} from '@chakra-ui/react';
 import { useState } from 'react';
 import { IUser } from '../../types/auth.type';
 import { Link } from 'react-router-dom';
@@ -59,13 +67,15 @@ export default function CreatorDetails({
   const isMyProfile: boolean = authUserId === creatorId;
 
   return (
-    <Flex gap={4} alignItems='center'>
-      <ProfilePicture src={profilePic?.src} alt={name} />
+    <Flex gap={4} alignItems='flex-start'>
+      <Box display={{ base: 'none', md: 'block' }}>
+        <ProfilePicture src={profilePic?.src} alt={name} />
+      </Box>
 
-      <Stack>
-        <Heading size='lg'>{postName}</Heading>
+      <Box>
+        <Heading textAlign='left'>{postName}</Heading>
 
-        <Flex gap={2} alignItems='center '>
+        <Flex gap={0} alignItems='center' mt={{ base: 0, lg: 2 }}>
           <Link
             to={`/${creatorId}/portfolio`}
             onClick={() => dispatch(toggle(''))}
@@ -77,9 +87,22 @@ export default function CreatorDetails({
 
           {isMyProfile ? (
             <Link to='/edit-profile'>
-              <Button variant='secondary' size='sm' rightIcon={<EditIcon />}>
+              <Button
+                display={{ base: 'none', md: 'block' }}
+                variant='secondary'
+                size='sm'
+                rightIcon={<EditIcon />}
+              >
                 Edit Profile
               </Button>
+
+              <IconButton
+                display={{ base: 'block', md: 'none' }}
+                size='xs'
+                icon={<EditIcon />}
+                variant='secondary'
+                aria-label='edit'
+              ></IconButton>
             </Link>
           ) : doIFollow ? (
             <Button variant='secondary' size='sm' onClick={unhandleFollow}>
@@ -91,7 +114,7 @@ export default function CreatorDetails({
             </Button>
           )}
         </Flex>
-      </Stack>
+      </Box>
     </Flex>
   );
 }

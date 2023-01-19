@@ -10,7 +10,7 @@ export default function ProfilePicture({
   size?: string;
 }) {
   return (
-    <AspectRatio w={size} ratio={1 / 1}>
+    <AspectRatio w={{ base: `calc(${size} / 2)`, md: size }} ratio={1 / 1}>
       <Image
         src={src}
         alt={alt}

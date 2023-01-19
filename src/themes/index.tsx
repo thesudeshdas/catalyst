@@ -57,7 +57,13 @@ const theme = extendTheme({
   components: {
     Link: {
       variants: {
-        linkPrimary: { color: '#2200ff' },
+        linkPrimary: {
+          color: 'white',
+          bg: '#4f46e5',
+          _hover: { bg: '#3730a3' },
+          textAlign: 'center',
+          fontWeight: 600,
+        },
       },
       defaultProps: {
         variant: 'linkPrimary',

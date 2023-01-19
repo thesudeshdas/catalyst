@@ -25,29 +25,31 @@ export default function PostNav({
     <Stack
       gap={2}
       position='sticky'
-      top={3}
-      w='4rem'
+      top='0'
       h='fit-content'
       alignItems='center'
     >
       <ProfilePicture
         src={creator.profilePic?.src}
         alt={creator.name}
-        size='3rem'
+        // size='3rem'
       />
 
       <Box position='relative'>
         <IconButton
-          aria-label='like'
-          icon={<CommentIcon boxSize={6} />}
+          size={{ base: 'sm', md: 'md' }}
+          w={{ base: '1rem', md: 4 }}
+          aria-label='comment'
+          icon={<CommentIcon boxSize={{ base: 4, md: 6 }} />}
           onClick={() => setShowComments((prev) => !prev)}
         />
         {comments?.length > 0 && (
           <Text
+            fontSize={{ base: 'xs', md: 'md' }}
             position='absolute'
             top='-30%'
             right='-30%'
-            bg='white'
+            bg='bg.primary'
             px={2}
             borderRadius='full'
           >
@@ -55,21 +57,39 @@ export default function PostNav({
           </Text>
         )}
       </Box>
-      <IconButton aria-label='comment' icon={<ShareIcon boxSize={6} />} />
       <IconButton
+        size={{ base: 'sm', md: 'md' }}
+        w={{ base: '1rem', md: 4 }}
         aria-label='comment'
-        icon={<InfoIcon boxSize={6} color='black' />}
+        icon={<ShareIcon boxSize={{ base: 4, md: 6 }} />}
       />
-      <IconButton aria-label='comment' icon={<SaveIcon boxSize={6} />} />
+      <IconButton
+        size={{ base: 'sm', md: 'md' }}
+        w={{ base: '1rem', md: 4 }}
+        aria-label='comment'
+        icon={<InfoIcon boxSize={{ base: 4, md: 6 }} />}
+      />
+      <IconButton
+        size={{ base: 'sm', md: 'md' }}
+        w={{ base: '1rem', md: 4 }}
+        aria-label='comment'
+        icon={<SaveIcon boxSize={{ base: 4, md: 6 }} />}
+      />
 
       <Box position='relative'>
-        <IconButton aria-label='like' icon={<LikeIcon boxSize={6} />} />
+        <IconButton
+          size={{ base: 'sm', md: 'md' }}
+          w={{ base: '1rem', md: 4 }}
+          aria-label='like'
+          icon={<LikeIcon boxSize={{ base: 4, md: 6 }} />}
+        />
         {likes?.length > 0 && (
           <Text
+            fontSize={{ base: 'xs', md: 'md' }}
             position='absolute'
             top='-30%'
             right='-30%'
-            bg='white'
+            bg='bg.primary'
             px={2}
             borderRadius='full'
           >
