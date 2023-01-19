@@ -65,9 +65,6 @@ const theme = extendTheme({
           fontWeight: 600,
         },
       },
-      defaultProps: {
-        variant: 'linkPrimary',
-      },
     },
     Heading: {
       baseStyle: {
