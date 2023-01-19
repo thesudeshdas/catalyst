@@ -102,7 +102,7 @@ export default function CreatorDetails({
                 icon={<EditIcon />}
                 variant='secondary'
                 aria-label='edit'
-              ></IconButton>
+              />
             </Link>
           ) : doIFollow ? (
             <Button variant='secondary' size='sm' onClick={unhandleFollow}>
