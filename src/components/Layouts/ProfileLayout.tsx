@@ -93,7 +93,7 @@ export default function ProfileLayout() {
 
       <PortfolioNav userId={profileId} />
 
-      {/* <Outlet
+      <Outlet
         context={{
           user,
           isMyProfile,
@@ -101,7 +101,7 @@ export default function ProfileLayout() {
           handleStarPost,
           handleUnstarPost,
         }}
-      /> */}
+      />
     </>
   );
 }

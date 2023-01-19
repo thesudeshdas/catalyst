@@ -1,4 +1,12 @@
-import { Flex, Heading, Stack, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  Heading,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
 import { ListTechStack, PortfolioPowstCard } from '../../components';
 import { useAppSelector } from '../../app/hooks';
@@ -24,18 +32,28 @@ export default function PagePortfolio() {
     ].slice(0, 3));
 
   return (
-    <>
+    <Box p={2}>
       {/* Bio & tech stack */}
-      <Flex justifyContent='space-between' my={8} alignItems='start'>
+      <Flex
+        justifyContent='space-between'
+        my={4}
+        alignItems='start'
+        direction={{ base: 'column-reverse', md: 'row' }}
+        gap={4}
+      >
         {user?.bio && (
-          <Text w='50%' fontSize='lg'>
-            {user?.bio}
+          <Text w={{ base: '100%', md: '60%', xl: '50%' }} fontSize='lg'>
+            {user?.bio} Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Necessitatibus perferendis accusantium omnis ea consectetur
+            dignissimos nostrum atque doloribus quod, voluptate, nobis
+            aspernatur delectus! Eveniet, illo nesciunt. Nobis iusto tenetur
+            tempora.
           </Text>
         )}
         <ListTechStack
           stack={user?.stack}
-          w='22rem'
-          direction='row-reverse'
+          w={{ base: '100%', md: '40%', lg: '35%' }}
+          direction={{ base: 'row', md: 'row-reverse' }}
           wrap='wrap'
           gap={4}
         />
@@ -43,16 +61,30 @@ export default function PagePortfolio() {
 
       {/* Featured work */}
       <Stack mb={8} gap={2}>
-        <Heading size='md'>Featured Work</Heading>
+        <Heading size='md' textAlign={{ base: 'center', md: 'left' }}>
+          Featured Work
+        </Heading>
 
         {posts && posts.length > 0 && (
-          <Wrap justify='space-between'>
-            {featuredPost.map((post) => (
-              <WrapItem key={post._id}>
-                <PortfolioPowstCard details={post} />
-              </WrapItem>
-            ))}
-          </Wrap>
+          <Grid
+            templateColumns={{
+              base: 'repeat(1, 1fr)',
+              md: 'repeat(2, 1fr)',
+              xl: 'repeat(3, 1fr)',
+            }}
+            my={8}
+            gap={4}
+            justifyItems='center'
+            alignItems='center'
+          >
+            {featuredPost.map((post) => {
+              return (
+                <GridItem key={post._id}>
+                  <PortfolioPowstCard details={post} />
+                </GridItem>
+              );
+            })}
+          </Grid>
         )}
       </Stack>
 
@@ -74,6 +106,6 @@ export default function PagePortfolio() {
           </WrapItem>
         </Wrap>
       </Stack> */}
-    </>
+    </Box>
   );
 }
