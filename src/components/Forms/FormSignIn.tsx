@@ -4,7 +4,6 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
-  Link,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -12,7 +11,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { signinWithCredentials } from '../../features/auth/authActions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const pwdRegex =
   /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -106,7 +105,9 @@ export default function FormSignIn() {
                     mr={0}
                   >
                     <Text>Password</Text>
-                    <Link href='/auth/forgot-password'>Forgot password?</Link>
+                    <Link to='/forgot-password' className='react-router-link'>
+                      Forgot password?
+                    </Link>
                   </FormLabel>
                   <Input
                     {...field}
