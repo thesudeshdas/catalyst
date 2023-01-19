@@ -13,9 +13,12 @@ export default function PagePortfolioWork() {
 
   return (
     <Grid
-      templateColumns='repeat(3, 1fr)'
-      mt={8}
-      mb={8}
+      templateColumns={{
+        base: 'repeat(1, 1fr)',
+        md: 'repeat(2, 1fr)',
+        xl: 'repeat(3, 1fr)',
+      }}
+      my={8}
       gap={4}
       justifyItems='center'
       alignItems='center'
