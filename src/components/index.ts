@@ -9,9 +9,6 @@ import PowstCard from './Cards/PowstCard';
 // Carousels
 import CarouselImage from './Carousels/CarouselImage';
 
-// Chats
-import CommentPanel from './Chats/CommentPanel';
-
 // CTAs
 import CTAButton from './CTAs/CTAButton';
 
@@ -55,6 +52,10 @@ import FeedNav from './Navs/FeedNav';
 import PortfolioNav from './Navs/PortfolioNav';
 import PostNav from './Navs/PostNav';
 
+// Panels
+import CommentPanel from './Panels/CommentPanel';
+import MobileCommentPanel from './Panels/MobileCommentPanel';
+
 // Pills
 import PowstTagPill from './Pills/PowstTagPill';
 import ProfileTagPill from './Pills/ProfileTagPill';
@@ -83,9 +84,6 @@ export {
 
   // Carousels
   CarouselImage,
-
-  // Chats
-  CommentPanel,
 
   // CTAs
   CTAButton,
@@ -129,6 +127,10 @@ export {
   FeedNav,
   PortfolioNav,
   PostNav,
+
+  // Panels
+  CommentPanel,
+  MobileCommentPanel,
 
   // Pills
   PowstTagPill,

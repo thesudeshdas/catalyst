@@ -15,7 +15,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { LikeIcon } from '../../assets/icons/icons';
 
 import { promptLogin, toggle } from '../../features/modal/modalSlice';
-import CommentPanel from '../Chats/CommentPanel';
+import CommentPanel from '../Panels/CommentPanel';
 import PostNav from '../Navs/PostNav';
 import CreatorDetails from '../Profile/CreatorDetails';
 import CarouselImage from '../Carousels/CarouselImage';
@@ -26,6 +26,7 @@ import ProfileSeparator from '../Profile/ProfileSeparator';
 import CTAButton from '../CTAs/CTAButton';
 import BackdropSinglePost from '../Backdrops/Backdrop';
 import { updateUserDetails } from '../../features/auth/authActions';
+import MobileCommentPanel from '../Panels/MobileCommentPanel';
 
 export default function SinglePowst({ postId }) {
   const dispatch = useAppDispatch();
@@ -107,9 +108,9 @@ export default function SinglePowst({ postId }) {
         justifyContent='center'
         gap={{ base: 2, md: 4 }}
       >
-        {/* {showComments && (
+        {showComments && (
           <CommentPanel comments={post.comments} postId={post._id} />
-        )} */}
+        )}
 
         <PostNav
           likes={post.likes}
@@ -186,12 +187,7 @@ export default function SinglePowst({ postId }) {
             direction={{ base: 'column', md: 'row' }}
             gap={4}
           >
-            <Text w={{ base: '100%', md: '60%' }}>
-              {post.description} Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Maiores pariatur dolores dolore molestiae
-              cupiditate ducimus rerum quod eos dolorem similique! Autem magni
-              explicabo quia quam atque laudantium, perferendis aut obcaecati.{' '}
-            </Text>
+            <Text w={{ base: '100%', md: '60%' }}>{post.description}</Text>
 
             <Spacer />
 
@@ -234,6 +230,10 @@ export default function SinglePowst({ postId }) {
               />
             </Stack>
           </Flex>
+
+          {showComments && (
+            <MobileCommentPanel comments={post.comments} postId={post._id} />
+          )}
 
           <ProfileSeparator user={post.user} />
 

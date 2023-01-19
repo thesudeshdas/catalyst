@@ -27,7 +27,7 @@ import {
 } from '../../assets/icons/icons';
 import { techStackIcons } from '../../data/portfolio/portfolio.data';
 import { toggle } from '../../features/modal/modalSlice';
-import CommentPanel from '../Chats/CommentPanel';
+import CommentPanel from '../Panels/CommentPanel';
 import PostNav from '../Navs/PostNav';
 import CreatorDetails from '../Profile/CreatorDetails';
 import CarouselImage from '../Carousels/CarouselImage';

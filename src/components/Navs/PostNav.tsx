@@ -29,11 +29,7 @@ export default function PostNav({
       h='fit-content'
       alignItems='center'
     >
-      <ProfilePicture
-        src={creator.profilePic?.src}
-        alt={creator.name}
-        // size='3rem'
-      />
+      <ProfilePicture src={creator.profilePic?.src} alt={creator.name} />
 
       <Box position='relative'>
         <IconButton
