@@ -43,11 +43,7 @@ export default function PagePortfolio() {
       >
         {user?.bio && (
           <Text w={{ base: '100%', md: '60%', xl: '50%' }} fontSize='lg'>
-            {user?.bio} Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Necessitatibus perferendis accusantium omnis ea consectetur
-            dignissimos nostrum atque doloribus quod, voluptate, nobis
-            aspernatur delectus! Eveniet, illo nesciunt. Nobis iusto tenetur
-            tempora.
+            {user?.bio}
           </Text>
         )}
         <ListTechStack

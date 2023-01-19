@@ -7,6 +7,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
 
 export type IPortfolioNavItem = { text: string; matcher: string; url: string };
 
@@ -17,40 +18,57 @@ export type IPortfolioNav = {
 export default function PortfolioNav({ userId }) {
   const location = useLocation();
 
+  const authUser = useAppSelector((state) => state.auth.user);
+
+  const isMyProfile = authUser._id === userId;
+
   const portfolioNav: IPortfolioNav = {
-    items: [
-      {
-        text: 'Portfolio',
-        matcher: `/${userId}/portfolio`,
-        url: `/${userId}/portfolio`,
-      },
-      {
-        text: 'Work',
-        matcher: `/${userId}/work`,
-        url: `/${userId}/work`,
-      },
-      {
-        text: 'Saved',
-        matcher: `/${userId}/saved`,
-        url: `/${userId}/saved`,
-      },
-      // * - hidden for now
-      // {
-      //   text: 'Blogs',
-      //   matcher: '/${userId}/blogs',
-      //   url: `/${userId}/blogs`,
-      // },
-      // {
-      //   text: 'Experience',
-      //   matcher: '/${userId}/experience',
-      //   url: `/${userId}/experience`,
-      // },
-      // {
-      //   text: 'About',
-      //   matcher: '/${userId}/about',
-      //   url: `/${userId}/about`,
-      // },
-    ],
+    items: isMyProfile
+      ? [
+          {
+            text: 'Portfolio',
+            matcher: `/${userId}/portfolio`,
+            url: `/${userId}/portfolio`,
+          },
+          {
+            text: 'Work',
+            matcher: `/${userId}/work`,
+            url: `/${userId}/work`,
+          },
+          {
+            text: 'Saved',
+            matcher: `/${userId}/saved`,
+            url: `/${userId}/saved`,
+          },
+          // * - hidden for now
+          // {
+          //   text: 'Blogs',
+          //   matcher: '/${userId}/blogs',
+          //   url: `/${userId}/blogs`,
+          // },
+          // {
+          //   text: 'Experience',
+          //   matcher: '/${userId}/experience',
+          //   url: `/${userId}/experience`,
+          // },
+          // {
+          //   text: 'About',
+          //   matcher: '/${userId}/about',
+          //   url: `/${userId}/about`,
+          // },
+        ]
+      : [
+          {
+            text: 'Portfolio',
+            matcher: `/${userId}/portfolio`,
+            url: `/${userId}/portfolio`,
+          },
+          {
+            text: 'Work',
+            matcher: `/${userId}/work`,
+            url: `/${userId}/work`,
+          },
+        ],
   };
 
   return (
