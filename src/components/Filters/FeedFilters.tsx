@@ -62,10 +62,18 @@ export default function FeedFilters({
       </Box>
 
       <Flex alignSelf='end' gap={4}>
-        <Button variant='secondary' onClick={() => setShowFilter(false)}>
+        <Button
+          variant='secondary'
+          onClick={() => setShowFilter(false)}
+          size={{ base: 'sm', lg: 'md' }}
+        >
           Cancel
         </Button>
-        <Button variant='primary' onClick={handleApplyFilter}>
+        <Button
+          variant='primary'
+          onClick={handleApplyFilter}
+          size={{ base: 'sm', lg: 'md' }}
+        >
           Apply Filters
         </Button>
       </Flex>
