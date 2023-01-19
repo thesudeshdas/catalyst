@@ -39,6 +39,7 @@ export default function ProfileDetails({ user }) {
   const handleLogout = () => {
     localStorage.removeItem('localUser');
     localStorage.removeItem('localStatus');
+    localStorage.removeItem('accTkn');
 
     dispatch(logoutPressed({}));
 
