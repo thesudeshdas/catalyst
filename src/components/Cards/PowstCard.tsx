@@ -48,10 +48,10 @@ export default function PowstCard({ details }: { details: IPost }) {
         transform='auto'
         transformOrigin='bottom'
         transition='all ease-out 300ms'
-        translateY={'calc(100% - 2.5rem)'}
+        translateY={'calc(100% - 1.5rem)'}
         _groupHover={{ transform: 'translateY(0%)' }}
       >
-        <Heading>{name}</Heading>
+        <Heading textAlign='left'>{name}</Heading>
         <Text noOfLines={5}>{description}</Text>
       </Stack>
 
