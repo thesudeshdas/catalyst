@@ -52,7 +52,7 @@ export default function ModalEditBio() {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent w='95%'>
           <ModalHeader>Edit your bio</ModalHeader>
           <ModalCloseButton />
 
@@ -79,10 +79,19 @@ export default function ModalEditBio() {
             </Center>
           </ModalBody>
           <ModalFooter>
-            <Button variant='secondary' mr={3} onClick={onClose}>
+            <Button
+              variant='secondary'
+              mr={3}
+              onClick={onClose}
+              size={{ base: 'sm', lg: 'md' }}
+            >
               Cancel
             </Button>
-            <Button variant='primary' onClick={handleSubmit}>
+            <Button
+              variant='primary'
+              onClick={handleSubmit}
+              size={{ base: 'sm', lg: 'md' }}
+            >
               Save
             </Button>
           </ModalFooter>

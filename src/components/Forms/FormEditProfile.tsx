@@ -53,6 +53,7 @@ export default function FormEditProfile() {
       direction={{ base: 'column', lg: 'row' }}
       p={2}
       alignItems={{ base: 'center', lg: 'flex-start' }}
+      mb={12}
     >
       <Box
         width={250}

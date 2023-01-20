@@ -137,7 +137,7 @@ export default function ModalEditSocial() {
 
       <Modal isOpen={isOpen} onClose={onClose} size='xl'>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent w='95%'>
           <ModalHeader>Edit your socials</ModalHeader>
           <ModalCloseButton />
 
@@ -147,7 +147,7 @@ export default function ModalEditSocial() {
                 return (
                   <Flex
                     w='48%'
-                    gap={4}
+                    gap={{ base: 2, lg: 4 }}
                     mb={4}
                     alignItems='center'
                     key={icon.alt}
@@ -156,8 +156,8 @@ export default function ModalEditSocial() {
                       key={icon.src}
                       src={icon.src}
                       alt={icon.alt}
-                      width={8}
-                      height={8}
+                      width={{ base: 6, lg: 8 }}
+                      height={{ base: 6, lg: 8 }}
                     />
 
                     <Input
@@ -175,10 +175,19 @@ export default function ModalEditSocial() {
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Button variant='secondary' mr={3} onClick={onClose}>
+            <Button
+              variant='secondary'
+              mr={3}
+              onClick={onClose}
+              size={{ base: 'sm', lg: 'md' }}
+            >
               Cancel
             </Button>
-            <Button variant='primary' onClick={handleSubmit}>
+            <Button
+              variant='primary'
+              onClick={handleSubmit}
+              size={{ base: 'sm', lg: 'md' }}
+            >
               Save
             </Button>
           </ModalFooter>

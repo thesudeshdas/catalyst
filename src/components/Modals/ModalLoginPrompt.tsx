@@ -21,7 +21,7 @@ export default function ModalLoginPrompt() {
     <>
       <Modal isOpen={shown} onClose={() => dispatch(promptLogin())} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent w='95%'>
           <ModalCloseButton />
 
           <ModalBody mt={8} p={10}>
