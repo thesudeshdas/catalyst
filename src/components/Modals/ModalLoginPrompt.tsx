@@ -21,7 +21,7 @@ export default function ModalLoginPrompt() {
     <>
       <Modal isOpen={shown} onClose={() => dispatch(promptLogin())} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent w='95%'>
           <ModalCloseButton />
 
           <ModalBody mt={8} p={10}>
@@ -35,12 +35,15 @@ export default function ModalLoginPrompt() {
             <Button
               variant='secondary'
               mr={3}
+              size={{ base: 'sm', lg: 'md' }}
               onClick={() => dispatch(promptLogin())}
             >
               Cancel
             </Button>
             <Link to='/sign-in'>
-              <Button variant='primary'>Sign In</Button>
+              <Button variant='primary' size={{ base: 'sm', lg: 'md' }}>
+                Sign In
+              </Button>
             </Link>
           </ModalFooter>
         </ModalContent>

@@ -99,9 +99,9 @@ export default function ModalEditName() {
         </InputGroup>
       </FormControl>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent w='95%'>
           <ModalHeader>Edit your personal details</ModalHeader>
           <ModalCloseButton />
 
@@ -170,10 +170,19 @@ export default function ModalEditName() {
             </Center>
           </ModalBody>
           <ModalFooter>
-            <Button variant='secondary' mr={3}>
+            <Button
+              variant='secondary'
+              mr={3}
+              onClick={onClose}
+              size={{ base: 'sm', lg: 'md' }}
+            >
               Cancel
             </Button>
-            <Button variant='primary' onClick={handleSubmit}>
+            <Button
+              variant='primary'
+              onClick={handleSubmit}
+              size={{ base: 'sm', lg: 'md' }}
+            >
               Save
             </Button>
           </ModalFooter>

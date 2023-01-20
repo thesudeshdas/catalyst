@@ -47,7 +47,7 @@ export default function AppNav() {
           cursor='pointer'
         >
           <Image
-            bg='white'
+            bg='bg.primary'
             display='inline-block'
             position='absolute'
             zIndex={1}
@@ -80,7 +80,7 @@ export default function AppNav() {
           cursor='pointer'
         >
           <Image
-            bg='white'
+            bg='bg.primary'
             display='inline-block'
             position='absolute'
             zIndex={1}
@@ -109,7 +109,7 @@ export default function AppNav() {
         onClick={handleCreate}
       >
         <Image
-          bg='white'
+          bg='bg.primary'
           display='inline-block'
           position='absolute'
           zIndex={1}
@@ -145,7 +145,7 @@ export default function AppNav() {
           cursor='pointer'
         >
           <Image
-            bg='white'
+            bg='bg.primary'
             display='inline-block'
             position='absolute'
             zIndex={1}

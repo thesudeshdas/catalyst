@@ -94,7 +94,7 @@ export default function SinglePowst({ postId }) {
   };
 
   const hasUserLiked = likes?.includes(userId);
-  const hasUserSaved = authUser.savedPost?.includes(postId);
+  const hasUserSaved = authUser?.savedPost?.includes(postId);
 
   return (
     <Box bg='#00000080'>
@@ -106,7 +106,7 @@ export default function SinglePowst({ postId }) {
         bg='bg.primary'
         height='calc(100vh - 3rem)'
         p={{ base: 0, md: 4, lg: 8 }}
-        paddingTop='4'
+        pt='4'
         overflowY='scroll'
         position='relative'
         borderTopRadius={{ base: 'xl', lg: '3xl' }}

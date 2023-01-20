@@ -49,8 +49,18 @@ export default function FormEditProfile() {
   };
 
   return (
-    <Flex>
-      <Box width={250} height={250} position='relative' mr={12}>
+    <Flex
+      direction={{ base: 'column', lg: 'row' }}
+      p={2}
+      alignItems={{ base: 'center', lg: 'flex-start' }}
+      mb={12}
+    >
+      <Box
+        width={250}
+        height={250}
+        position='relative'
+        mr={{ base: 0, lg: 12 }}
+      >
         <Image
           alt='blank profile'
           src={imgSrc}
@@ -73,7 +83,7 @@ export default function FormEditProfile() {
         />
       </Box>
 
-      <Stack gap={4}>
+      <Stack gap={4} w={{ base: '100%', md: '60%', lg: '75%' }}>
         <ModalEditName />
 
         <ModalEditBio />
