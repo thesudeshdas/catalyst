@@ -96,16 +96,22 @@ export default function ModalEditSocial() {
       <FormControl>
         <FormLabel>Your Socials</FormLabel>
 
-        <Flex w='60em' wrap='wrap' justifyContent='space-between'>
+        <Flex wrap='wrap' justifyContent='space-between'>
           {socialIcons.map((icon) => {
             return (
-              <Flex w='48%' gap={4} mb={4} alignItems='center' key={icon.alt}>
+              <Flex
+                w='48%'
+                gap={{ base: 2, lg: 4 }}
+                mb={4}
+                alignItems='center'
+                key={icon.alt}
+              >
                 <Image
                   key={icon.src}
                   src={icon.src}
                   alt={icon.alt}
-                  width={8}
-                  height={8}
+                  width={{ base: 6, lg: 8 }}
+                  height={{ base: 6, lg: 8 }}
                 />
 
                 <InputGroup>
