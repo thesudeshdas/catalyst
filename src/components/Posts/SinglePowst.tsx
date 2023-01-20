@@ -94,7 +94,7 @@ export default function SinglePowst({ postId }) {
   };
 
   const hasUserLiked = likes?.includes(userId);
-  const hasUserSaved = authUser.savedPost?.includes(postId);
+  const hasUserSaved = authUser?.savedPost?.includes(postId);
 
   return (
     <Box bg='#00000080'>
