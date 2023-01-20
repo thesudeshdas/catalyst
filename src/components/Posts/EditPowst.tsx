@@ -94,12 +94,13 @@ export default function EditPowst({ post }) {
         direction='row-reverse'
         bg='white'
         height='calc(100vh - 3rem)'
-        p={8}
+        p={{ base: 0, md: 4, lg: 8 }}
+        pt='4'
         overflowY='scroll'
         position='relative'
-        borderTopRadius='3xl'
+        borderTopRadius={{ base: 'xl', lg: '3xl' }}
         justifyContent='center'
-        gap={4}
+        gap={{ base: 2, md: 4 }}
       >
         <PostNav
           likes={[]}
@@ -108,17 +109,30 @@ export default function EditPowst({ post }) {
           setShowComments={() => {}}
         />
 
-        <Stack w='80em' gap={6}>
+        <Box
+          gap={{ base: 0, md: 4, lg: 6 }}
+          w={{ base: '87%', md: '70%' }}
+          position='relative'
+        >
           {/* user details & title */}
-          <Flex gap={4} alignItems='center'>
-            <ProfilePicture
-              src={post.user.profilePic?.src}
-              alt={post.user.name}
-            />
+          <Flex
+            gap={{ base: 1, md: 4 }}
+            alignItems={{ md: 'center' }}
+            direction={{ base: 'column', md: 'row' }}
+            mb={4}
+          >
+            <Box display={{ base: 'none', md: 'block' }}>
+              <ProfilePicture
+                src={authUser?.profilePic?.src}
+                alt={authUser?.name}
+              />
+            </Box>
 
-            <Stack>
-              <Heading size='lg'>Edit Powst</Heading>
-              <InputGroup>
+            <Box>
+              <Heading mb={{ base: 2, md: 6 }} textAlign='left'>
+                Edit Powst
+              </Heading>
+              <InputGroup w={{ base: '90%', lg: '30rem' }}>
                 <InputRightElement
                   pointerEvents='none'
                   children={<EditIcon />}
@@ -128,19 +142,18 @@ export default function EditPowst({ post }) {
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
                   placeholder='What did you make?'
-                  w='30rem'
                 />
               </InputGroup>
-            </Stack>
+            </Box>
           </Flex>
 
           {/* add images & videos */}
           <CarouselImage images={post.images} />
 
           {/* texts & stack & links */}
-          <Flex>
-            <Stack w='60%'>
-              <Heading fontWeight='600' size='md'>
+          <Flex my={4} direction={{ base: 'column', lg: 'row' }} gap={2}>
+            <Stack w={{ base: '100%', lg: '60%' }}>
+              <Heading size='md' textAlign='left'>
                 Edit Description
               </Heading>
 
@@ -156,9 +169,9 @@ export default function EditPowst({ post }) {
 
             <Spacer />
 
-            <Stack w='25%' gap={10}>
-              <Stack gap={2}>
-                <Heading fontWeight='600' size='md'>
+            <Stack w={{ base: '100%', lg: '25%' }} gap={10}>
+              <Stack>
+                <Heading size='md' textAlign='left'>
                   Edit live link
                 </Heading>
 
@@ -189,7 +202,7 @@ export default function EditPowst({ post }) {
 
               {/* tech stack */}
               <Stack>
-                <Heading fontWeight='600' size='md'>
+                <Heading size='md' textAlign='left'>
                   Edit tech stack
                 </Heading>
 
@@ -201,7 +214,7 @@ export default function EditPowst({ post }) {
           {/* separator */}
           <ProfileSeparator user={post.user} />
 
-          <Flex alignSelf='flex-end' gap={4}>
+          <Flex position='absolute' right={0} gap={4} mt={6}>
             <Button variant='secondary' onClick={() => dispatch(toggle(''))}>
               Cancel
             </Button>
@@ -209,7 +222,7 @@ export default function EditPowst({ post }) {
               Edit Powst
             </Button>
           </Flex>
-        </Stack>
+        </Box>
       </Flex>
     </Box>
   );
